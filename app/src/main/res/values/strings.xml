@@ -8,6 +8,7 @@
     <string name="title_menu">Menu</string>
     <string name="title_week_plan">Week plan</string>
 
+
     <string name="onTheTable">On The Table</string>
     <string name="back">Back</string>
     <string name="next">Next</string>
@@ -33,4 +34,17 @@
     <string name="logout">Logout</string>
     <string name="favourit_meals_setting">Favourite Meals</string>
     <string name="add_meal">Add Meal</string>
+
+    <string name="dish_of_the_day">Dish of the day</string>
+    <string name="categories">Categories</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="start_cooking">Start Cooking!</string>
+    <string name="singup">SingUp</string>
+    <string name="don_t_have_an_account">Don’t have an account</string>
+    <string name="email">Email</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="login">Login</string>
+
 </resources>

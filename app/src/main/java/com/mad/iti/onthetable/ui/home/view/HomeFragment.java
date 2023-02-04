@@ -17,7 +17,7 @@ import com.mad.iti.onthetable.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
-    TextView homeTextView;
+//    TextView homeTextView;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -28,8 +28,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        homeTextView = view.findViewById(R.id.text_home);
-        homeTextView.setOnClickListener(v->{
-        });
+//        homeTextView = view.findViewById(R.id.text_home);
+//        homeTextView.setOnClickListener(v->{
+//        });
     }
 }

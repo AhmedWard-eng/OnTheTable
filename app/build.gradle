@@ -47,4 +47,8 @@ dependencies {
     //Lotti Dependency
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    //rounded images
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
 }
