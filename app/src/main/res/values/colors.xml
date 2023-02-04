@@ -17,4 +17,8 @@
     <color name="item_color_two">#C8FFD4</color>
     <color name="dark_green">#023020</color>
 
+    //indicator color
+    <color name="inactive">#C4C4C4</color>
+    <color name="active">#F28832</color>
+
 </resources>
