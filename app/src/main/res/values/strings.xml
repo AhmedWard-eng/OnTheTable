@@ -7,6 +7,34 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_menu">Menu</string>
     <string name="title_week_plan">Week plan</string>
+
+
+    <string name="onTheTable">On The Table</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="headerOne_onboarding">Discovery And Plan Your Recipe</string>
+    <string name="descriptionOne_onboarding">Tell us your food preference and we will serve you delicious recipes ideas</string>
+    <string name="headerTwo_onboarding">All Your Favorite Recipes In One Place</string>
+    <string name="descriptionTwo_onboarding">Save time on planning by having your favorite recipes within reach</string>
+    <string name="headerWeekPlan">Ready to plan this week?</string>
+    <string name="defaultHistroy">Aprial , 2023</string>
+    <string name="saturday">SA.</string>
+    <string name="sunday">SU.</string>
+    <string name="monday">M.</string>
+    <string name="tuesday">TU.</string>
+    <string name="wednesday">W.</string>
+    <string name="thursday">TH.</string>
+    <string name="friday">F.</string>
+    <string name="userName_setting">User Name</string>
+    <string name="email_setting">Email@gmail.com</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="week_plan">Week Plan</string>
+    <string name="about_us">About Us</string>
+    <string name="logout">Logout</string>
+    <string name="favourit_meals_setting">Favourite Meals</string>
+    <string name="add_meal">Add Meal</string>
+
     <string name="dish_of_the_day">Dish of the day</string>
     <string name="categories">Categories</string>
     <string name="password">Password</string>
@@ -18,4 +46,5 @@
     <string name="confirm_password">Confirm password</string>
     <string name="sign_up">Sign up</string>
     <string name="login">Login</string>
+
 </resources>

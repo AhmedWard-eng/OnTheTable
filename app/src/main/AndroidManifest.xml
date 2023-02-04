@@ -12,7 +12,13 @@
         android:theme="@style/Theme.OnTheTable"
         tools:targetApi="31">
         <activity
+            android:name=".splash.OnBoardingActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".splash.SplashActivity"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>

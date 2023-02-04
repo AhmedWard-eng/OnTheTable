@@ -18,4 +18,8 @@
     <color name="dark_green">#023020</color>
     <color name="dark_grey">#1E1E1E</color>
 
+    //indicator color
+    <color name="inactive">#C4C4C4</color>
+    <color name="active">#F28832</color>
+
 </resources>
