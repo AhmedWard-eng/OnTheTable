@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/signUpFragment">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -32,4 +32,18 @@
         android:name="com.mad.iti.onthetable.ui.weekplan.view.WeekPlanFragment"
         android:label="@string/title_week_plan"
         tools:layout="@layout/fragment_week_plan" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.mad.iti.onthetable.ui.registeration.login.presenter.LoginFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.mad.iti.onthetable.ui.registeration.singup.presenter.SignUpFragment"
+        android:label="@string/sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>
