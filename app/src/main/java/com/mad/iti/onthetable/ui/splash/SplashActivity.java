@@ -1,4 +1,4 @@
-package com.mad.iti.onthetable.splash;
+package com.mad.iti.onthetable.ui.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,7 +33,7 @@ public class SplashActivity extends AppCompatActivity {
                 if(isFirstTime){
                     SharedPreferences.Editor editor = mSharedPreferences.edit();
                     editor.putBoolean("firstTime",false);
-                    editor.commit();
+                    editor.apply();
                     Intent intent = new Intent(SplashActivity.this, OnBoardingActivity.class);
                     startActivity(intent);
                 }else{

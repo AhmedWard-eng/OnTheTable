@@ -1,4 +1,4 @@
-package com.mad.iti.onthetable.ui.registeration.singup.presenter;
+package com.mad.iti.onthetable.ui.registeration.singup.view;
 
 import android.os.Bundle;
 

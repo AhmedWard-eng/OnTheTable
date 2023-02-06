@@ -7,8 +7,23 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="header_three">
+        <item name="android:textColor">@color/outline_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="appNameInLoginAndSignUp">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/pacifico</item>
+        <item name="android:textColor">@color/cadmium_orange</item>
+        <item name="android:textSize">48sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="header_two">
         <item name="android:textColor">@color/outline_color</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 </resources>

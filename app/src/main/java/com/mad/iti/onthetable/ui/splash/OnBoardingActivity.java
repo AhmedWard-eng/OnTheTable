@@ -1,4 +1,4 @@
-package com.mad.iti.onthetable.splash;
+package com.mad.iti.onthetable.ui.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;

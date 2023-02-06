@@ -46,5 +46,6 @@
     <string name="confirm_password">Confirm password</string>
     <string name="sign_up">Sign up</string>
     <string name="login">Login</string>
+    <string name="already_have_account">Already have account</string>
 
 </resources>

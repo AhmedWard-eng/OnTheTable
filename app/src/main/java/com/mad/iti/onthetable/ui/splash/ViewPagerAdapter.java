@@ -1,4 +1,4 @@
-package com.mad.iti.onthetable.splash;
+package com.mad.iti.onthetable.ui.splash;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,11 +17,11 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     Context context;
 
-    int animations[] = {R.raw.foodisready , R.raw.vegetablefood};
+    int[] animations = {R.raw.foodisready , R.raw.vegetablefood};
 
-    int headerText[] = {R.string.headerOne_onboarding , R.string.headerTwo_onboarding};
+    int[] headerText = {R.string.headerOne_onboarding , R.string.headerTwo_onboarding};
 
-    int descriptionText[] = {R.string.descriptionOne_onboarding , R.string.descriptionTwo_onboarding};
+    int[] descriptionText = {R.string.descriptionOne_onboarding , R.string.descriptionTwo_onboarding};
 
     public ViewPagerAdapter(Context context){
         this.context = context;
@@ -34,7 +34,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == (ConstraintLayout) object;
+        return view == object;
     }
 
     @NonNull

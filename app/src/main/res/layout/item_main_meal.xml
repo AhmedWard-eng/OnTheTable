@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/textView_meal_title_item_main"
-            style="@style/header_two"
+            style="@style/header_three"
             android:layout_width="106dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
