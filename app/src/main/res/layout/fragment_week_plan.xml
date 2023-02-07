@@ -20,183 +20,183 @@
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/daydate2_textView_weekplan"
         android:layout_width="22dp"
         android:layout_height="wrap_content"
         android:text="2"
         android:fontFamily="@font/barlow"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/textView19"
-        app:layout_constraintEnd_toStartOf="@+id/textView16"
+        app:layout_constraintBottom_toBottomOf="@+id/daydate1_textView_weekplan"
+        app:layout_constraintEnd_toStartOf="@+id/daydate3_textView_weekplan"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView19"
-        app:layout_constraintTop_toTopOf="@+id/textView19" />
+        app:layout_constraintStart_toEndOf="@+id/daydate1_textView_weekplan"
+        app:layout_constraintTop_toTopOf="@+id/daydate1_textView_weekplan" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/daydate6_textView_weekplan"
         android:layout_width="22dp"
         android:layout_height="wrap_content"
         android:text="6"
         android:textAlignment="center"
         android:fontFamily="@font/barlow"
-        app:layout_constraintBottom_toBottomOf="@+id/textView17"
-        app:layout_constraintEnd_toStartOf="@+id/textView18"
+        app:layout_constraintBottom_toBottomOf="@+id/daydate5_textView_weekplan"
+        app:layout_constraintEnd_toStartOf="@+id/daydate7_textView_weekplan"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView17"
-        app:layout_constraintTop_toTopOf="@+id/textView17" />
+        app:layout_constraintStart_toEndOf="@+id/daydate5_textView_weekplan"
+        app:layout_constraintTop_toTopOf="@+id/daydate5_textView_weekplan" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/daydate7_textView_weekplan"
         android:layout_width="22dp"
         android:layout_height="wrap_content"
         android:text="7"
         android:textAlignment="center"
         android:fontFamily="@font/barlow"
-        app:layout_constraintBottom_toBottomOf="@+id/textView14"
+        app:layout_constraintBottom_toBottomOf="@+id/daydate6_textView_weekplan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toTopOf="@+id/textView14" />
+        app:layout_constraintStart_toEndOf="@+id/daydate6_textView_weekplan"
+        app:layout_constraintTop_toTopOf="@+id/daydate6_textView_weekplan" />
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/daydate1_textView_weekplan"
         android:layout_width="22dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="1"
         android:fontFamily="@font/barlow"
         android:textAlignment="center"
-        app:layout_constraintEnd_toStartOf="@+id/textView20"
+        app:layout_constraintEnd_toStartOf="@+id/daydate2_textView_weekplan"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/saturday_textView_weekplan" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/daydate4_textView_weekplan"
         android:layout_width="22dp"
         android:layout_height="wrap_content"
         android:text="4"
         android:textAlignment="center"
         android:fontFamily="@font/barlow"
-        app:layout_constraintBottom_toBottomOf="@+id/textView16"
-        app:layout_constraintEnd_toStartOf="@+id/textView17"
+        app:layout_constraintBottom_toBottomOf="@+id/daydate3_textView_weekplan"
+        app:layout_constraintEnd_toStartOf="@+id/daydate5_textView_weekplan"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toTopOf="@+id/textView16" />
+        app:layout_constraintStart_toEndOf="@+id/daydate3_textView_weekplan"
+        app:layout_constraintTop_toTopOf="@+id/daydate3_textView_weekplan" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/daydate5_textView_weekplan"
         android:layout_width="22dp"
         android:layout_height="wrap_content"
         android:text="5"
         android:textAlignment="center"
         android:fontFamily="@font/barlow"
-        app:layout_constraintBottom_toBottomOf="@+id/textView15"
-        app:layout_constraintEnd_toStartOf="@+id/textView14"
+        app:layout_constraintBottom_toBottomOf="@+id/daydate4_textView_weekplan"
+        app:layout_constraintEnd_toStartOf="@+id/daydate6_textView_weekplan"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toTopOf="@+id/textView15" />
+        app:layout_constraintStart_toEndOf="@+id/daydate4_textView_weekplan"
+        app:layout_constraintTop_toTopOf="@+id/daydate4_textView_weekplan" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/daydate3_textView_weekplan"
         android:layout_width="22dp"
         android:layout_height="wrap_content"
         android:text="3"
         android:textAlignment="center"
         android:fontFamily="@font/barlow"
-        app:layout_constraintBottom_toBottomOf="@+id/textView20"
-        app:layout_constraintEnd_toStartOf="@+id/textView15"
+        app:layout_constraintBottom_toBottomOf="@+id/daydate2_textView_weekplan"
+        app:layout_constraintEnd_toStartOf="@+id/daydate4_textView_weekplan"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView20"
-        app:layout_constraintTop_toTopOf="@+id/textView20" />
+        app:layout_constraintStart_toEndOf="@+id/daydate2_textView_weekplan"
+        app:layout_constraintTop_toTopOf="@+id/daydate2_textView_weekplan" />
 
     <androidx.constraintlayout.widget.Group
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/sunday_textView_weekplan"
         android:layout_width="22dp"
         android:layout_height="wrap_content"
         android:text="@string/sunday"
         android:fontFamily="@font/barlow"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
-        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintBottom_toBottomOf="@+id/saturday_textView_weekplan"
+        app:layout_constraintEnd_toStartOf="@+id/monday_textView_weekplan"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/textView5" />
+        app:layout_constraintStart_toEndOf="@+id/saturday_textView_weekplan"
+        app:layout_constraintTop_toTopOf="@+id/saturday_textView_weekplan" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/friday_textView_weekplan"
         android:layout_width="22dp"
         android:layout_height="wrap_content"
         android:text="@string/friday"
         android:fontFamily="@font/barlow"
-        app:layout_constraintBottom_toBottomOf="@+id/textView8"
+        app:layout_constraintBottom_toBottomOf="@+id/thursday_textView_weekplan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toTopOf="@+id/textView8" />
+        app:layout_constraintStart_toEndOf="@+id/thursday_textView_weekplan"
+        app:layout_constraintTop_toTopOf="@+id/thursday_textView_weekplan" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tuesday_textView_weekplan"
         android:layout_width="22dp"
         android:layout_height="wrap_content"
         android:text="@string/tuesday"
         android:fontFamily="@font/barlow"
-        app:layout_constraintBottom_toBottomOf="@+id/textView6"
-        app:layout_constraintEnd_toStartOf="@+id/textView7"
+        app:layout_constraintBottom_toBottomOf="@+id/monday_textView_weekplan"
+        app:layout_constraintEnd_toStartOf="@+id/wednesday_textView_weekplan"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toTopOf="@+id/textView6" />
+        app:layout_constraintStart_toEndOf="@+id/monday_textView_weekplan"
+        app:layout_constraintTop_toTopOf="@+id/monday_textView_weekplan" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/saturday_textView_weekplan"
         android:layout_width="22dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/saturday"
         android:fontFamily="@font/barlow"
-        app:layout_constraintEnd_toStartOf="@+id/textView3"
+        app:layout_constraintEnd_toStartOf="@+id/sunday_textView_weekplan"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/wednesday_textView_weekplan"
         android:layout_width="22dp"
         android:layout_height="wrap_content"
         android:text="@string/wednesday"
         android:fontFamily="@font/barlow"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
-        app:layout_constraintEnd_toStartOf="@+id/textView8"
+        app:layout_constraintBottom_toBottomOf="@+id/tuesday_textView_weekplan"
+        app:layout_constraintEnd_toStartOf="@+id/thursday_textView_weekplan"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/textView4" />
+        app:layout_constraintStart_toEndOf="@+id/tuesday_textView_weekplan"
+        app:layout_constraintTop_toTopOf="@+id/tuesday_textView_weekplan" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/monday_textView_weekplan"
         android:layout_width="22dp"
         android:layout_height="wrap_content"
         android:text="@string/monday"
         android:fontFamily="@font/barlow"
-        app:layout_constraintBottom_toBottomOf="@+id/textView3"
-        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintBottom_toBottomOf="@+id/sunday_textView_weekplan"
+        app:layout_constraintEnd_toStartOf="@+id/tuesday_textView_weekplan"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        app:layout_constraintStart_toEndOf="@+id/sunday_textView_weekplan"
+        app:layout_constraintTop_toTopOf="@+id/sunday_textView_weekplan" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/thursday_textView_weekplan"
         android:layout_width="22dp"
         android:layout_height="wrap_content"
         android:text="@string/thursday"
         android:fontFamily="@font/barlow"
-        app:layout_constraintBottom_toBottomOf="@+id/textView7"
-        app:layout_constraintEnd_toStartOf="@+id/textView9"
+        app:layout_constraintBottom_toBottomOf="@+id/wednesday_textView_weekplan"
+        app:layout_constraintEnd_toStartOf="@+id/friday_textView_weekplan"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="@+id/textView7" />
+        app:layout_constraintStart_toEndOf="@+id/wednesday_textView_weekplan"
+        app:layout_constraintTop_toTopOf="@+id/wednesday_textView_weekplan" />
 
     <TextView
         android:id="@+id/headerWeekPlan_textView"
@@ -212,31 +212,31 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/back_imageView_weekplan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/icon_left"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintBottom_toBottomOf="@+id/week_year_textView_weekplan"
+        app:layout_constraintEnd_toStartOf="@+id/week_year_textView_weekplan"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/week_year_textView_weekplan"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/next_imageView_weekplan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/icons_right"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintBottom_toBottomOf="@+id/week_year_textView_weekplan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/week_year_textView_weekplan"
+        app:layout_constraintTop_toTopOf="@+id/week_year_textView_weekplan"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/week_year_textView_weekplan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -246,9 +246,9 @@
         android:textColor="@color/cadmium_orange"
         android:textSize="16sp"
         android:fontFamily="@font/barlow"
-        app:layout_constraintEnd_toStartOf="@+id/imageView6"
+        app:layout_constraintEnd_toStartOf="@+id/next_imageView_weekplan"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toEndOf="@+id/back_imageView_weekplan"
         app:layout_constraintTop_toBottomOf="@+id/headerWeekPlan_textView" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -266,15 +266,28 @@
         app:layout_constraintGuide_begin="183dp" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
+        android:id="@+id/addMeal_button_weekplan"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/add_week_plan_button"
+        android:fontFamily="@font/barlow"
         android:text="@string/add_meal"
-        android:fontFamily="@font/barlowbold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mealWeekPlan_recyclerView_weekplan"
+        android:layout_width="409dp"
+        android:layout_height="490dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addMeal_button_weekplan" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

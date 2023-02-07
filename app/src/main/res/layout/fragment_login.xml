@@ -9,31 +9,30 @@
 
     <TextView
         android:id="@+id/textView6"
+        style="@style/appNameInLoginAndSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        style="@style/appNameInLoginAndSignUp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutEmailLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
+        android:id="@+id/textInputLayoutEmailLogin"
         style="?attr/textInputOutlinedStyle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
         app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutPassLogin"
+        app:layout_constraintEnd_toEndOf="@+id/textView6"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView6">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditTextEmailLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
@@ -41,20 +40,20 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/textInputLayoutPassLogin"
         style="?attr/textInputOutlinedStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-
         app:endIconMode="password_toggle"
         app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+        app:layout_constraintBottom_toTopOf="@+id/textViewForgotPassLoginFr"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutEmailLogin"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutEmailLogin"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmailLogin">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditTextPassLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
@@ -64,32 +63,32 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/textViewForgotPassLoginFr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:linksClickable="true"
+        android:selectAllOnFocus="true"
         android:text="@string/forgot_password"
         android:textColor="@color/cadmium_orange"
         android:textStyle="bold"
-        android:selectAllOnFocus="true"
-        android:linksClickable="true"
         app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutPassLogin"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassLogin" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_background"
         android:text="@string/start_cooking"
         android:textColor="@color/neutral"
-        android:background="@drawable/button_background"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutPassLogin"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutPassLogin"
+        app:layout_constraintTop_toBottomOf="@+id/textViewForgotPassLoginFr" />
 
     <TextView
         android:id="@+id/textView8"
@@ -97,17 +96,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/don_t_have_an_account"
-        android:textSize="16dp"
         android:textColor="@color/outline_color"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView9"
+        app:layout_constraintEnd_toStartOf="@+id/textViewGoToSignUP"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textViewGoToSignUP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"

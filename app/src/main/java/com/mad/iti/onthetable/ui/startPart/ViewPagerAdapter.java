@@ -1,4 +1,4 @@
-package com.mad.iti.onthetable.ui.splash;
+package com.mad.iti.onthetable.ui.startPart;
 
 import android.content.Context;
 import android.view.LayoutInflater;

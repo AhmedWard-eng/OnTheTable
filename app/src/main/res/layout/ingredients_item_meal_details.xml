@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:backgroundTint="@color/neutral">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imageViewIngredientImageBGItem"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ingredients_item_background"
+        android:backgroundTint="@color/calamansi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_oval="true" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imageViewIngredientImageItem"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:src="@drawable/avocado_small"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewIngredientImageBGItem"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewIngredientImageBGItem"
+        app:layout_constraintStart_toStartOf="@+id/imageViewIngredientImageBGItem"
+        app:layout_constraintTop_toTopOf="@+id/imageViewIngredientImageBGItem"
+        app:riv_oval="true" />
+
+    <TextView
+        android:id="@+id/textViewIngredientNameItem"
+        style="@style/header_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewIngredientImageBGItem"
+        app:layout_constraintStart_toStartOf="@+id/imageViewIngredientImageBGItem"
+        app:layout_constraintTop_toBottomOf="@+id/textViewIngredientMeasureItem"
+        tools:text="Avocado" />
+
+    <TextView
+        android:id="@+id/textViewIngredientMeasureItem"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/dark_grey"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewIngredientImageBGItem"
+        app:layout_constraintStart_toStartOf="@+id/imageViewIngredientImageBGItem"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewIngredientImageBGItem"
+        tools:text="1 sliced" />
+</androidx.constraintlayout.widget.ConstraintLayout>
