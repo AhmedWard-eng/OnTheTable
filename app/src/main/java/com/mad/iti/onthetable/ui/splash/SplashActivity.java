@@ -9,6 +9,8 @@ import android.os.Handler;
 
 import com.mad.iti.onthetable.MainActivity;
 import com.mad.iti.onthetable.R;
+import com.mad.iti.onthetable.ui.registeration.RegsiterationActivity;
+import com.mad.iti.onthetable.ui.startPart.OnBoardingActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -27,21 +29,27 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                mSharedPreferences = getSharedPreferences("mySp",MODE_PRIVATE);
-                boolean isFirstTime = mSharedPreferences.getBoolean("firstTime" , true);
-
-                if(isFirstTime){
+                mSharedPreferences = getSharedPreferences("mySp", MODE_PRIVATE);
+                boolean isFirstTime = mSharedPreferences.getBoolean("firstTime", true);
+                //// TODO: 2/7/2023   make sharedPrefToShowIfIsAuth
+                boolean isAuthenticated = false;
+                if (isFirstTime) {
                     SharedPreferences.Editor editor = mSharedPreferences.edit();
-                    editor.putBoolean("firstTime",false);
+                    editor.putBoolean("firstTime", false);
                     editor.apply();
                     Intent intent = new Intent(SplashActivity.this, OnBoardingActivity.class);
                     startActivity(intent);
-                }else{
+                } else if (isAuthenticated) {
+
                     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(SplashActivity.this, RegsiterationActivity.class);
                     startActivity(intent);
                     finish();
                 }
             }
-        },SPLASH_TIME_OUT);
+        }, SPLASH_TIME_OUT);
     }
 }

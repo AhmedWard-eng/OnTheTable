@@ -12,7 +12,12 @@
         android:theme="@style/Theme.OnTheTable"
         tools:targetApi="31">
         <activity
-            android:name=".ui.splash.OnBoardingActivity"
+            android:name=".ui.registeration.RegsiterationActivity"
+            android:exported="false"
+            android:label="@string/title_activity_regsiteration"
+            android:theme="@style/Theme.OnTheTable.NoActionBar" />
+        <activity
+            android:name=".ui.startPart.OnBoardingActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

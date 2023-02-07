@@ -33,25 +33,6 @@
         android:label="@string/title_week_plan"
         tools:layout="@layout/fragment_week_plan" />
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.mad.iti.onthetable.ui.registeration.login.view.LoginFragment"
-        android:label="@string/login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_navigation_home"
-            app:destination="@id/navigation_home" />
-    </fragment>
-    <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.mad.iti.onthetable.ui.registeration.singup.view.SignUpFragment"
-        android:label="@string/sign_up"
-        tools:layout="@layout/fragment_sign_up" >
-        <action
-            android:id="@+id/action_signUpFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            />
-    </fragment>
-    <fragment
         android:id="@+id/mealDetailsFragment"
         android:name="com.mad.iti.onthetable.ui.mealDetails.view.MealDetailsFragment"
         android:label="fragment_meal_details"

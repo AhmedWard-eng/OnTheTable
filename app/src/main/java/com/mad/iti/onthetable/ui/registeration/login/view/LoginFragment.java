@@ -1,5 +1,6 @@
 package com.mad.iti.onthetable.ui.registeration.login.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mad.iti.onthetable.MainActivity;
 import com.mad.iti.onthetable.R;
 
 /**
@@ -70,12 +72,10 @@ public class LoginFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        view.findViewById(R.id.buttonLogin).setOnClickListener(v->{
-            NavOptions navOptions = new NavOptions.Builder()
-                    .setPopUpTo(R.id.navigation_home, true)
-                    .build();
-//            Navigation.findNavController(v).clearBackStack(R.id.action_loginFragment_to_navigation_home);
-            Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_navigation_home,null,navOptions);
+        view.findViewById(R.id.buttonLogin).setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            startActivity(intent);
+            requireActivity().finish();
         });
         super.onViewCreated(view, savedInstanceState);
     }
