@@ -47,5 +47,12 @@
     <string name="sign_up">Sign up</string>
     <string name="login">Login</string>
     <string name="already_have_account">Already have account</string>
+    <string name="search_meal">Search by Meal</string>
+    <string name="search_by_ingredients">Search by ingredients</string>
+    <string name="search_by_cuisine">Search By Cuisine</string>
+    <string name="egypt">Egypt</string>
+    <string name="view_all"><u>View All</u></string>
+    <string name="search_by_meal">Search by Meal</string>
+    <string name="dessert">Dessert</string>
 
 </resources>
