@@ -1,93 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/dark_grey"
-    tools:context=".ui.mealDetails.view.MealDetailsFragment">
+    android:layout_height="match_parent">
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/cardView2"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="78dp"
-        android:background="@drawable/background_item"
-        app:cardCornerRadius="36dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/roundImage"
-        app:layout_constraintVertical_bias="1.0" />
+        android:layout_height="match_parent"
+        android:background="#CCF28832"
+        tools:context=".ui.mealDetails.view.MealDetailsFragment">
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/roundImage"
-        android:layout_width="156dp"
-        android:layout_height="156dp"
-        android:src="@drawable/breakfast"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:riv_oval="true" />
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/cardView2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="78dp"
+            android:background="@drawable/background_item"
+            app:cardCornerRadius="36dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/roundImage"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textView10"
-        style="@style/header_two"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView11"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView11"
-        tools:text="TextView" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/roundImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/breakfast"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_oval="true" />
 
-    <TextView
-        android:id="@+id/textView11"
-        style="@style/header_two"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toTopOf="@+id/textView10"
-        tools:text="TextView" />
+        <TextView
+            android:id="@+id/textViewMealCateItemDetails"
+            style="@style/header_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/txtViewMealNameItemDetails"
+            app:layout_constraintStart_toStartOf="@+id/txtViewMealNameItemDetails"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewMealNameItemDetails"
+            tools:text="Beef category" />
 
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/baseline_calendar_today_24"
-        app:layout_constraintEnd_toEndOf="@+id/textView13"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView11"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        <TextView
+            android:id="@+id/textViewMealCountryItemDetails"
+            style="@style/header_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@id/barrier2"
+            app:layout_constraintEnd_toEndOf="@+id/textViewMealCateItemDetails"
+            app:layout_constraintStart_toStartOf="@+id/textViewMealCateItemDetails"
+            app:layout_constraintTop_toBottomOf="@+id/textViewMealCateItemDetails"
 
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_favorite_border_24"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
-        app:layout_constraintEnd_toStartOf="@+id/imageView10"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@+id/textView13" />
+            tools:text="Italian food" />
 
-    <TextView
-        android:id="@+id/textView13"
-        style="@style/header_one"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/roundImage"
-        tools:text="Beef and Mustard Pie" />
+        <ImageView
+            android:id="@+id/imageViewAddToCalendarItemDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/baseline_calendar_today_24"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewMealCountryItemDetails"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewMealCateItemDetails"
+            app:layout_constraintTop_toTopOf="@+id/textViewMealCateItemDetails" />
+
+        <ImageView
+            android:id="@+id/imageViewAddToFavITemDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_favorite_border_24"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewAddToCalendarItemDetails"
+            app:layout_constraintEnd_toStartOf="@+id/textViewMealCateItemDetails"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageViewAddToCalendarItemDetails" />
+
+        <TextView
+            android:id="@+id/txtViewMealNameItemDetails"
+            style="@style/header_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/roundImage"
+            tools:text="Beef and Mustard Pie" />
+
+        <TextView
+            android:id="@+id/textView24"
+            style="@style/header_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/main_ingredients"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier2" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="8dp"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="txtViewMealNameItemDetails,imageViewAddToFavITemDetails,imageViewAddToCalendarItemDetails,textViewMealCountryItemDetails,textViewMealCateItemDetails"
+            tools:layout_editor_absoluteY="364dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewIngredientsItemDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/cardView2"
+            app:layout_constraintStart_toStartOf="@+id/cardView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView24"
+            tools:itemCount="10"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/ingredients_item_meal_details"
+            tools:orientation="horizontal" />
+
+        <TextView
+            android:id="@+id/textView25"
+            style="@style/header_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/procedure"
+            app:layout_constraintStart_toStartOf="@+id/textView24"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewIngredientsItemDetails" />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/barlow"
+            android:gravity="center"
+            android:textColor="@color/outline_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textView25"
+            app:layout_constraintTop_toBottomOf="@+id/textView25"
+            tools:text="@string/procedures" />
+
+        <TextView
+            android:id="@+id/textView10"
+            style="@style/header_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/video"
+            app:layout_constraintStart_toStartOf="@+id/textView25"
+            app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="32dp"
     app:cardUseCompatPadding="true"
@@ -13,12 +13,12 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/imageView_item_main"
-            android:layout_width="162dp"
+            android:layout_width="match_parent"
             android:layout_height="164dp"
             android:scaleType="fitXY"
             android:src="@drawable/breakfast"
@@ -31,7 +31,7 @@
         <TextView
             android:id="@+id/textView_meal_title_item_main"
             style="@style/header_three"
-            android:layout_width="106dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:textSize="12sp"

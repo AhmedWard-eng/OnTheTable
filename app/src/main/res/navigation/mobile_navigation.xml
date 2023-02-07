@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/signUpFragment">
+    app:startDestination="@id/mealDetailsFragment">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -51,4 +51,9 @@
             app:destination="@id/loginFragment"
             />
     </fragment>
+    <fragment
+        android:id="@+id/mealDetailsFragment"
+        android:name="com.mad.iti.onthetable.ui.mealDetails.view.MealDetailsFragment"
+        android:label="fragment_meal_details"
+        tools:layout="@layout/fragment_meal_details" />
 </navigation>
