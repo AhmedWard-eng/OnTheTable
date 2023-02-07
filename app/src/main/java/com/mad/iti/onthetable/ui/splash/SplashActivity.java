@@ -6,15 +6,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import com.mad.iti.onthetable.MainActivity;
 import com.mad.iti.onthetable.R;
+import com.mad.iti.onthetable.model.repositories.MealsRepo;
 import com.mad.iti.onthetable.ui.registeration.RegsiterationActivity;
 import com.mad.iti.onthetable.ui.startPart.OnBoardingActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
     private static int SPLASH_TIME_OUT = 4000;
+    private static final String TAG = "SplashActivity";
 
     SharedPreferences mSharedPreferences;
 
@@ -51,5 +54,9 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         }, SPLASH_TIME_OUT);
+
+        MealsRepo mealsRepo = MealsRepo.getInstance();
+        mealsRepo.getYouMightLikeMealsObservable();
+        mealsRepo.getRandomMealObservable();
     }
 }

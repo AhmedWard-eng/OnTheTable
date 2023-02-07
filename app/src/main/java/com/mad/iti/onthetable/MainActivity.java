@@ -1,6 +1,7 @@
 package com.mad.iti.onthetable;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -11,12 +12,14 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.mad.iti.onthetable.databinding.ActivityMainBinding;
+import com.mad.iti.onthetable.model.repositories.MealsRepo;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -29,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        MealsRepo mealsRepo = MealsRepo.getInstance();
+        mealsRepo.getRootIngredientObservable().subscribe((rootIngredient, throwable) -> {
+            Log.i(TAG, "Observer onCreate: "+rootIngredient.ingredients.get(0));
+            Log.e(TAG, "Observer onCreate: "+throwable );
+        });
+
     }
 
 }

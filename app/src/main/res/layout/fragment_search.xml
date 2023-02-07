@@ -70,9 +70,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/countrySearch_textView"
         tools:itemCount="10"
-        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:listitem="@layout/country_search_row_layout"
-        tools:orientation="horizontal"/>
+        tools:orientation="horizontal"
+        tools:spanCount = "2"/>
 
     <TextView
         android:id="@+id/countrySearch_textView"
@@ -120,6 +121,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        tools:itemCount="10"
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/ingredient_item_search_fragment"
+        tools:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ingredientSearch_textView" />
 

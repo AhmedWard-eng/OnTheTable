@@ -9,9 +9,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.mad.iti.onthetable.R;
+import com.mad.iti.onthetable.model.Meal;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class YouMightLikeAdapter extends RecyclerView.Adapter<YouMightLikeAdapter.ViewHolder> {
+
+    List<Meal> meals;
+
+    public YouMightLikeAdapter(List<Meal> meals) {
+        this.meals = meals;
+    }
+
     @NonNull
     @Override
     public YouMightLikeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -21,22 +34,29 @@ public class YouMightLikeAdapter extends RecyclerView.Adapter<YouMightLikeAdapte
 
     @Override
     public void onBindViewHolder(@NonNull YouMightLikeAdapter.ViewHolder holder, int position) {
-        holder.textViewName.setText("Traditional French omelette");
-        holder.imageView.setImageResource(R.drawable.breakfast);
+        holder.textViewName.setText(meals.get(position).strMeal);
+        Glide.with(holder.getView().getContext()).load(meals.get(position).strMealThumb).placeholder(R.drawable.breakfast).error(R.drawable.avocado_small).into(holder.getImageView());
     }
 
     @Override
     public int getItemCount() {
-        return 20;
+        return meals.size();
+    }
+
+    public void setMeals(ArrayList<Meal> meals) {
+        this.meals = meals;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
         private TextView textViewName;
         private ImageView addToFavoriteButton;
+        View  view;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            view = itemView;
             imageView = itemView.findViewById(R.id.imageView_item_main);
             textViewName = itemView.findViewById(R.id.textView_meal_title_item_main);
             addToFavoriteButton = itemView.findViewById(R.id.icon_fav_item_main);
@@ -48,6 +68,10 @@ public class YouMightLikeAdapter extends RecyclerView.Adapter<YouMightLikeAdapte
 
         public TextView getTextViewName() {
             return textViewName;
+        }
+
+        public View getView() {
+            return view;
         }
 
         public ImageView getAddToFavoriteButton() {

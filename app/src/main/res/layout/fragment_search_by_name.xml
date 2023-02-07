@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.search.view.SearchFilterFragment">
+    tools:context=".ui.search.view.SearchByNameFragment">
+
 
     <EditText
-        android:id="@+id/searchFilter_editText"
+        android:id="@+id/SearchByName_editText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -24,15 +26,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchFilter_recyclerView"
+        android:id="@+id/SearchByName_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchFilter_editText"
-        tools:itemCount="33"
-        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/ingredients_item"
-        tools:spanCount="3" />
+        app:layout_constraintTop_toBottomOf="@+id/SearchByName_editText2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
