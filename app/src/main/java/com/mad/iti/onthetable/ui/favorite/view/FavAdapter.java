@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mad.iti.onthetable.R;
-import com.mad.iti.onthetable.ui.home.view.YouMightLikeAdapter;
 
 public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
 

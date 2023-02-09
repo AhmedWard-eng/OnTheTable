@@ -38,6 +38,7 @@ public class SignUpFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         view.findViewById(R.id.buttonSignUp).setOnClickListener(v->{
+
             Navigation.findNavController(view).navigate(R.id.action_signUpFragment_to_loginFragment);
         });
         super.onViewCreated(view, savedInstanceState);

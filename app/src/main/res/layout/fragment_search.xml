@@ -55,7 +55,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/barlow"
-        android:text="Sreach by Categories"
+        android:text="@string/search_by_categories"
         android:textColor="@color/outline_color"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,20 +88,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ingredients_recyclerView" />
 
-    <EditText
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:hint="@string/search_by_meal"
-        android:padding="12dp"
-        android:singleLine="true"
-        android:imeOptions="actionSearch"
-        android:drawableLeft="@drawable/baseline_search_24"
-        android:background="@drawable/search_view_rounded"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="@string/search_by_meal"
+            android:padding="12dp"
+            android:singleLine="true"
+            android:clickable="true"
+            android:focusable="false"
+            android:imeOptions="actionSearch"
+            android:drawableStart="@drawable/baseline_search_24"
+            android:background="@drawable/search_view_rounded"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/ingredientSearch_textView"

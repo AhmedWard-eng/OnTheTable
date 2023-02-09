@@ -13,6 +13,7 @@ import com.mad.iti.onthetable.model.RootMealPreview;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Single;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -39,7 +40,7 @@ public interface RetrofitMealsAPI {
     @GET("search.php")
     public Single<RootMeal>searchByName(@Query("s") String mealName);
     @GET("lookup.php")
-    public Single<RootMeal> getMealById(@Query("i") int id);
+    public Single<RootMeal> getMealById(@Query("i") String id);
     @GET("random.php")
     public Single<RootMeal> getRandomMeal();
 
