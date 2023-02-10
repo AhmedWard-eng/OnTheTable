@@ -4,38 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.search.view.mealResult.SearchMealResultsFragment">
+    tools:context=".ui.search.view.SearchFilterFragment"
+    android:id="@+id/all_ingredient_fragment">
 
-
-    <TextView
-        android:id="@+id/searchResult_textView"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/searchFilterByIngredient_editText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/search_view_rounded"
+        android:drawableStart="@drawable/baseline_search_24"
         android:fontFamily="@font/barlow"
-        android:text="@string/result"
-        android:textColor="@color/outline_color"
-        android:textSize="20sp"
+        android:hint="@string/search_by_ingredient"
+        android:imeOptions="actionSearch"
+        android:padding="12dp"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mealResults_recyclerView"
+        android:id="@+id/searchFilterByIngredient_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchResult_textView"
-        tools:itemCount="33"
+        app:layout_constraintTop_toBottomOf="@+id/searchFilterByIngredient_editText"
+        tools:itemCount="13"
         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:listitem="@layout/ingredients_item"
-        tools:spanCount="3"/>
-
+        tools:spanCount="3" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

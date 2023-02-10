@@ -1,13 +1,9 @@
 package com.mad.iti.onthetable;
 
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.mad.iti.onthetable.model.Meal;
-import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBaseAuthWrapper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +14,9 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import com.mad.iti.onthetable.databinding.ActivityMainBinding;
+import com.mad.iti.onthetable.model.repositories.MealsRepo;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";

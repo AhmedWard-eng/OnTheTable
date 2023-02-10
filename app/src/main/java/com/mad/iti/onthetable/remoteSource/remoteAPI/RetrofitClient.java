@@ -3,8 +3,11 @@ package com.mad.iti.onthetable.remoteSource.remoteAPI;
 import android.util.Log;
 
 import com.mad.iti.onthetable.model.Ingredient;
+import com.mad.iti.onthetable.model.RootCategory;
+import com.mad.iti.onthetable.model.RootCuisine;
 import com.mad.iti.onthetable.model.RootIngredient;
 import com.mad.iti.onthetable.model.RootMeal;
+import com.mad.iti.onthetable.model.RootMealPreview;
 
 import java.util.List;
 import java.util.Random;
@@ -41,8 +44,35 @@ public class RetrofitClient implements APIClientInterface {
     @Override
     public Single<RootIngredient> getIngredients() {
 
-        Log.i(TAG, "Observer CallAPi: ");
+        Log.i(TAG, "Observer CallAPi: getIngredients");
         return retrofitMealsAPI.getIngredients();
+    }
+
+    @Override
+    public Single<RootCategory> getAllCategories() {
+        Log.i(TAG, "Observer CallAPi: getCategories");
+        return retrofitMealsAPI.getCategories();
+    }
+
+    @Override
+    public Single<RootCuisine> getAllCuisines() {
+        Log.i(TAG, "Observer CallAPi: getCuisines");
+        return retrofitMealsAPI.getCuisines();
+    }
+
+    @Override
+    public Single<RootMealPreview> getMealsByIngredient(String id) {
+        return retrofitMealsAPI.getMealsByIngredient(id);
+    }
+
+    @Override
+    public Single<RootMealPreview> getMealsByCategory(String id) {
+        return retrofitMealsAPI.getMealsByCategory(id);
+    }
+
+    @Override
+    public Single<RootMealPreview> getMealsByCountry(String id) {
+        return retrofitMealsAPI.getMealsByCuisine(id);
     }
 
     @Override

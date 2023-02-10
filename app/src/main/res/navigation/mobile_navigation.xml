@@ -24,6 +24,20 @@
             android:id="@+id/action_navigation_search_to_searchByNameFragment"
             app:destination="@id/searchByNameFragment" />
     </fragment>
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_navigation_search_to_allCountriesFragment"
+            app:destination="@id/allCountriesFragment" />
+        <action
+            android:id="@+id/action_navigation_search_to_allCountriesFragment2"
+            app:destination="@id/allCountriesFragment" />
+        <action
+            android:id="@+id/action_navigation_search_to_allIngredientFragment"
+            app:destination="@id/allIngredientFragment" />
+        <action
+            android:id="@+id/action_navigation_search_to_searchMealResultsFragment"
+            app:destination="@id/searchMealResultsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favorite"
@@ -57,5 +71,30 @@
         <action
             android:id="@+id/action_searchByNameFragment_to_mealDetailsFragment"
             app:destination="@id/mealDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allIngredientFragment"
+        android:name="com.mad.iti.onthetable.ui.search.view.ingredient.AllIngredientFragment"
+        android:label="AllIngredientFragment" >
+        <action
+            android:id="@+id/action_allIngredientFragment_to_searchMealResultsFragment"
+            app:destination="@id/searchMealResultsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allCountriesFragment"
+        android:name="com.mad.iti.onthetable.ui.search.view.country.AllCountriesFragment"
+        android:label="AllCountriesFragment" >
+        <action
+            android:id="@+id/action_allCountriesFragment_to_searchMealResultsFragment"
+            app:destination="@id/searchMealResultsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchMealResultsFragment"
+        android:name="com.mad.iti.onthetable.ui.search.view.mealResult.SearchMealResultsFragment"
+        android:label="fragment_search_meal_results"
+        tools:layout="@layout/fragment_search_meal_results" >
+        <argument
+            android:name="resultMeal"
+            app:argType="com.mad.iti.onthetable.ui.search.view.CheckSearchBy" />
     </fragment>
 </navigation>
