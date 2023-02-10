@@ -1,12 +1,13 @@
-package com.mad.iti.onthetable.ui.registeration;
+package com.mad.iti.onthetable.ui.authentication;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
+
 import com.mad.iti.onthetable.R;
 
-public class RegsiterationActivity extends AppCompatActivity {
+public class AuthenticationActivity extends AppCompatActivity {
 
 
     @Override
@@ -14,7 +15,7 @@ public class RegsiterationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_regsiteration);
-
+        Navigation.findNavController(this,R.id.nav_host_fragment_content_regsiteration);
 
 
     }

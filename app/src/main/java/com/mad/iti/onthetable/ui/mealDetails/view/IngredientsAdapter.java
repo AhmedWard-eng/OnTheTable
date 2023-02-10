@@ -35,7 +35,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     public void onBindViewHolder(@NonNull IngredientsAdapter.ViewHolder holder, int position) {
         holder.getTextViewIngredientMeasure().setText(ingredientWithMeasures.get(position).getIngredientMeasure());
         holder.getTextViewIngredientName().setText(ingredientWithMeasures.get(position).getIngredientName());
-        Glide.with(holder.getView().getContext()).load("https://www.themealdb.com/images/ingredients/" + ingredientWithMeasures.get(position).getIngredientName() + "-Small.png").placeholder(R.drawable.breakfast).error(R.drawable.avocado_small).into(holder.roundedImageView);
+        Glide.with(holder.getView().getContext()).load("https://www.themealdb.com/images/ingredients/" + ingredientWithMeasures.get(position).getIngredientName() + "-Small.png").placeholder(R.drawable.breakfast).error(R.drawable.avocado_small).into(holder.getRoundedImageView());
 
 
     }
@@ -51,9 +51,9 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewIngredientName;
-        TextView textViewIngredientMeasure;
-        RoundedImageView roundedImageView;
+        private final TextView textViewIngredientName;
+        private final TextView textViewIngredientMeasure;
+        private final RoundedImageView roundedImageView;
         View view;
 
 

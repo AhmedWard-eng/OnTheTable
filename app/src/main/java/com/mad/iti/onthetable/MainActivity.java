@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.mad.iti.onthetable.model.Meal;
+import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBaseAuthWrapper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -52,11 +56,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        MealsRepo mealsRepo = MealsRepo.getInstance();
-//        mealsRepo.getRootIngredientObservable().subscribe((rootIngredient, throwable) -> {
-//            Log.i(TAG, "Observer onCreate: "+rootIngredient.ingredients.get(0));
-//            Log.e(TAG, "Observer onCreate: "+throwable );
-//        });
+
+
 
     }
 
@@ -64,5 +65,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         return navController.navigateUp() || super.onSupportNavigateUp();
     }
+
+
 
 }

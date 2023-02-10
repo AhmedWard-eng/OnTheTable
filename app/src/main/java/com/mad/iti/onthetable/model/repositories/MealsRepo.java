@@ -48,19 +48,15 @@ public class MealsRepo implements MealsRepoInterface {
 
     public Single<RootMeal> getYouMightLikeMealsObservable() {
 
-            youMightLikeMealsSingle = retrofitClient.getYouMightLikeMeal().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        youMightLikeMealsSingle = retrofitClient.getYouMightLikeMeal().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
 
         return youMightLikeMealsSingle;
     }
 
     public Single<RootMeal> getRandomMealObservable() {
-        return randomMealSingle;
-    }
+        return randomMealSingle = retrofitClient.getRandomMeal().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
 
-    public void enqueueRandomMealCall(){
-        randomMealSingle = retrofitClient.getRandomMeal().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
-
 
 
     public Single<RootMeal> searchMealByName(String name) {

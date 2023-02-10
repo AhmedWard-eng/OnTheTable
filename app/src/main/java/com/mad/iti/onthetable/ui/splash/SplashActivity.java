@@ -9,8 +9,9 @@ import android.os.Handler;
 
 import com.mad.iti.onthetable.MainActivity;
 import com.mad.iti.onthetable.R;
+import com.mad.iti.onthetable.model.repositories.AuthenticationFireBaseRepo;
 import com.mad.iti.onthetable.model.repositories.MealsRepo;
-import com.mad.iti.onthetable.ui.registeration.RegsiterationActivity;
+import com.mad.iti.onthetable.ui.authentication.AuthenticationActivity;
 import com.mad.iti.onthetable.ui.startPart.OnBoardingActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -40,21 +41,24 @@ public class SplashActivity extends AppCompatActivity {
                     editor.putBoolean("firstTime", false);
                     editor.apply();
                     Intent intent = new Intent(SplashActivity.this, OnBoardingActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
-                } else if (isAuthenticated) {
 
+                } else if (AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
                     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
-                    finish();
                 } else {
-                    Intent intent = new Intent(SplashActivity.this, RegsiterationActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, AuthenticationActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
-                    finish();
                 }
             }
         }, SPLASH_TIME_OUT);
 
         MealsRepo mealsRepo = MealsRepo.getInstance();
         mealsRepo.getRandomMealObservable();
+        mealsRepo.getYouMightLikeMealsObservable();
     }
 }
