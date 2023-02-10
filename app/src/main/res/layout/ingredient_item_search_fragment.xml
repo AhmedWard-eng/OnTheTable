@@ -6,7 +6,8 @@
     android:layout_margin="8dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:backgroundTint="@color/neutral">
+    android:backgroundTint="@color/neutral"
+    android:id="@+id/row_ingredient_layout">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imageViewIngredientImageBGItem"
@@ -14,7 +15,7 @@
         android:layout_height="96dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/ingredients_item_background"
-        android:backgroundTint="@color/item_color_one"
+        android:backgroundTint="@color/calamansi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,11 +35,12 @@
 
     <TextView
         android:id="@+id/textViewIngredientNameItem"
-        style="@style/header_three"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
+        android:fontFamily="@font/barlow"
+        android:textColor="@color/outline_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageViewIngredientImageBGItem"
         app:layout_constraintStart_toStartOf="@+id/imageViewIngredientImageBGItem"

@@ -67,5 +67,8 @@
     <string name="view_all"><u>View All</u></string>
     <string name="search_by_meal">Search by Meal</string>
     <string name="dessert">Dessert</string>
+    <string name="search_by_country">Search by Country</string>
+    <string name="search_by_ingredient">Search By Ingredient</string>
+    <string name="result">Result from </string>
 
 </resources>

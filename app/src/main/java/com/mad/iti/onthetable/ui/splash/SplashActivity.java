@@ -58,5 +58,6 @@ public class SplashActivity extends AppCompatActivity {
         MealsRepo mealsRepo = MealsRepo.getInstance();
         mealsRepo.getYouMightLikeMealsObservable();
         mealsRepo.getRandomMealObservable();
+        mealsRepo.getRootIngredientObservable();
     }
 }
