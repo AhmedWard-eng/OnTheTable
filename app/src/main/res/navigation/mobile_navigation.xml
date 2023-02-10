@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/navigation_home">
-
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.mad.iti.onthetable.ui.home.view.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_navigation_home_to_mealDetailsFragment"
             app:destination="@id/mealDetailsFragment" />
@@ -19,12 +18,10 @@
         android:id="@+id/navigation_search"
         android:name="com.mad.iti.onthetable.ui.search.view.SearchFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_navigation_search_to_searchByNameFragment"
             app:destination="@id/searchByNameFragment" />
-    </fragment>
-        tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_navigation_search_to_allCountriesFragment"
             app:destination="@id/allCountriesFragment" />
@@ -58,7 +55,7 @@
         android:id="@+id/mealDetailsFragment"
         android:name="com.mad.iti.onthetable.ui.mealDetails.view.MealDetailsFragment"
         android:label="fragment_meal_details"
-        tools:layout="@layout/fragment_meal_details" >
+        tools:layout="@layout/fragment_meal_details">
         <argument
             android:name="mealId"
             app:argType="string" />
@@ -67,7 +64,7 @@
         android:id="@+id/searchByNameFragment"
         android:name="com.mad.iti.onthetable.ui.search.view.SearchByNameFragment"
         android:label="@string/search_for_a_meal"
-        tools:layout="@layout/fragment_search_by_name" >
+        tools:layout="@layout/fragment_search_by_name">
         <action
             android:id="@+id/action_searchByNameFragment_to_mealDetailsFragment"
             app:destination="@id/mealDetailsFragment" />
@@ -75,7 +72,7 @@
     <fragment
         android:id="@+id/allIngredientFragment"
         android:name="com.mad.iti.onthetable.ui.search.view.ingredient.AllIngredientFragment"
-        android:label="AllIngredientFragment" >
+        android:label="AllIngredientFragment">
         <action
             android:id="@+id/action_allIngredientFragment_to_searchMealResultsFragment"
             app:destination="@id/searchMealResultsFragment" />
@@ -83,7 +80,7 @@
     <fragment
         android:id="@+id/allCountriesFragment"
         android:name="com.mad.iti.onthetable.ui.search.view.country.AllCountriesFragment"
-        android:label="AllCountriesFragment" >
+        android:label="AllCountriesFragment">
         <action
             android:id="@+id/action_allCountriesFragment_to_searchMealResultsFragment"
             app:destination="@id/searchMealResultsFragment" />
@@ -92,9 +89,13 @@
         android:id="@+id/searchMealResultsFragment"
         android:name="com.mad.iti.onthetable.ui.search.view.mealResult.SearchMealResultsFragment"
         android:label="fragment_search_meal_results"
-        tools:layout="@layout/fragment_search_meal_results" >
+        tools:layout="@layout/fragment_search_meal_results">
         <argument
             android:name="resultMeal"
             app:argType="com.mad.iti.onthetable.ui.search.view.CheckSearchBy" />
+        <action
+            android:id="@+id/action_searchMealResultsFragment_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
     </fragment>
+
 </navigation>

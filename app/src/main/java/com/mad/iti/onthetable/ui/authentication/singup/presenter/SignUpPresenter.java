@@ -1,10 +1,9 @@
 package com.mad.iti.onthetable.ui.authentication.singup.presenter;
 
 import com.google.firebase.auth.FirebaseUser;
-import com.mad.iti.onthetable.model.repositories.AuthenticationFireBaseRepo;
-import com.mad.iti.onthetable.model.repositories.AuthenticationRepo;
+import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationFireBaseRepo;
+import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationRepo;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.SignUpDelegate;
-import com.mad.iti.onthetable.ui.authentication.login.view.LoginViewInterface;
 import com.mad.iti.onthetable.ui.authentication.singup.view.SignUpViewInterface;
 
 public class SignUpPresenter implements SignUpPresenterInterface, SignUpDelegate {

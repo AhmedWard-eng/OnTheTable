@@ -1,5 +1,6 @@
 package com.mad.iti.onthetable.ui.authentication.singup.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.mad.iti.onthetable.MainActivity;
 import com.mad.iti.onthetable.R;
 import com.mad.iti.onthetable.databinding.FragmentSignUpBinding;
 import com.mad.iti.onthetable.ui.authentication.singup.presenter.SignUpPresenter;
@@ -86,7 +88,9 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     @Override
     public void onSuccess(FirebaseUser user) {
         Toast.makeText(requireContext(), R.string.signup_successfully, Toast.LENGTH_SHORT).show();
-        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_signUpFragment_to_loginFragment);
+        Intent intent = new Intent(binding.getRoot().getContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        binding.getRoot().getContext().startActivity(intent);
     }
 
     @Override

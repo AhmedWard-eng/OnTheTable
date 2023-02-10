@@ -18,7 +18,7 @@ import com.mad.iti.onthetable.R;
 import com.mad.iti.onthetable.databinding.FragmentMealDetailsBinding;
 import com.mad.iti.onthetable.model.GetArrayFromMeal;
 import com.mad.iti.onthetable.model.Meal;
-import com.mad.iti.onthetable.model.repositories.MealsRepo;
+import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepo;
 import com.mad.iti.onthetable.ui.mealDetails.presenter.MealsDetailsFragmentPresenter;
 import com.mad.iti.onthetable.ui.mealDetails.presenter.MealsDetailsPresenterInterface;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;

@@ -1,8 +1,16 @@
 package com.mad.iti.onthetable.model;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "favorite")
 public class Meal {
+    @PrimaryKey
     public String idMeal;
     public String strMeal;
+
+    @Ignore
     public Object strDrinkAlternate;
     public String strCategory;
     public String strArea;
@@ -50,8 +58,15 @@ public class Meal {
     public String strMeasure18;
     public String strMeasure19;
     public String strMeasure20;
+    @Ignore
     public String strSource;
+
+    @Ignore
     public Object strImageSource;
+
+    @Ignore
     public Object strCreativeCommonsConfirmed;
+
+    @Ignore
     public Object dateModified;
 }

@@ -4,8 +4,7 @@ import com.mad.iti.onthetable.model.RootCategory;
 import com.mad.iti.onthetable.model.RootCuisine;
 import com.mad.iti.onthetable.model.RootIngredient;
 import com.mad.iti.onthetable.model.RootMealPreview;
-import com.mad.iti.onthetable.model.repositories.MealsRepoInterface;
-import com.mad.iti.onthetable.ui.home.presenter.HomeFragmentPresenter;
+import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepoInterface;
 
 import io.reactivex.rxjava3.core.Single;
 

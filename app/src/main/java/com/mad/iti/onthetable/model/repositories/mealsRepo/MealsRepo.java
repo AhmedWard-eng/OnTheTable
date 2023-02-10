@@ -1,4 +1,4 @@
-package com.mad.iti.onthetable.model.repositories;
+package com.mad.iti.onthetable.model.repositories.mealsRepo;
 
 import com.mad.iti.onthetable.model.RootCategory;
 import com.mad.iti.onthetable.model.RootCuisine;
@@ -8,15 +8,7 @@ import com.mad.iti.onthetable.model.RootMealPreview;
 import com.mad.iti.onthetable.remoteSource.remoteAPI.APIClientInterface;
 import com.mad.iti.onthetable.remoteSource.remoteAPI.RetrofitClient;
 
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.ObservableEmitter;
-import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -99,6 +91,12 @@ public class MealsRepo implements MealsRepoInterface {
             randomMealSingle = retrofitClient.getRandomMeal().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
         }
         return randomMealSingle;
+    }
+
+    @Override
+    public Single<RootMeal> searchMealByName(String name) {
+        return retrofitClient.searchMealByName(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+
     }
 
     @Override

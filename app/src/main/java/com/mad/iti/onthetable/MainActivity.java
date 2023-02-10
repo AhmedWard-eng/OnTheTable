@@ -1,22 +1,16 @@
 package com.mad.iti.onthetable;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
-import com.mad.iti.onthetable.databinding.ActivityMainBinding;
-import com.mad.iti.onthetable.model.repositories.MealsRepo;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -49,7 +43,16 @@ public class MainActivity extends AppCompatActivity {
             } else if (destination.getId() == R.id.mealDetailsFragment) {
                 myToolbar.setVisibility(View.GONE);
                 navView.setVisibility(View.GONE);
-            } else {
+            }  else if (destination.getId() == R.id.allIngredientFragment) {
+                myToolbar.setVisibility(View.GONE);
+                navView.setVisibility(View.GONE);
+            } else if (destination.getId() == R.id.allCountriesFragment) {
+                myToolbar.setVisibility(View.GONE);
+                navView.setVisibility(View.GONE);
+            } else if (destination.getId() == R.id.searchMealResultsFragment) {
+                myToolbar.setVisibility(View.GONE);
+                navView.setVisibility(View.GONE);
+            }else {
                 myToolbar.setVisibility(View.VISIBLE);
                 navView.setVisibility(View.VISIBLE);
             }

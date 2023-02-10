@@ -20,7 +20,7 @@ import android.widget.EditText;
 
 import com.mad.iti.onthetable.R;
 import com.mad.iti.onthetable.model.FragmentName;
-import com.mad.iti.onthetable.model.repositories.MealsRepo;
+import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepo;
 import com.mad.iti.onthetable.ui.GridWithTwoMealAdapter;
 import com.mad.iti.onthetable.ui.search.presenter.SearchByNamePresenter;
 import com.mad.iti.onthetable.ui.search.presenter.SearchByNamePresenterInterface;
@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.disposables.Disposable;
 

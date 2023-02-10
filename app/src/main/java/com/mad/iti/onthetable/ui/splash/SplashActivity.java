@@ -9,8 +9,8 @@ import android.os.Handler;
 
 import com.mad.iti.onthetable.MainActivity;
 import com.mad.iti.onthetable.R;
-import com.mad.iti.onthetable.model.repositories.AuthenticationFireBaseRepo;
-import com.mad.iti.onthetable.model.repositories.MealsRepo;
+import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationFireBaseRepo;
+import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepo;
 import com.mad.iti.onthetable.ui.authentication.AuthenticationActivity;
 import com.mad.iti.onthetable.ui.startPart.OnBoardingActivity;
 

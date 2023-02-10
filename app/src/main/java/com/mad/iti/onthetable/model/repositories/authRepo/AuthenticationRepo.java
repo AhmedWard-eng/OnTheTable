@@ -1,4 +1,4 @@
-package com.mad.iti.onthetable.model.repositories;
+package com.mad.iti.onthetable.model.repositories.authRepo;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

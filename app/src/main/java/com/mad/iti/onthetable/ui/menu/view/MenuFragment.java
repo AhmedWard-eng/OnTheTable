@@ -4,19 +4,17 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mad.iti.onthetable.R;
-import com.mad.iti.onthetable.model.repositories.AuthenticationFireBaseRepo;
+import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationFireBaseRepo;
 
 public class MenuFragment extends Fragment {
 

@@ -5,8 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -17,13 +17,10 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mad.iti.onthetable.R;
-import com.mad.iti.onthetable.model.RootIngredient;
 import com.mad.iti.onthetable.model.RootMealPreview;
-import com.mad.iti.onthetable.model.repositories.MealsRepo;
+import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepo;
 import com.mad.iti.onthetable.ui.search.presenter.SearchPresenter;
 import com.mad.iti.onthetable.ui.search.view.CheckSearchBy;
-import com.mad.iti.onthetable.ui.search.view.ingredient.OnIngredientClickListener;
-import com.mad.iti.onthetable.ui.search.view.ingredient.SearchIngredientAdapter;
 
 import java.util.ArrayList;
 
@@ -32,8 +29,8 @@ import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class SearchMealResultsFragment extends Fragment {
-
+public class SearchMealResultsFragment extends Fragment implements OnClickMealResult{
+    private static final String TAG = "SearchMealResultsFragme";
     TextView resultTextView;
 
     private RecyclerView previewMealRecyclerView;
@@ -50,8 +47,7 @@ public class SearchMealResultsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         searchPresenter = SearchPresenter.getInstance(MealsRepo.getInstance());
-        BottomNavigationView navBar = getActivity().findViewById(R.id.nav_view);
-        navBar.setVisibility(View.GONE);
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search_meal_results, container, false);
     }
@@ -71,7 +67,7 @@ public class SearchMealResultsFragment extends Fragment {
 //        previewMealRecyclerView.setLayoutManager(layoutManager);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         previewMealRecyclerView.setLayoutManager(gridLayoutManager);
-        mealResultAdapter = new MealResultAdapter(getContext() , new ArrayList<>());
+        mealResultAdapter = new MealResultAdapter(getContext() , new ArrayList<>(),this);
 
         if(checkSearchBy.getType() == CheckSearchBy.ingredient){
             checkSearchBy = SearchMealResultsFragmentArgs.fromBundle(getArguments()).getResultMeal();
@@ -139,5 +135,15 @@ public class SearchMealResultsFragment extends Fragment {
         }
 
         previewMealRecyclerView.setAdapter(mealResultAdapter);
+    }
+
+    @Override
+    public void onClickItem(String id) {
+        Log.d(TAG, "onClick: item id= "+id);
+
+        com.mad.iti.onthetable.ui.search.view.mealResult.SearchMealResultsFragmentDirections.ActionSearchMealResultsFragmentToMealDetailsFragment action =
+                SearchMealResultsFragmentDirections.
+                        actionSearchMealResultsFragmentToMealDetailsFragment(id);
+        Navigation.findNavController(requireView()).navigate(action);
     }
 }

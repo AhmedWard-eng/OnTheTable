@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.mad.iti.onthetable.MainActivity;
 import com.mad.iti.onthetable.R;
+import com.mad.iti.onthetable.ui.authentication.AuthenticationActivity;
 
 public class OnBoardingActivity extends AppCompatActivity {
 
@@ -55,7 +56,7 @@ public class OnBoardingActivity extends AppCompatActivity {
                     mSLideViewPager.setCurrentItem(getitem(1),true);
                 else {
 
-                    Intent intent = new Intent(OnBoardingActivity.this,MainActivity.class);
+                    Intent intent = new Intent(OnBoardingActivity.this,AuthenticationActivity.class);
                     startActivity(intent);
                     finish();
 
@@ -69,7 +70,7 @@ public class OnBoardingActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                Intent intent = new Intent(OnBoardingActivity.this, MainActivity.class);
+                Intent intent = new Intent(OnBoardingActivity.this, AuthenticationActivity.class);
                 startActivity(intent);
                 finish();
 

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -18,11 +17,8 @@ import android.widget.EditText;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mad.iti.onthetable.R;
 import com.mad.iti.onthetable.model.RootCuisine;
-import com.mad.iti.onthetable.model.RootIngredient;
-import com.mad.iti.onthetable.model.repositories.MealsRepo;
+import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepo;
 import com.mad.iti.onthetable.ui.search.presenter.SearchPresenter;
-import com.mad.iti.onthetable.ui.search.view.ingredient.OnIngredientClickListener;
-import com.mad.iti.onthetable.ui.search.view.ingredient.SearchIngredientAdapter;
 
 import java.util.ArrayList;
 
@@ -47,8 +43,7 @@ public class AllCountriesFragment extends Fragment implements OnCountryClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         searchPresenter = SearchPresenter.getInstance(MealsRepo.getInstance());
-        BottomNavigationView navBar = getActivity().findViewById(R.id.nav_view);
-        navBar.setVisibility(View.GONE);
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_all_countries, container, false);
     }

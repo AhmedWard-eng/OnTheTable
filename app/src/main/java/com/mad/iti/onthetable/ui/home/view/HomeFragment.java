@@ -21,10 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.mad.iti.onthetable.R;
 import com.mad.iti.onthetable.model.Meal;
-import com.mad.iti.onthetable.model.repositories.MealsRepo;
+import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepo;
 import com.mad.iti.onthetable.ui.GridWithTwoMealAdapter;
 import com.mad.iti.onthetable.ui.home.presenter.HomeFragmentPresenter;
-import com.mad.iti.onthetable.ui.home.view.HomeFragmentDirections;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;

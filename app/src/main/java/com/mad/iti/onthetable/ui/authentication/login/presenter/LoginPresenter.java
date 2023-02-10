@@ -1,8 +1,8 @@
 package com.mad.iti.onthetable.ui.authentication.login.presenter;
 
 import com.google.firebase.auth.FirebaseUser;
-import com.mad.iti.onthetable.model.repositories.AuthenticationFireBaseRepo;
-import com.mad.iti.onthetable.model.repositories.AuthenticationRepo;
+import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationFireBaseRepo;
+import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationRepo;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.SignInDelegate;
 import com.mad.iti.onthetable.ui.authentication.login.view.LoginViewInterface;
 

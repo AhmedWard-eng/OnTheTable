@@ -1,6 +1,7 @@
 package com.mad.iti.onthetable.ui.search.view.mealResult;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,19 +10,22 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.mad.iti.onthetable.R;
 import com.mad.iti.onthetable.model.Category;
 import com.mad.iti.onthetable.model.MealPreview;
+import com.mad.iti.onthetable.ui.home.view.HomeFragmentDirections;
 import com.mad.iti.onthetable.ui.search.view.category.OnCategoryClickListener;
 import com.mad.iti.onthetable.ui.search.view.category.SearchCategoryAdapter;
+import com.mad.iti.onthetable.ui.search.view.mealResult.SearchMealResultsFragmentDirections.ActionSearchMealResultsFragmentToMealDetailsFragment;
 
 import java.util.List;
 
 public class MealResultAdapter extends RecyclerView.Adapter<MealResultAdapter.ViewHolder>{
-
+    private static final String TAG = "MealResultAdapter";
     private final Context context;
     private List<MealPreview> mealPreviewList;
 
@@ -33,16 +37,11 @@ public class MealResultAdapter extends RecyclerView.Adapter<MealResultAdapter.Vi
         this.mealPreviewList = mealPreviewList;
     }
 
-    public void MealResultAdapter(List<MealPreview> mealPreviewList) {
-        this.mealPreviewList = mealPreviewList;
-    }
+
 
     private OnClickMealResult listener;
 
-    public MealResultAdapter(Context context, List<MealPreview> mealPreviewList) {
-        this.context = context;
-        this.mealPreviewList = mealPreviewList;
-    }
+
 
     public MealResultAdapter(Context context, List<MealPreview> mealPreviewList , OnClickMealResult listener) {
         this.context = context;
@@ -66,11 +65,12 @@ public class MealResultAdapter extends RecyclerView.Adapter<MealResultAdapter.Vi
                 .load(mealPreviewList.get(position).getStrMealThumb())
                 .into(holder.mealImage);
 
-//        holder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//            }
-//        });
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClickItem(mealPreviewList.get(holder.getAbsoluteAdapterPosition()).idMeal);
+            }
+        });
 
     }
 

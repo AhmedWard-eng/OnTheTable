@@ -1,25 +1,41 @@
 package com.mad.iti.onthetable.ui.search.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.mad.iti.onthetable.R;
+import com.mad.iti.onthetable.model.RootCategory;
+import com.mad.iti.onthetable.model.RootCuisine;
+import com.mad.iti.onthetable.model.RootIngredient;
+import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepo;
+import com.mad.iti.onthetable.ui.search.presenter.SearchPresenter;
+import com.mad.iti.onthetable.ui.search.view.category.OnCategoryClickListener;
+import com.mad.iti.onthetable.ui.search.view.category.SearchCategoryAdapter;
+import com.mad.iti.onthetable.ui.search.view.country.OnCountryClickListener;
+import com.mad.iti.onthetable.ui.search.view.country.SearchCountryAdapter;
+import com.mad.iti.onthetable.ui.search.view.ingredient.OnIngredientClickListener;
+import com.mad.iti.onthetable.ui.search.view.ingredient.SearchIngredientAdapter;
+
+import java.util.ArrayList;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class SearchFragment extends Fragment implements OnIngredientClickListener , OnCountryClickListener , OnCategoryClickListener {
+public class SearchFragment extends Fragment implements OnIngredientClickListener, OnCountryClickListener, OnCategoryClickListener {
 
     private RecyclerView ingredientRecyclerView;
     private SearchIngredientAdapter ingredientAdapter;
@@ -27,8 +43,7 @@ public class SearchFragment extends Fragment implements OnIngredientClickListene
     private RecyclerView categoryRecyclerView;
     private SearchCategoryAdapter categoryAdapter;
     EditText editText;
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+
 
     private RecyclerView countryRecyclerView;
     private SearchCountryAdapter countryAdapter;
@@ -36,11 +51,13 @@ public class SearchFragment extends Fragment implements OnIngredientClickListene
     private SearchPresenter searchPresenter;
 
     TextView viewAllCountries , viewAllIngredients;
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         searchPresenter = SearchPresenter.getInstance(MealsRepo.getInstance());
 
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -51,11 +68,6 @@ public class SearchFragment extends Fragment implements OnIngredientClickListene
                 Navigation.findNavController(v).navigate(R.id.action_navigation_search_to_searchByNameFragment);
             }
         });
-    }
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
         viewAllCountries = view.findViewById(R.id.country_viewAll_textView2);
         viewAllIngredients = view.findViewById(R.id.ingredient_viewAll_textView);
         viewAllCountries.setOnClickListener(v->{

@@ -1,4 +1,4 @@
-package com.mad.iti.onthetable.model.repositories;
+package com.mad.iti.onthetable.model.repositories.mealsRepo;
 
 import com.mad.iti.onthetable.model.RootCategory;
 import com.mad.iti.onthetable.model.RootCuisine;
