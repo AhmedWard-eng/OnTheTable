@@ -1,10 +1,31 @@
 package com.mad.iti.onthetable.model.repositories.dataRepo;
 
+import androidx.lifecycle.LiveData;
+
+import com.mad.iti.onthetable.model.Meal;
+import com.mad.iti.onthetable.model.MealPlanner;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBaseFavDelegate;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBasePlannerDelegate;
 
+import java.util.List;
+
 public interface FavAndWeekPlanInterface {
 
-    public void getWeekPlanner(FireBasePlannerDelegate fireBasePlannerDelegate);
-    public void getFavMeals(FireBaseFavDelegate fireBaseFavDelegate);
+    void refreshPlanner();
+    void refreshMeals();
+
+   LiveData<List<Meal>> getFavMealsLiveData();
+
+    LiveData<List<MealPlanner>> getAllMealsFromPlannerAtDate(String date);
+
+    void addToFavorites(Meal meal, OnAddingListener onAddingListener);
+
+    void addToPlanner(MealPlanner mealPlanner,OnAddingListener onAddingListener);
+
+    void deleteMealFromPlanner(MealPlanner mealPlanner);
+
+    void deleteMealFromFavorites(Meal meal);
+    void deleteAllFav();
+    void deleteAllWeekPlan();
+
 }

@@ -1,7 +1,8 @@
 package com.mad.iti.onthetable.remoteSource.remoteFireBase;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -12,7 +13,6 @@ import com.mad.iti.onthetable.model.MealPlanner;
 import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationFireBaseRepo;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class FireBaseRealTimeWrapper {
 
@@ -32,32 +32,47 @@ public class FireBaseRealTimeWrapper {
     private FireBaseRealTimeWrapper() {
         this.database = FirebaseDatabase.getInstance();
         authenticationFireBaseRepo = AuthenticationFireBaseRepo.getInstance();
-        if(authenticationFireBaseRepo.isAuthenticated()){
+        if (authenticationFireBaseRepo.isAuthenticated()) {
             this.referenceFavorite = database.getReference().child("users").child(authenticationFireBaseRepo.getUser().getUid()).child("favoritesMeal");
             this.referenceWeekPlanner = database.getReference().child("users").child(authenticationFireBaseRepo.getUser().getUid()).child("weekPlannerMeal");
         }
     }
 
-    public boolean addToFav(Meal meal) {
+    public void addToFav(Meal meal, FireBaseAddingDelegate fireBaseAddingDelegate) {
         if (authenticationFireBaseRepo.isAuthenticated()) {
-            String key = referenceFavorite.push().getKey();
-            referenceFavorite.child(key).setValue(meal);
-            return true;
-        } else {
-            return false;
-        }
-    }
-    public boolean addToWeekPlanner(MealPlanner mealPlanner) {
-        if (authenticationFireBaseRepo.isAuthenticated()) {
-            String key = referenceFavorite.push().getKey();
-            referenceFavorite.child(key).setValue(mealPlanner);
-            return true;
-        } else {
-            return false;
+            referenceFavorite.child(meal.idMeal).setValue(meal).addOnCompleteListener(task -> fireBaseAddingDelegate.onSuccess()).addOnFailureListener(e -> fireBaseAddingDelegate.onFailure(e.toString()));
         }
     }
 
-    public void getFavMeals(FireBaseFavDelegate fireBaseFavDelegate){
+    public void addToWeekPlanner(MealPlanner mealPlanner, FireBaseAddingDelegate fireBaseAddingDelegate) {
+        if (authenticationFireBaseRepo.isAuthenticated()) {
+            String key = referenceFavorite.push().getKey();
+            referenceFavorite.child(String.valueOf(mealPlanner.id)).setValue(mealPlanner).addOnCompleteListener(task -> fireBaseAddingDelegate.onSuccess()).addOnFailureListener(e -> fireBaseAddingDelegate.onFailure(e.toString()));
+
+        }
+    }
+
+    public void removeMealFromFav(String mealId, FireBaseRemovingDelegate fireBaseRemovingDelegate) {
+        referenceFavorite.child(mealId).removeValue(new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                fireBaseRemovingDelegate.onSuccess();
+            }
+        });
+    }
+
+
+    public void removeMealFromPlanner(int id ,FireBaseRemovingDelegate fireBaseRemovingDelegate){
+        referenceWeekPlanner.child(String.valueOf(id)).removeValue(new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                fireBaseRemovingDelegate.onSuccess();
+            }
+        });
+    }
+
+
+    public void getFavMeals(FireBaseFavDelegate fireBaseFavDelegate) {
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -76,7 +91,7 @@ public class FireBaseRealTimeWrapper {
         referenceFavorite.addValueEventListener(postListener);
     }
 
-    public void getWeekPlanner(FireBasePlannerDelegate fireBasePlannerDelegate){
+    public void getWeekPlanner(FireBasePlannerDelegate fireBasePlannerDelegate) {
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

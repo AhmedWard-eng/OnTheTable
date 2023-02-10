@@ -82,8 +82,6 @@ public class HomeFragment extends Fragment {
             if (rootMeal != null && rootMeal.meals != null) {
                 Meal meal = rootMeal.meals.get(0);
                 setMealIntoTheView(meal);
-                localSource.insertMealToFavorite(meal);
-                FireBaseRealTimeWrapper.getInstance().addToFav(meal);
             }
             Log.e(TAG, "getRandomMeal: homeFragment");
         });
