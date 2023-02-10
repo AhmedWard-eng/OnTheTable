@@ -1,6 +1,5 @@
-package com.mad.iti.onthetable.model.repositories;
+package com.mad.iti.onthetable.model.repositories.authRepo;
 
-import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -10,11 +9,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.mad.iti.onthetable.MainActivity;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBaseAuthWrapper;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.SignInDelegate;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.SignUpDelegate;
-import com.mad.iti.onthetable.ui.splash.SplashActivity;
 
 public class AuthenticationFireBaseRepo implements AuthenticationRepo {
 

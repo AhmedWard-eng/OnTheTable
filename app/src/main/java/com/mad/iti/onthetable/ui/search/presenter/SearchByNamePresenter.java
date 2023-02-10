@@ -1,7 +1,7 @@
 package com.mad.iti.onthetable.ui.search.presenter;
 
 import com.mad.iti.onthetable.model.RootMeal;
-import com.mad.iti.onthetable.model.repositories.MealsRepoInterface;
+import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepoInterface;
 
 import io.reactivex.rxjava3.core.Single;
 
