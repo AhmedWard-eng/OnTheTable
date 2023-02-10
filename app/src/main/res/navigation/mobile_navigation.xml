@@ -50,7 +50,7 @@
         android:id="@+id/navigation_weekPlan"
         android:name="com.mad.iti.onthetable.ui.weekplan.view.WeekPlanFragment"
         android:label="@string/title_week_plan"
-        tools:layout="@layout/fragment_week_plan" />
+        tools:layout="@layout/fragment_week_plan_m_m" />
     <fragment
         android:id="@+id/mealDetailsFragment"
         android:name="com.mad.iti.onthetable.ui.mealDetails.view.MealDetailsFragment"

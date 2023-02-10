@@ -1,46 +1,32 @@
 package com.mad.iti.onthetable.ui.weekplan.view;
 
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CalendarView;
+
 import com.mad.iti.onthetable.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link WeekPlanFragment#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
+import java.util.Calendar;
+
+
 public class WeekPlanFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    CalendarView calendarView;
+    Button button;
+    RecyclerView recyclerView;
+    private static final String TAG = "WeekPlanFragment";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment WeekPlanFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static WeekPlanFragment newInstance(String param1, String param2) {
-        WeekPlanFragment fragment = new WeekPlanFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     public WeekPlanFragment() {
         // Required empty public constructor
@@ -49,10 +35,7 @@ public class WeekPlanFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -60,5 +43,29 @@ public class WeekPlanFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_week_plan, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        calendarView = view.findViewById(R.id.calendarView);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.add(Calendar.DAY_OF_WEEK,1);
+        calendarView.setMinDate(calendar.getTimeInMillis());
+        calendarView.setFirstDayOfWeek(7);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                Calendar calendar1 = Calendar.getInstance();
+                calendar1.setTimeInMillis(view.getDate());
+                calendar1.set(Calendar.YEAR,year);
+                calendar1.set(year,month,dayOfMonth);
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.DATE, 1);
+                SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+                Log.d(TAG, "onSelectedDayChange: "+calendar1.get(Calendar.DAY_OF_WEEK));
+            }
+        });
     }
 }

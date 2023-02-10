@@ -11,7 +11,6 @@ import com.mad.iti.onthetable.model.MealPlanner;
 
 @Database(entities = {Meal.class , MealPlanner.class} , version = 1)
 public abstract class AppDataBase extends RoomDatabase {
-
     private static AppDataBase instance = null;
     public abstract MealDao mealDao();
     public static synchronized AppDataBase getInstance(Context context){

@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 
 import com.mad.iti.onthetable.model.Meal;
+import com.mad.iti.onthetable.model.MealPlanner;
 
 import java.util.List;
 
@@ -13,6 +14,8 @@ public class LocalSourceRoom implements LocalSource{
     private MealDao dao;
     private static LocalSourceRoom localSource = null;
     private LiveData<List<Meal>> favoriteMeals;
+
+
 
     private LocalSourceRoom(Context context){
         AppDataBase appDataBase = AppDataBase.getInstance(context.getApplicationContext());
@@ -52,5 +55,22 @@ public class LocalSourceRoom implements LocalSource{
             }
         }).start();
 
+    }
+
+    @Override
+    public LiveData<List<MealPlanner>> getAllMealsFromPlannerAtDate(String date) {
+        return dao.getAllMealsFromPlannerAtDate(date);
+    }
+
+
+
+    @Override
+    public void deleteMealFromPlanner(MealPlanner mealPlanner) {
+        new Thread(() -> dao.deleteMealFromPlanner(mealPlanner)).start();
+    }
+
+    @Override
+    public void insertMealIntoPlanner(MealPlanner mealPlanner) {
+        new Thread(() -> dao.insertMealIntoPlanner(mealPlanner)).start();
     }
 }

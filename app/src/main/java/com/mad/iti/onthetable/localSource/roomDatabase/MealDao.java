@@ -8,6 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.mad.iti.onthetable.model.Meal;
+import com.mad.iti.onthetable.model.MealPlanner;
 
 import java.util.List;
 @Dao
@@ -21,5 +22,16 @@ public interface MealDao {
     @Delete
     void deleteMealFromFavorite(Meal product);
 
+    @Query("select * from weekPlan  where date = :date")
+    LiveData<List<MealPlanner>> getAllMealsFromPlannerAtDate(String date);
+
+    @Query("delete from weekPlan where date = :date & idMeal = :mealId")
+    void deleteMealFromPlanner(String date,String mealId);
+
+    @Delete
+    void deleteMealFromPlanner(MealPlanner mealPlanner);
+
+    @Insert
+    void insertMealIntoPlanner(MealPlanner mealPlanner);
 
 }

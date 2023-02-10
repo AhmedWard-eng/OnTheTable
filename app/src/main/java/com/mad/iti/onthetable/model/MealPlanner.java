@@ -10,17 +10,13 @@ public class MealPlanner {
     public  int id;
     public String idMeal;
     public String strMeal;
-
     public int dayOfWeek;
-
     public String date;
-
-    @Ignore
-    public Object strDrinkAlternate;
     public String strCategory;
     public String strArea;
     public String strInstructions;
     public String strMealThumb;
+    @Ignore
     public Object strTags;
     public String strYoutube;
     public String strIngredient1;
@@ -63,15 +59,4 @@ public class MealPlanner {
     public String strMeasure18;
     public String strMeasure19;
     public String strMeasure20;
-    @Ignore
-    public String strSource;
-
-    @Ignore
-    public Object strImageSource;
-
-    @Ignore
-    public Object strCreativeCommonsConfirmed;
-
-    @Ignore
-    public Object dateModified;
 }

@@ -54,8 +54,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         });
 
         binding.textViewGoToSignUP.setOnClickListener(v -> {
-            Navigation.findNavController(view).clearBackStack(R.id.signUpFragment);
-            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_signUpFragment);
+            Navigation.findNavController(view).navigateUp();
         });
         super.onViewCreated(view, savedInstanceState);
     }

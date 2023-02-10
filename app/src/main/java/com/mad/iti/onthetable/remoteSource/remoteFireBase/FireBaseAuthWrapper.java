@@ -15,7 +15,7 @@ public class FireBaseAuthWrapper {
         return fireBaseAuthWrapper;
     }
 
-    public FireBaseAuthWrapper() {
+    private FireBaseAuthWrapper() {
         this.auth = FirebaseAuth.getInstance();
     }
 
