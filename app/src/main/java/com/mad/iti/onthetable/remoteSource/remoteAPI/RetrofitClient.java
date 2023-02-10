@@ -12,6 +12,7 @@ import java.util.Random;
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleObserver;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -46,7 +47,7 @@ public class RetrofitClient implements APIClientInterface {
 
     @Override
     public Single<RootMeal> getRandomMeal() {
-        Log.d(TAG, "getRandomMeal: ");
+        Log.d(TAG, "getRandomMeal: retrofit client");
         return retrofitMealsAPI.getRandomMeal();
     }
 
@@ -56,4 +57,15 @@ public class RetrofitClient implements APIClientInterface {
         char c = (char) (r.nextInt(26) + 'A');
         return retrofitMealsAPI.searchByName(String.valueOf(c));
     }
+
+    @Override
+    public Single<RootMeal> searchMealByName(String name) {
+        return retrofitMealsAPI.searchByName(name);
+    }
+
+    public Single<RootMeal> getMealById(String id){
+        return retrofitMealsAPI.getMealById(id);
+    }
+
+
 }

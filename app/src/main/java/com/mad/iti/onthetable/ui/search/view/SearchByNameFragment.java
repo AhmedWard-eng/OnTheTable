@@ -1,66 +1,124 @@
 package com.mad.iti.onthetable.ui.search.view;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import com.mad.iti.onthetable.R;
+import com.mad.iti.onthetable.model.FragmentName;
+import com.mad.iti.onthetable.model.repositories.MealsRepo;
+import com.mad.iti.onthetable.ui.GridWithTwoMealAdapter;
+import com.mad.iti.onthetable.ui.search.presenter.SearchByNamePresenter;
+import com.mad.iti.onthetable.ui.search.presenter.SearchByNamePresenterInterface;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchByNameFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableEmitter;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
+import io.reactivex.rxjava3.disposables.Disposable;
+
+
 public class SearchByNameFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String TAG = "SearchByNameFragment";
+    EditText editTextSearch;
+    RecyclerView recyclerView;
+    Disposable disposable;
+    SearchByNamePresenterInterface searchByNamePresenter;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private GridWithTwoMealAdapter adapter;
 
     public SearchByNameFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchByNameFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchByNameFragment newInstance(String param1, String param2) {
-        SearchByNameFragment fragment = new SearchByNameFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        searchByNamePresenter = SearchByNamePresenter.getInstance(MealsRepo.getInstance());
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_search_by_name, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        editTextSearch = view.findViewById(R.id.searchByName_editText);
+        recyclerView = view.findViewById(R.id.searchByName_recyclerView);
+        editTextSearch.requestFocus();
+        InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(editTextSearch, InputMethodManager.SHOW_IMPLICIT);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        adapter = new GridWithTwoMealAdapter(new ArrayList<>(), FragmentName.SEARCH_BY_NAME);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(adapter);
+        searchWithTextWitcher();
+
+    }
+
+    private void searchWithTextWitcher() {
+
+        Observable<String> observable = Observable.create((ObservableOnSubscribe<String>) emitter -> editTextSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                emitter.onNext(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        })).debounce(300, TimeUnit.MILLISECONDS);
+
+        observable.subscribe(this::searchMeal);
+
+    }
+
+    private void searchMeal(String s) {
+        Log.d(TAG, "searchMeal: ");
+        if (!s.isEmpty()) {
+            disposable = searchByNamePresenter.searchMealByName(s).subscribe((rootMeal, throwable) -> {
+                if (rootMeal != null && rootMeal.meals != null) adapter.setMeals(rootMeal.meals);
+                else {
+                    adapter.setMeals(new ArrayList<>());
+                    Log.e(TAG, "rootMeal.meals is null");
+                }
+            });
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_by_name, container, false);
+    public void onDestroy() {
+        super.onDestroy();
+        if (this.disposable != null && disposable.isDisposed()) {
+            disposable.dispose();
+        }
     }
 }

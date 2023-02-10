@@ -12,6 +12,8 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+       String actualResult = GetIdFromYoutubeUrl.getId("https://www.youtube.com/watch?v=p3u8eiy3yHI");
+       String expected = "p3u8eiy3yHI";
+        assertEquals(expected, actualResult);
     }
 }

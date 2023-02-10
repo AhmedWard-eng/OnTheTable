@@ -22,7 +22,7 @@
         app:riv_oval="true" />
 
     <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/imageViewIngredientImageItem"
+        android:id="@+id/imageViewIngredientImageItem_mealDetails"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:src="@drawable/avocado_small"
@@ -33,7 +33,7 @@
         app:riv_oval="true" />
 
     <TextView
-        android:id="@+id/textViewIngredientNameItem"
+        android:id="@+id/textViewIngredientNameItem_mealDetails"
         style="@style/header_three"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

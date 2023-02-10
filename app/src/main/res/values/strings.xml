@@ -67,5 +67,9 @@
     <string name="view_all"><u>View All</u></string>
     <string name="search_by_meal">Search by Meal</string>
     <string name="dessert">Dessert</string>
+    <string name="search_by_categories">Search by Categories</string>
+    <string name="search_for_a_meal">Search For A Meal</string>
+    <string name="signup_successfully">SignedUp successfully</string>
+    <string name="loggedIn_uccessfully">LoggedIn Successfully</string>
 
 </resources>

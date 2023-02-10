@@ -7,7 +7,7 @@
     android:layout_margin="8dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cardViewRandomMeal"
         android:layout_width="285dp"
         android:layout_height="255dp"
         android:elevation="32dp"

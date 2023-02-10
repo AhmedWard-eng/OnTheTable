@@ -5,18 +5,24 @@ import com.mad.iti.onthetable.model.RootMeal;
 import com.mad.iti.onthetable.remoteSource.remoteAPI.APIClientInterface;
 import com.mad.iti.onthetable.remoteSource.remoteAPI.RetrofitClient;
 
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableEmitter;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class MealsRepo implements MealsRepoInterface{
+public class MealsRepo implements MealsRepoInterface {
     private static final String TAG = "MealsRepo";
     private APIClientInterface retrofitClient;
     private Single<RootIngredient> rootIngredientSingle;
 
     private Single<RootMeal> youMightLikeMealsSingle;
-
-
     private Single<RootMeal> randomMealSingle;
 
     private static MealsRepo instance;
@@ -41,17 +47,26 @@ public class MealsRepo implements MealsRepoInterface{
     }
 
     public Single<RootMeal> getYouMightLikeMealsObservable() {
-        if (youMightLikeMealsSingle == null) {
-            youMightLikeMealsSingle = retrofitClient.getYouMightLikeMeal().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-        }
+
+        youMightLikeMealsSingle = retrofitClient.getYouMightLikeMeal().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+
         return youMightLikeMealsSingle;
     }
 
     public Single<RootMeal> getRandomMealObservable() {
-        if (randomMealSingle == null) {
-            randomMealSingle = retrofitClient.getRandomMeal().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-        }
-        return randomMealSingle;
+        return randomMealSingle = retrofitClient.getRandomMeal().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+
+    }
+
+
+    public Single<RootMeal> searchMealByName(String name) {
+        return retrofitClient.searchMealByName(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+
+    }
+
+    @Override
+    public Single<RootMeal> getMealById(String id) {
+        return retrofitClient.getMealById(id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
 

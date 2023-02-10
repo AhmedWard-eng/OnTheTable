@@ -19,7 +19,11 @@
         android:id="@+id/navigation_search"
         android:name="com.mad.iti.onthetable.ui.search.view.SearchFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_navigation_search_to_searchByNameFragment"
+            app:destination="@id/searchByNameFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favorite"
@@ -44,5 +48,14 @@
         <argument
             android:name="mealId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchByNameFragment"
+        android:name="com.mad.iti.onthetable.ui.search.view.SearchByNameFragment"
+        android:label="@string/search_for_a_meal"
+        tools:layout="@layout/fragment_search_by_name" >
+        <action
+            android:id="@+id/action_searchByNameFragment_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
     </fragment>
 </navigation>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.mad.iti.onthetable.ui.registeration.login.view.LoginFragment"
+        android:name="com.mad.iti.onthetable.ui.authentication.login.view.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.mad.iti.onthetable.ui.registeration.singup.view.SignUpFragment"
+        android:name="com.mad.iti.onthetable.ui.authentication.singup.view.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
