@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
             FavAndWeekPlanRepo.getInstance(this.getApplicationContext()).refreshMeals();
-            FavAndWeekPlanRepo.getInstance(this.getApplicationContext()).refreshMeals();
+            FavAndWeekPlanRepo.getInstance(this.getApplicationContext()).refreshPlanner();
         }
 
 

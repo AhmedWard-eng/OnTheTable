@@ -1,11 +1,14 @@
 package com.mad.iti.onthetable.ui.search.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.mad.iti.onthetable.model.Ingredient;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +32,7 @@ import com.mad.iti.onthetable.ui.search.view.ingredient.OnIngredientClickListene
 import com.mad.iti.onthetable.ui.search.view.ingredient.SearchIngredientAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.SingleObserver;
@@ -49,6 +53,8 @@ public class SearchFragment extends Fragment implements OnIngredientClickListene
     private SearchCountryAdapter countryAdapter;
 
     private SearchPresenter searchPresenter;
+
+    List<Ingredient> ingredientList;
 
     TextView viewAllCountries , viewAllIngredients;
 
@@ -75,16 +81,18 @@ public class SearchFragment extends Fragment implements OnIngredientClickListene
         });
 
         viewAllIngredients.setOnClickListener(v->{
-            Navigation.findNavController(view).navigate(R.id.action_navigation_search_to_allIngredientFragment);
+            if(ingredientList != null){
+                Navigation.findNavController(view).navigate(R.id.action_navigation_search_to_allIngredientFragment);
+            }
+
         });
 
         ingredientRecyclerView = view.findViewById(R.id.ingredients_recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         ingredientRecyclerView.setLayoutManager(layoutManager);
-        ingredientAdapter = new SearchIngredientAdapter(getContext() , new ArrayList<>(),this , "HomeSearch");
-        searchPresenter.getIngredients().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        ingredientAdapter = new SearchIngredientAdapter(getContext() , new ArrayList<>(),this );
+        searchPresenter.getIngredients()
                 .subscribe(new SingleObserver<RootIngredient>() {
                     @Override
                     public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
@@ -94,6 +102,7 @@ public class SearchFragment extends Fragment implements OnIngredientClickListene
                     @Override
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull RootIngredient rootIngredient) {
                         ingredientAdapter.setingredientList(rootIngredient.ingredients);
+                        ingredientList = rootIngredient.ingredients;
                         ingredientAdapter.notifyDataSetChanged();
                     }
 
@@ -108,7 +117,7 @@ public class SearchFragment extends Fragment implements OnIngredientClickListene
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
         layoutManager2.setOrientation(RecyclerView.HORIZONTAL);
         countryRecyclerView.setLayoutManager(layoutManager2);
-        countryAdapter = new SearchCountryAdapter(getContext() , new ArrayList<>(),this,"HomeSearch");
+        countryAdapter = new SearchCountryAdapter(getContext() , new ArrayList<>(),this);
         searchPresenter.getCuisines().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<RootCuisine>() {
@@ -158,7 +167,37 @@ public class SearchFragment extends Fragment implements OnIngredientClickListene
     }
 
     @Override
-    public void onClickItem(String id) {
+    public void onClickCountry(String name) {
+        CheckSearchBy checkSearchBy = new CheckSearchBy();
+        checkSearchBy.setType(CheckSearchBy.country);
+        checkSearchBy.setName(name);
 
+        com.mad.iti.onthetable.ui.search.view.SearchFragmentDirections.ActionNavigationSearchToSearchMealResultsFragment action = SearchFragmentDirections
+                .actionNavigationSearchToSearchMealResultsFragment(checkSearchBy);
+        Navigation.findNavController(requireView()).navigate(action);
+    }
+
+    @Override
+    public void onClickItem(String name) {
+
+        CheckSearchBy checkSearchBy = new CheckSearchBy();
+        checkSearchBy.setType(CheckSearchBy.ingredient);
+        checkSearchBy.setName(name);
+
+        com.mad.iti.onthetable.ui.search.view.SearchFragmentDirections.ActionNavigationSearchToSearchMealResultsFragment action = SearchFragmentDirections
+                .actionNavigationSearchToSearchMealResultsFragment(checkSearchBy);
+        Navigation.findNavController(requireView()).navigate(action);
+    }
+
+    @Override
+    public void onClickCategory(String id) {
+
+        CheckSearchBy checkSearchBy = new CheckSearchBy();
+        checkSearchBy.setType(CheckSearchBy.category);
+        checkSearchBy.setName(id);
+        Log.i("Category", "onClick: " + id);
+        com.mad.iti.onthetable.ui.search.view.SearchFragmentDirections.ActionNavigationSearchToSearchMealResultsFragment action = SearchFragmentDirections
+                .actionNavigationSearchToSearchMealResultsFragment(checkSearchBy);
+        Navigation.findNavController(requireView()).navigate(action);
     }
 }

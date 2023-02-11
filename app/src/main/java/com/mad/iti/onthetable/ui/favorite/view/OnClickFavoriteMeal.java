@@ -6,5 +6,5 @@ public interface OnClickFavoriteMeal {
 
     void onClickItem(String id);
 
-    void onClickDeleteItem(Meal meal);
+    void onClickDeleteItem(Meal meal,int position);
 }

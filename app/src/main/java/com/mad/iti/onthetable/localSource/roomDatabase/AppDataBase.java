@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.mad.iti.onthetable.model.Meal;
 import com.mad.iti.onthetable.model.MealPlanner;
 
-@Database(entities = {Meal.class , MealPlanner.class} , version = 1)
+@Database(entities = {Meal.class , MealPlanner.class} , version = 1,exportSchema = false)
 public abstract class AppDataBase extends RoomDatabase {
     private static AppDataBase instance = null;
     public abstract MealDao mealDao();

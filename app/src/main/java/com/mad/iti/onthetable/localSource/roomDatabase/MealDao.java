@@ -18,10 +18,14 @@ public interface MealDao {
     @Query("SELECT * FROM favorite")
     LiveData<List<Meal>> getAllFavoriteMeals();
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+
+    @Query("SELECT * FROM favorite where idMeal = :id")
+    LiveData<Meal> getMealFromFavById(String id);
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertMealToFavorite(Meal meal);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void InsertAllMealsToFavorite(List<Meal> meals);
 
     @Query("SELECT * FROM favorite where idMeal =:idMeal")
@@ -41,6 +45,8 @@ public interface MealDao {
 
     @Query("delete from weekPlan where date = :date & idMeal = :mealId")
     void deleteMealFromPlanner(String date, String mealId);
+
+
 
     @Delete
     void deleteMealFromPlanner(MealPlanner mealPlanner);

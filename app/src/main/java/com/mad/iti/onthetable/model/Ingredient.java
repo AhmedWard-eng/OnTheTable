@@ -1,6 +1,8 @@
 package com.mad.iti.onthetable.model;
 
-public class Ingredient {
+import java.io.Serializable;
+
+public class Ingredient implements Serializable {
     public String idIngredient;
     public String strIngredient;
     public String strDescription;

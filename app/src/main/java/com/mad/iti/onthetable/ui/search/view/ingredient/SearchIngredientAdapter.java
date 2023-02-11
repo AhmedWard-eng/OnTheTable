@@ -29,7 +29,6 @@ public class SearchIngredientAdapter extends RecyclerView.Adapter<SearchIngredie
 
     private final Context context;
     private List<Ingredient> ingredientList;
-    private String fromFragment;
 
     private OnIngredientClickListener listener;
 
@@ -44,13 +43,13 @@ public class SearchIngredientAdapter extends RecyclerView.Adapter<SearchIngredie
 
     public void setingredientList(List<Ingredient> ingredientList) {
         this.ingredientList = ingredientList;
+        notifyDataSetChanged();
     }
 
-    public SearchIngredientAdapter(Context context, List<Ingredient> ingredientList , OnIngredientClickListener listener , String fromFragment) {
+    public SearchIngredientAdapter(Context context, List<Ingredient> ingredientList, OnIngredientClickListener listener) {
         this.context = context;
         this.ingredientList = ingredientList;
         this.listener = listener;
-        this.fromFragment = fromFragment;
     }
 
 
@@ -58,7 +57,7 @@ public class SearchIngredientAdapter extends RecyclerView.Adapter<SearchIngredie
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View v = layoutInflater.inflate(R.layout.ingredient_item_search_fragment,parent,false);
+        View v = layoutInflater.inflate(R.layout.ingredient_item_search_fragment, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
@@ -66,28 +65,13 @@ public class SearchIngredientAdapter extends RecyclerView.Adapter<SearchIngredie
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CheckSearchBy checkSearchBy = new CheckSearchBy();
-        String name = ingredientList.get(position).getStrIngredient();
-        holder.ingredientTextView.setText(ingredientList.get(position).getStrIngredient());
-        Glide.with(context)
-                .load("https://www.themealdb.com/images/ingredients/"+name+"-Small.png")
-                .into(holder.ingredientImage);
-
+        String name = ingredientList.get(holder.getAbsoluteAdapterPosition()).getStrIngredient();
+        holder.ingredientTextView.setText(ingredientList.get(holder.getAbsoluteAdapterPosition()).getStrIngredient());
+        Glide.with(holder.itemView.getContext()).load("https://www.themealdb.com/images/ingredients/" + name + "-Small.png").placeholder(R.drawable.breakfast).error(R.drawable.avocado_small).into(holder.ingredientImage);
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkSearchBy.setType(CheckSearchBy.ingredient);
-                checkSearchBy.setName(name);
-                Log.i("Ingredient", "onClick: " + name);
                 listener.onClickItem(name);
-                if(fromFragment == "AllIngredient"){
-                    ActionAllIngredientFragmentToSearchMealResultsFragment action = AllIngredientFragmentDirections
-                            .actionAllIngredientFragmentToSearchMealResultsFragment(checkSearchBy);
-                    Navigation.findNavController(v).navigate(action);
-                }else if(fromFragment == "HomeSearch"){
-                    ActionNavigationSearchToSearchMealResultsFragment action = SearchFragmentDirections
-                            .actionNavigationSearchToSearchMealResultsFragment(checkSearchBy);
-                    Navigation.findNavController(v).navigate(action);
-                }
             }
         });
 
@@ -98,7 +82,7 @@ public class SearchIngredientAdapter extends RecyclerView.Adapter<SearchIngredie
         return ingredientList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView ingredientTextView;
         RoundedImageView ingredientImage;

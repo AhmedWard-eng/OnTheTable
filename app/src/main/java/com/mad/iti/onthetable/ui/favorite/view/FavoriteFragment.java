@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,7 +43,7 @@ public class FavoriteFragment extends Fragment implements OnClickFavoriteMeal{
 
 
         favMealRecyclerView = view.findViewById(R.id.favoriteMeals_recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        GridLayoutManager layoutManager = new GridLayoutManager(requireContext(),2);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         favMealRecyclerView.setLayoutManager(layoutManager);
         favAdapter = new FavAdapter(getContext() , new ArrayList<>() ,this);
@@ -62,7 +63,8 @@ public class FavoriteFragment extends Fragment implements OnClickFavoriteMeal{
     }
 
     @Override
-    public void onClickDeleteItem(Meal meal) {
+    public void onClickDeleteItem(Meal meal,int position) {
         favoritePresenter.deleteMealFromFav(meal);
+       favAdapter.notifyItemRemoved(position);
     }
 }

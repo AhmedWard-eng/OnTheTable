@@ -28,20 +28,14 @@ public class SearchCategoryAdapter extends RecyclerView.Adapter<SearchCategoryAd
     private final Context context;
     private List<Category> categoryList;
 
-    public List<Category> getCategoryList() {
-        return categoryList;
-    }
 
     public void setCategoryList(List<Category> categoryList) {
         this.categoryList = categoryList;
     }
 
-    private OnCategoryClickListener listener;
+    private final OnCategoryClickListener listener;
 
-    public SearchCategoryAdapter(Context context, List<Category> categoryList) {
-        this.context = context;
-        this.categoryList = categoryList;
-    }
+
 
     public SearchCategoryAdapter(Context context, List<Category> categoryList , OnCategoryClickListener listener) {
         this.context = context;
@@ -60,7 +54,6 @@ public class SearchCategoryAdapter extends RecyclerView.Adapter<SearchCategoryAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CheckSearchBy checkSearchBy = new CheckSearchBy();
         String name = categoryList.get(position).getStrCategory();
         holder.categoryTextView.setText(categoryList.get(position).getStrCategory());
         Glide.with(context)
@@ -70,13 +63,7 @@ public class SearchCategoryAdapter extends RecyclerView.Adapter<SearchCategoryAd
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onClickItem(name);
-                checkSearchBy.setType(CheckSearchBy.category);
-                checkSearchBy.setName(name);
-                Log.i("Category", "onClick: " + name);
-                ActionNavigationSearchToSearchMealResultsFragment action = SearchFragmentDirections
-                        .actionNavigationSearchToSearchMealResultsFragment(checkSearchBy);
-                Navigation.findNavController(v).navigate(action);
+                listener.onClickCategory(name);
             }
         });
 
