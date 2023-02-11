@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationFireBaseRepo;
+import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (destination.getId() == R.id.mealDetailsFragment) {
                 myToolbar.setVisibility(View.GONE);
                 navView.setVisibility(View.GONE);
-            }  else if (destination.getId() == R.id.allIngredientFragment) {
+            } else if (destination.getId() == R.id.allIngredientFragment) {
                 myToolbar.setVisibility(View.GONE);
                 navView.setVisibility(View.GONE);
             } else if (destination.getId() == R.id.allCountriesFragment) {
@@ -52,13 +54,16 @@ public class MainActivity extends AppCompatActivity {
             } else if (destination.getId() == R.id.searchMealResultsFragment) {
                 myToolbar.setVisibility(View.GONE);
                 navView.setVisibility(View.GONE);
-            }else {
+            } else {
                 myToolbar.setVisibility(View.VISIBLE);
                 navView.setVisibility(View.VISIBLE);
             }
         });
 
-
+        if (AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
+            FavAndWeekPlanRepo.getInstance(this.getApplicationContext()).refreshMeals();
+            FavAndWeekPlanRepo.getInstance(this.getApplicationContext()).refreshMeals();
+        }
 
 
     }
@@ -67,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         return navController.navigateUp() || super.onSupportNavigateUp();
     }
-
 
 
 }

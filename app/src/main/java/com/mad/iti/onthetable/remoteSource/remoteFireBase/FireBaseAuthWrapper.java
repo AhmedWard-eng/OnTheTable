@@ -15,7 +15,7 @@ public class FireBaseAuthWrapper {
         return fireBaseAuthWrapper;
     }
 
-    public FireBaseAuthWrapper() {
+    private FireBaseAuthWrapper() {
         this.auth = FirebaseAuth.getInstance();
     }
 
@@ -29,6 +29,7 @@ public class FireBaseAuthWrapper {
     public void logout(){
         auth.signOut();
     }
+
 
 
 }

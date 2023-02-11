@@ -74,5 +74,7 @@
     <string name="search_for_a_meal">Search For A Meal</string>
     <string name="signup_successfully">SignedUp successfully</string>
     <string name="loggedIn_uccessfully">LoggedIn Successfully</string>
+    <string name="favorite_meals">Favorite Meals</string>
+    <string name="added_successfully_to_your_plan">Added successfully to your plan</string>
 
 </resources>

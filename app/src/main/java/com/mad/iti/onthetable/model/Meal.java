@@ -1,5 +1,6 @@
 package com.mad.iti.onthetable.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -7,6 +8,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "favorite")
 public class Meal {
     @PrimaryKey
+    @NonNull
     public String idMeal;
     public String strMeal;
 
@@ -16,6 +18,7 @@ public class Meal {
     public String strArea;
     public String strInstructions;
     public String strMealThumb;
+    @Ignore
     public Object strTags;
     public String strYoutube;
     public String strIngredient1;

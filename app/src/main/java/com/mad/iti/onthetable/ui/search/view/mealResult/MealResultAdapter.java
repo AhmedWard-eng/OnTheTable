@@ -24,7 +24,7 @@ import com.mad.iti.onthetable.ui.search.view.mealResult.SearchMealResultsFragmen
 
 import java.util.List;
 
-public class MealResultAdapter extends RecyclerView.Adapter<MealResultAdapter.ViewHolder>{
+public class MealResultAdapter extends RecyclerView.Adapter<MealResultAdapter.ViewHolder> {
     private static final String TAG = "MealResultAdapter";
     private final Context context;
     private List<MealPreview> mealPreviewList;
@@ -38,12 +38,10 @@ public class MealResultAdapter extends RecyclerView.Adapter<MealResultAdapter.Vi
     }
 
 
-
     private OnClickMealResult listener;
 
 
-
-    public MealResultAdapter(Context context, List<MealPreview> mealPreviewList , OnClickMealResult listener) {
+    public MealResultAdapter(Context context, List<MealPreview> mealPreviewList, OnClickMealResult listener) {
         this.context = context;
         this.mealPreviewList = mealPreviewList;
         this.listener = listener;
@@ -53,9 +51,8 @@ public class MealResultAdapter extends RecyclerView.Adapter<MealResultAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View v = layoutInflater.inflate(R.layout.preview_meal_row_layout,parent,false);
-        MealResultAdapter.ViewHolder vh = new MealResultAdapter.ViewHolder(v);
-        return vh;
+        View v = layoutInflater.inflate(R.layout.item_main_meal, parent, false);
+        return new ViewHolder(v);
     }
 
     @Override
@@ -79,7 +76,7 @@ public class MealResultAdapter extends RecyclerView.Adapter<MealResultAdapter.Vi
         return mealPreviewList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView mealNameTextView;
         ImageView mealImage;
@@ -89,9 +86,9 @@ public class MealResultAdapter extends RecyclerView.Adapter<MealResultAdapter.Vi
         public ViewHolder(@NonNull View v) {
             super(v);
             layout = v;
-            mealNameTextView = v.findViewById(R.id.titlePreviewMeal_textView);
-            mealImage = v.findViewById(R.id.previewMeal_imageView);
-            cardView = v.findViewById(R.id.previewMeal_cardView);
+            mealNameTextView = v.findViewById(R.id.textView_meal_title_item_main);
+            mealImage = v.findViewById(R.id.imageView_item_main);
+            cardView = v.findViewById(R.id.cardView_item_main);
         }
     }
 }

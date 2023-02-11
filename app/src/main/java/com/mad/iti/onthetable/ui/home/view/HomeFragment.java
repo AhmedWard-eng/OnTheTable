@@ -7,7 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mad.iti.onthetable.localSource.roomDatabase.LocalSource;
+import com.mad.iti.onthetable.localSource.roomDatabase.LocalSourceRoom;
 import com.mad.iti.onthetable.model.FragmentName;
+import com.mad.iti.onthetable.model.GetMealPlannerFromMealAndDate;
+import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
+import com.mad.iti.onthetable.model.repositories.dataRepo.OnAddingListener;
 import com.mad.iti.onthetable.ui.home.view.HomeFragmentDirections.ActionNavigationHomeToMealDetailsFragment;
 
 import androidx.annotation.NonNull;
@@ -44,6 +49,7 @@ public class HomeFragment extends Fragment {
     CardView cardView;
     private Disposable disposableRandomMeal;
     private Disposable disposableYouMightLike;
+    LocalSource localSource;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeFragmentPresenter = HomeFragmentPresenter.getInstance(MealsRepo.getInstance());
@@ -65,6 +71,8 @@ public class HomeFragment extends Fragment {
         adapter = new GridWithTwoMealAdapter(new ArrayList<>(), FragmentName.HOME);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
+        localSource = LocalSourceRoom.getInstance(requireContext());
+
 
         getRandomMeal();
         getYouMightLikeMeals();
@@ -76,6 +84,8 @@ public class HomeFragment extends Fragment {
             if (rootMeal != null && rootMeal.meals != null) {
                 Meal meal = rootMeal.meals.get(0);
                 setMealIntoTheView(meal);
+
+
             }
             Log.e(TAG, "getRandomMeal: homeFragment");
         });
@@ -94,12 +104,9 @@ public class HomeFragment extends Fragment {
         textViewMealName.setText(meal.strMeal);
         textViewMealCountry.setText(meal.strArea);
         Glide.with(requireContext()).load(meal.strMealThumb).placeholder(R.drawable.breakfast).error(R.drawable.avocado_small).into(imageViewDishOfTheDay);
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ActionNavigationHomeToMealDetailsFragment action = HomeFragmentDirections.actionNavigationHomeToMealDetailsFragment(meal.idMeal);
-                Navigation.findNavController(v).navigate(action);
-            }
+        cardView.setOnClickListener(v -> {
+            ActionNavigationHomeToMealDetailsFragment action = HomeFragmentDirections.actionNavigationHomeToMealDetailsFragment(meal.idMeal);
+            Navigation.findNavController(v).navigate(action);
         });
 
     }
