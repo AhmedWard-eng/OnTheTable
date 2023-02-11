@@ -1,13 +1,15 @@
 package com.mad.iti.onthetable.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "weekPlan")
 public class MealPlanner {
-    @PrimaryKey(autoGenerate = true)
-    public  int id;
+    @NonNull
+    @PrimaryKey
+    public  String id;
     public String idMeal;
     public String strMeal;
     public int dayOfWeek;

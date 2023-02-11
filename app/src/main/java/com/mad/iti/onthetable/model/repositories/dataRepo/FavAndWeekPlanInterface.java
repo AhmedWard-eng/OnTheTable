@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData;
 
 import com.mad.iti.onthetable.model.Meal;
 import com.mad.iti.onthetable.model.MealPlanner;
-import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBaseFavDelegate;
-import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBasePlannerDelegate;
 
 import java.util.List;
 
@@ -27,5 +25,7 @@ public interface FavAndWeekPlanInterface {
     void deleteMealFromFavorites(Meal meal);
     void deleteAllFav();
     void deleteAllWeekPlan();
+
+    LiveData<Meal> getMealById(String idMeal);
 
 }

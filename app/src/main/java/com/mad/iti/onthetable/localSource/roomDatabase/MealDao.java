@@ -24,11 +24,15 @@ public interface MealDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void InsertAllMealsToFavorite(List<Meal> meals);
 
+    @Query("SELECT * FROM favorite where idMeal =:idMeal")
+    LiveData<Meal> getMealById(String idMeal);
+
     @Delete
     void deleteMealFromFavorite(Meal product);
 
     @Query("delete From favorite")
     void deleteAllFav();
+
     @Query("delete From weekPlan")
     void deleteAllWeekPlan();
 
@@ -41,10 +45,10 @@ public interface MealDao {
     @Delete
     void deleteMealFromPlanner(MealPlanner mealPlanner);
 
-    @Insert
+    @Insert (onConflict = OnConflictStrategy.IGNORE)
     void insertMealIntoPlanner(MealPlanner mealPlanner);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void InsertAllMealsIntoPlanner(List<MealPlanner> mealPlanners);
 
 }

@@ -10,7 +10,9 @@ import android.widget.TextView;
 import com.mad.iti.onthetable.localSource.roomDatabase.LocalSource;
 import com.mad.iti.onthetable.localSource.roomDatabase.LocalSourceRoom;
 import com.mad.iti.onthetable.model.FragmentName;
-import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBaseRealTimeWrapper;
+import com.mad.iti.onthetable.model.GetMealPlannerFromMealAndDate;
+import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
+import com.mad.iti.onthetable.model.repositories.dataRepo.OnAddingListener;
 import com.mad.iti.onthetable.ui.home.view.HomeFragmentDirections.ActionNavigationHomeToMealDetailsFragment;
 
 import androidx.annotation.NonNull;
@@ -82,6 +84,8 @@ public class HomeFragment extends Fragment {
             if (rootMeal != null && rootMeal.meals != null) {
                 Meal meal = rootMeal.meals.get(0);
                 setMealIntoTheView(meal);
+
+
             }
             Log.e(TAG, "getRandomMeal: homeFragment");
         });

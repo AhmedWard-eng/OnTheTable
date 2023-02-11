@@ -1,5 +1,7 @@
 package com.mad.iti.onthetable.remoteSource.remoteFireBase;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -15,7 +17,7 @@ import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationFireBase
 import java.util.ArrayList;
 
 public class FireBaseRealTimeWrapper {
-
+    private static final String TAG = "FavAndWeekPlanRepo";
     private FirebaseDatabase database;
     private DatabaseReference referenceWeekPlanner;
     private DatabaseReference referenceFavorite;
@@ -46,8 +48,8 @@ public class FireBaseRealTimeWrapper {
 
     public void addToWeekPlanner(MealPlanner mealPlanner, FireBaseAddingDelegate fireBaseAddingDelegate) {
         if (authenticationFireBaseRepo.isAuthenticated()) {
-            String key = referenceFavorite.push().getKey();
-            referenceFavorite.child(String.valueOf(mealPlanner.id)).setValue(mealPlanner).addOnCompleteListener(task -> fireBaseAddingDelegate.onSuccess()).addOnFailureListener(e -> fireBaseAddingDelegate.onFailure(e.toString()));
+            String key = referenceWeekPlanner.push().getKey();
+            referenceWeekPlanner.child(String.valueOf(mealPlanner.id)).setValue(mealPlanner).addOnCompleteListener(task -> fireBaseAddingDelegate.onSuccess()).addOnFailureListener(e -> fireBaseAddingDelegate.onFailure(e.toString()));
 
         }
     }
@@ -62,8 +64,8 @@ public class FireBaseRealTimeWrapper {
     }
 
 
-    public void removeMealFromPlanner(int id ,FireBaseRemovingDelegate fireBaseRemovingDelegate){
-        referenceWeekPlanner.child(String.valueOf(id)).removeValue(new DatabaseReference.CompletionListener() {
+    public void removeMealFromPlanner(String id, FireBaseRemovingDelegate fireBaseRemovingDelegate) {
+        referenceWeekPlanner.child(id).removeValue(new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                 fireBaseRemovingDelegate.onSuccess();
@@ -78,7 +80,7 @@ public class FireBaseRealTimeWrapper {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<Meal> meals = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    meals.add(snapshot.getValue(Meal.class));
+                    new Thread(() -> meals.add(snapshot.getValue(Meal.class))).start();
                 }
                 fireBaseFavDelegate.onSuccess(meals);
             }
@@ -88,6 +90,7 @@ public class FireBaseRealTimeWrapper {
                 fireBaseFavDelegate.onFailure(databaseError.toException().toString());
             }
         };
+        Log.d(TAG, "getFavMeals: " + database.getReference().child("users").child(authenticationFireBaseRepo.getUser().getUid()).child("favoritesMeal").getKey());
         referenceFavorite.addValueEventListener(postListener);
     }
 
@@ -97,7 +100,7 @@ public class FireBaseRealTimeWrapper {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<MealPlanner> mealPlanners = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    mealPlanners.add(snapshot.getValue(MealPlanner.class));
+                    new Thread(() -> mealPlanners.add(snapshot.getValue(MealPlanner.class))).start();
                 }
                 fireBasePlannerDelegate.onSuccess(mealPlanners);
             }

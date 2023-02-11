@@ -1,4 +1,4 @@
-package com.mad.iti.onthetable;
+package com.mad.iti.onthetable.formatters;
 
 public class GetIdFromYoutubeUrl {
     public static String getId(String link) {

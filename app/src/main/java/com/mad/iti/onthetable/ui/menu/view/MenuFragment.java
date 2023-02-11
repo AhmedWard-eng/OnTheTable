@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.mad.iti.onthetable.R;
 import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationFireBaseRepo;
+import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
 
 public class MenuFragment extends Fragment {
 
@@ -50,6 +51,8 @@ public class MenuFragment extends Fragment {
 
     private void logOut() {
         AuthenticationFireBaseRepo.getInstance().logout();
+        FavAndWeekPlanRepo.getInstance(requireContext().getApplicationContext()).deleteAllWeekPlan();
+        FavAndWeekPlanRepo.getInstance(requireContext().getApplicationContext()).deleteAllFav();
         Toast.makeText(requireContext(), "LoggedOut successfully", Toast.LENGTH_SHORT).show();
     }
 }

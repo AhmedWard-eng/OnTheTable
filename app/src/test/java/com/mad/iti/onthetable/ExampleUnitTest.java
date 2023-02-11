@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import com.mad.iti.onthetable.formatters.GetIdFromYoutubeUrl;
+
 /**
  * Example local unit test, which will execute on the development machine (host).
  *

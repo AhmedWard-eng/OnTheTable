@@ -12,7 +12,6 @@ import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBaseAddingDelegate
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBaseFavDelegate;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBasePlannerDelegate;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBaseRealTimeWrapper;
-import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBaseRemovingDelegate;
 
 import java.util.List;
 
@@ -60,7 +59,8 @@ public class FavAndWeekPlanRepo implements FavAndWeekPlanInterface {
             @Override
             public void onSuccess(List<Meal> meals) {
                 new Thread(() -> {
-                    dataBase.mealDao().InsertAllMealsToFavorite(meals);
+                    new Thread(() -> dataBase.mealDao().InsertAllMealsToFavorite(meals)).start();
+                    Log.d(TAG, "onSuccess: ");
                 }).start();
             }
 
@@ -103,7 +103,7 @@ public class FavAndWeekPlanRepo implements FavAndWeekPlanInterface {
         firebase.addToWeekPlanner(mealPlanner, new FireBaseAddingDelegate() {
             @Override
             public void onSuccess() {
-                dataBase.mealDao().insertMealIntoPlanner(mealPlanner);
+                new Thread(() -> dataBase.mealDao().insertMealIntoPlanner(mealPlanner)).start();
                 onAddingListener.onSuccess();
             }
 
@@ -116,7 +116,7 @@ public class FavAndWeekPlanRepo implements FavAndWeekPlanInterface {
 
     @Override
     public void deleteMealFromPlanner(MealPlanner mealPlanner) {
-        firebase.removeMealFromPlanner(mealPlanner.id, () -> dataBase.mealDao().deleteMealFromPlanner(mealPlanner));
+        firebase.removeMealFromPlanner(mealPlanner.id, () -> new Thread(() -> dataBase.mealDao().deleteMealFromPlanner(mealPlanner)).start());
     }
 
     @Override
@@ -126,12 +126,21 @@ public class FavAndWeekPlanRepo implements FavAndWeekPlanInterface {
 
     @Override
     public void deleteAllFav() {
-        dataBase.mealDao().deleteAllFav();
+        new Thread(() -> {
+            dataBase.mealDao().deleteAllFav();
+        }).start();
     }
 
     @Override
     public void deleteAllWeekPlan() {
-        dataBase.mealDao().deleteAllWeekPlan();
+        new Thread(() -> {
+            dataBase.mealDao().deleteAllWeekPlan();
+        }).start();
+    }
+
+    @Override
+    public LiveData<Meal> getMealById(String idMeal) {
+        return dataBase.mealDao().getMealById(idMeal);
     }
 
 }

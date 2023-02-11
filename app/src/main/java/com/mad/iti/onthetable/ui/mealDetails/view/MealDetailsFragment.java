@@ -1,9 +1,12 @@
 package com.mad.iti.onthetable.ui.mealDetails.view;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,13 +14,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.mad.iti.onthetable.GetIdFromYoutubeUrl;
+import com.mad.iti.onthetable.formatters.FormatDateToString;
+import com.mad.iti.onthetable.formatters.GetIdFromYoutubeUrl;
 import com.mad.iti.onthetable.R;
 import com.mad.iti.onthetable.databinding.FragmentMealDetailsBinding;
 import com.mad.iti.onthetable.model.GetArrayFromMeal;
+import com.mad.iti.onthetable.model.GetMealPlannerFromMealAndDate;
 import com.mad.iti.onthetable.model.Meal;
+import com.mad.iti.onthetable.model.MealPlanner;
+import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
+import com.mad.iti.onthetable.model.repositories.dataRepo.OnAddingListener;
 import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepo;
 import com.mad.iti.onthetable.ui.mealDetails.presenter.MealsDetailsFragmentPresenter;
 import com.mad.iti.onthetable.ui.mealDetails.presenter.MealsDetailsPresenterInterface;
@@ -26,6 +37,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -38,6 +51,8 @@ public class MealDetailsFragment extends Fragment {
 
     MealsDetailsPresenterInterface mealsDetailsPresenter;
     IngredientsAdapter ingredientsAdapter;
+
+    ImageView imageViewADDToWeekPlanner;
     YouTubePlayerView yt;
 
     Disposable disposable;
@@ -58,7 +73,7 @@ public class MealDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         fragmentMealDetailsBinding = FragmentMealDetailsBinding.inflate(inflater, container, false);
-        mealsDetailsPresenter = MealsDetailsFragmentPresenter.getInstance(MealsRepo.getInstance());
+        mealsDetailsPresenter = MealsDetailsFragmentPresenter.getInstance(MealsRepo.getInstance(), FavAndWeekPlanRepo.getInstance(requireContext()));
         // Inflate the layout for this fragment
         return fragmentMealDetailsBinding.getRoot();
     }
@@ -67,6 +82,8 @@ public class MealDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         yt = fragmentMealDetailsBinding.ytPlayer;
+        imageViewADDToWeekPlanner = view.findViewById(R.id.imageViewAddToCalendarItemDetails);
+
 //        getLifecycle().addObserver(yt);
         ingredientsAdapter = new IngredientsAdapter(new ArrayList<>());
         fragmentMealDetailsBinding.recyclerViewIngredientsItemDetails.setAdapter(ingredientsAdapter);
@@ -76,6 +93,11 @@ public class MealDetailsFragment extends Fragment {
         String id = MealDetailsFragmentArgs.fromBundle(requireArguments()).getMealId();
 
         getMeal(id);
+    }
+
+    private void openDatePicker(Meal meal) {
+        DialogFragment newFragment = new DatePickerFragment(meal, mealsDetailsPresenter);
+        newFragment.show(requireActivity().getSupportFragmentManager(), "datePicker");
     }
 
     private void getMeal(String id) {
@@ -98,6 +120,7 @@ public class MealDetailsFragment extends Fragment {
         fragmentMealDetailsBinding.textViewProcedures.setText(formatText(meal.strInstructions));
         Glide.with(requireContext()).load(meal.strMealThumb).placeholder(R.drawable.breakfast).error(R.drawable.avocado_small).into(fragmentMealDetailsBinding.mealImage);
         ingredientsAdapter.setList(GetArrayFromMeal.getArrayList(meal));
+        imageViewADDToWeekPlanner.setOnClickListener((v) -> openDatePicker(meal));
 
         yt.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
@@ -107,11 +130,7 @@ public class MealDetailsFragment extends Fragment {
                 youTubePlayer.cueVideo(videoId, 0);
             }
         });
-//        yt.getYouTubePlayerWhenReady(youTubePlayer -> {
-//
-//            youTubePlayer.cueVideo(,0);
-//            // do stuff with it
-//        });
+
     }
 
     private String formatText(String strInstructions) {
@@ -124,5 +143,49 @@ public class MealDetailsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         yt.release();
+    }
+
+    public static class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+        Meal meal;
+        MealsDetailsPresenterInterface mealsDetailsPresenter;
+
+        public DatePickerFragment(Meal meal, MealsDetailsPresenterInterface mealsDetailsFragmentPresenter) {
+            this.meal = meal;
+            this.mealsDetailsPresenter = mealsDetailsFragmentPresenter;
+        }
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), this, year, month, day);
+            datePickerDialog.getDatePicker().setMinDate(new Date().getTime());
+            // Create a new instance of DatePickerDialog and return it
+            return datePickerDialog;
+        }
+
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            MealPlanner mealPlanner = GetMealPlannerFromMealAndDate.getMealPlanner(meal, FormatDateToString.getString(year, month, day), 0);
+            mealsDetailsPresenter.addToWeekPlanner(mealPlanner, new OnAddingListener() {
+                @Override
+                public void onSuccess() {
+                    Toast.makeText(view.getContext(), "added Successfully to your plan", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(String message) {
+                    Toast.makeText(view.getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            });
+            // Do something with the date chosen by the user
+        }
     }
 }

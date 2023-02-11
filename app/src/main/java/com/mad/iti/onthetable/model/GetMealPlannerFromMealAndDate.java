@@ -1,15 +1,15 @@
 package com.mad.iti.onthetable.model;
 
 public class GetMealPlannerFromMealAndDate {
-    public static MealPlanner getMealPlanner(Meal meal, String date,int dayOfWeek){
+    public static MealPlanner getMealPlanner(Meal meal, String date, int dayOfWeek) {
         MealPlanner mealPlanner = new MealPlanner();
         mealPlanner.idMeal = meal.idMeal;
         mealPlanner.date = date;
-        mealPlanner.strMeal =meal.strMeal;
+        mealPlanner.strMeal = meal.strMeal;
         mealPlanner.dayOfWeek = dayOfWeek;
         mealPlanner.strCategory = meal.strCategory;
         mealPlanner.strArea = meal.strArea;
-        mealPlanner.strInstructions= meal.strInstructions;
+        mealPlanner.strInstructions = meal.strInstructions;
         mealPlanner.strMealThumb = meal.strMealThumb;
         mealPlanner.strTags = meal.strTags;
         mealPlanner.strYoutube = meal.strYoutube;
@@ -53,6 +53,7 @@ public class GetMealPlannerFromMealAndDate {
         mealPlanner.strMeasure18 = meal.strMeasure18;
         mealPlanner.strMeasure19 = meal.strMeasure19;
         mealPlanner.strMeasure20 = meal.strMeasure20;
-        return  mealPlanner;
+        mealPlanner.id = date + "-" + meal.idMeal;
+        return mealPlanner;
     }
 }
