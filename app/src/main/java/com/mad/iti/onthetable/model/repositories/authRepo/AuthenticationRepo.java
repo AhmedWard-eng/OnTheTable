@@ -1,5 +1,6 @@
 package com.mad.iti.onthetable.model.repositories.authRepo;
 
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.SignInDelegate;
@@ -14,5 +15,5 @@ public interface AuthenticationRepo {
     FirebaseUser getUser();
    FirebaseAuth getFirebaseAuth();
 
-   void signUpWithGoogle(SignUpWithGoogleDelegate signUpWithGoogleDelegate);
+   void signUpWithGoogle(AuthCredential authCredential,SignUpWithGoogleDelegate signUpWithGoogleDelegate);
 }

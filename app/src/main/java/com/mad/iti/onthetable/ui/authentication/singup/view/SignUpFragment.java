@@ -100,7 +100,6 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     }
 
     private void signUpWithGoogle() {
-        signUpPresenter.signUpWithGoogle();
     }
 
     private void signUp() {
@@ -190,19 +189,18 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
                                     // When sign in account is not equal to null initialize auth credential
                                     AuthCredential authCredential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
                                     // Check credential
+
                                     firebaseAuth.signInWithCredential(authCredential).addOnSuccessListener(requireActivity(), new OnSuccessListener<AuthResult>() {
                                         @Override
                                         public void onSuccess(AuthResult authResult) {
-                                            startActivity(new Intent(getContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                                            displayToast("Firebase authentication successful");
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
 
-                                            displayToast("Authentication Failed :" + e.getMessage());
                                         }
                                     });
+
                                 }
                             } catch (ApiException e) {
                                 e.printStackTrace();
