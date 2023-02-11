@@ -64,7 +64,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder>{
         holder.deleteMealIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onClickDeleteItem(favMealsList.get(holder.getAbsoluteAdapterPosition()).idMeal);
+                listener.onClickDeleteItem(favMealsList.get(holder.getAbsoluteAdapterPosition()));
             }
         });
 

@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData;
 
 import com.mad.iti.onthetable.model.Meal;
 import com.mad.iti.onthetable.model.MealPlanner;
-import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBaseFavDelegate;
-import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBasePlannerDelegate;
 
 import java.util.List;
 

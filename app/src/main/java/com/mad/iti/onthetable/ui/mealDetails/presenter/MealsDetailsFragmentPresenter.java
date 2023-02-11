@@ -14,7 +14,7 @@ public class MealsDetailsFragmentPresenter implements MealsDetailsPresenterInter
     private MealsRepoInterface mealsRepo;
     private FavAndWeekPlanInterface dataBaseRepo;
 
-    OnAddingListener onAddingListener;
+    //OnAddingListener onAddingListener;
     public static synchronized MealsDetailsFragmentPresenter getInstance(MealsRepoInterface mealsRepo,FavAndWeekPlanInterface dataBaseRepo){
         if(mealsDetailsFragmentPresenter == null){
             mealsDetailsFragmentPresenter = new MealsDetailsFragmentPresenter(mealsRepo , dataBaseRepo);
@@ -34,7 +34,7 @@ public class MealsDetailsFragmentPresenter implements MealsDetailsPresenterInter
     }
 
     @Override
-    public void addFavMeal(Meal meal) {
+    public void addFavMeal(Meal meal , OnAddingListener onAddingListener) {
         dataBaseRepo.addToFavorites(meal , onAddingListener);
     }
 }

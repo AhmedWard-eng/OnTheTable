@@ -5,4 +5,7 @@ import com.google.firebase.auth.FirebaseUser;
 public interface SignUpViewInterface {
     void onSuccess(FirebaseUser user);
     void OnFailure(String message);
+
+    void onSuccessGoogle();
+    void OnFailureGoogle(String message);
 }
