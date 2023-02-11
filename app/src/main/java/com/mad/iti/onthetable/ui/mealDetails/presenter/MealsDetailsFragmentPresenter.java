@@ -1,5 +1,7 @@
 package com.mad.iti.onthetable.ui.mealDetails.presenter;
 
+import androidx.lifecycle.LiveData;
+
 import com.mad.iti.onthetable.model.Meal;
 import com.mad.iti.onthetable.model.MealPlanner;
 import com.mad.iti.onthetable.model.RootMeal;
@@ -41,6 +43,10 @@ public class MealsDetailsFragmentPresenter implements MealsDetailsPresenterInter
     @Override
     public void addToWeekPlanner(MealPlanner mealPlanner, OnAddingListener onAddingListener) {
         dataBaseRepo.addToPlanner(mealPlanner,onAddingListener);
+    }
+
+    public LiveData<Meal> getMealFromFav(){
+        return null;
     }
 
 

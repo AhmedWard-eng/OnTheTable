@@ -125,7 +125,7 @@ public class SearchByNameFragment extends Fragment implements OnClickListener {
 
     @Override
     public void onClick(String id) {
-        SearchByNameFragmentDirections.ActionSearchByNameFragmentToMealDetailsFragment action = SearchByNameFragmentDirections.actionSearchByNameFragmentToMealDetailsFragment(id, Status.ONLINE.toString());
+        SearchByNameFragmentDirections.ActionSearchByNameFragmentToMealDetailsFragment action = SearchByNameFragmentDirections.actionSearchByNameFragmentToMealDetailsFragment(id, Status.ONLINE.toString(),false);
         Navigation.findNavController(requireView()).navigate(action);
     }
 }

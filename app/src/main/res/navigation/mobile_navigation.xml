@@ -70,7 +70,11 @@
         android:id="@+id/navigation_weekPlan"
         android:name="com.mad.iti.onthetable.ui.weekplan.view.WeekPlanFragment"
         android:label="@string/title_week_plan"
-        tools:layout="@layout/fragment_week_plan_m_m" />
+        tools:layout="@layout/fragment_week_plan_m_m" >
+        <action
+            android:id="@+id/action_navigation_weekPlan_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mealDetailsFragment"
         android:name="com.mad.iti.onthetable.ui.mealDetails.view.MealDetailsFragment"
@@ -84,8 +88,7 @@
             app:argType="string" />
         <argument
             android:name="isWeekPlanner"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/searchByNameFragment"

@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment implements  OnClickListener{
         textViewMealCountry.setText(meal.strArea);
         Glide.with(requireContext()).load(meal.strMealThumb).placeholder(R.drawable.breakfast).error(R.drawable.avocado_small).into(imageViewDishOfTheDay);
         cardView.setOnClickListener(v -> {
-            ActionNavigationHomeToMealDetailsFragment action = HomeFragmentDirections.actionNavigationHomeToMealDetailsFragment(meal.idMeal, Status.ONLINE.toString());
+            ActionNavigationHomeToMealDetailsFragment action = HomeFragmentDirections.actionNavigationHomeToMealDetailsFragment(meal.idMeal, Status.ONLINE.toString(),false);
             Navigation.findNavController(v).navigate(action);
         });
 
@@ -121,7 +121,7 @@ public class HomeFragment extends Fragment implements  OnClickListener{
 
     @Override
     public void onClick(String id) {
-        HomeFragmentDirections.ActionNavigationHomeToMealDetailsFragment action = HomeFragmentDirections.actionNavigationHomeToMealDetailsFragment(id,Status.ONLINE.toString());
+        HomeFragmentDirections.ActionNavigationHomeToMealDetailsFragment action = HomeFragmentDirections.actionNavigationHomeToMealDetailsFragment(id,Status.ONLINE.toString(),false);
         Navigation.findNavController(requireView()).navigate(action);
     }
 }

@@ -1,5 +1,7 @@
 package com.mad.iti.onthetable.ui.weekplan.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,7 @@ import android.widget.CalendarView;
 import com.mad.iti.onthetable.R;
 import com.mad.iti.onthetable.formatters.FormatDateToString;
 import com.mad.iti.onthetable.model.MealPlanner;
+import com.mad.iti.onthetable.model.Status;
 import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
 import com.mad.iti.onthetable.ui.weekplan.presenter.WeekPlanPresenter;
 import com.mad.iti.onthetable.ui.weekplan.presenter.WeekPlanPresenterInterface;
@@ -96,13 +99,20 @@ public class WeekPlanFragment extends Fragment implements ONItemClickListener, O
         calendarView.setFirstDayOfWeek(7);
     }
 
+
     @Override
     public void onClick(MealPlanner mealPlanner) {
+        WeekPlanFragmentDirections.ActionNavigationWeekPlanToMealDetailsFragment action = WeekPlanFragmentDirections.actionNavigationWeekPlanToMealDetailsFragment(mealPlanner.id, Status.OFFLINE.toString(),true);
     }
 
     @Override
     public void onRemove(MealPlanner mealPlanner, int position) {
-        weekPlanPresenter.removeItemFromPlanner(mealPlanner);
-        weekPlannerAdapter.notifyItemRemoved(position);
+        new AlertDialog.Builder(getContext())
+                .setTitle(R.string.Delete_Meal)
+                .setMessage(R.string.Are_you_sure_you_want_to_delete_this_meal)
+                .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> {
+                    weekPlanPresenter.removeItemFromPlanner(mealPlanner);
+                })
+                .setNegativeButton(android.R.string.no, null).show();
     }
 }

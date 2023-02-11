@@ -144,7 +144,7 @@ public class SearchMealResultsFragment extends Fragment implements OnClickMealRe
 
         com.mad.iti.onthetable.ui.search.view.mealResult.SearchMealResultsFragmentDirections.ActionSearchMealResultsFragmentToMealDetailsFragment action =
                 SearchMealResultsFragmentDirections.
-                        actionSearchMealResultsFragmentToMealDetailsFragment(id, Status.ONLINE.toString());
+                        actionSearchMealResultsFragmentToMealDetailsFragment(id, Status.ONLINE.toString(),false);
         Navigation.findNavController(requireView()).navigate(action);
     }
 }
