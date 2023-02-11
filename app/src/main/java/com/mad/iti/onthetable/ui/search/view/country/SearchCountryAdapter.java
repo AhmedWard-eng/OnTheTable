@@ -27,20 +27,11 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
     private List<Cuisine> countryList;
     private String fromFragment;
 
-    public List<Cuisine> getCountryList() {
-        return countryList;
-    }
-
     public void setCountryList(List<Cuisine> countryList) {
         this.countryList = countryList;
     }
 
     private OnCountryClickListener listener;
-
-    public SearchCountryAdapter(Context context, List<Cuisine> countryList) {
-        this.context = context;
-        this.countryList = countryList;
-    }
 
     public SearchCountryAdapter(Context context, List<Cuisine> countryList , OnCountryClickListener listener , String fromFragment) {
         this.context = context;

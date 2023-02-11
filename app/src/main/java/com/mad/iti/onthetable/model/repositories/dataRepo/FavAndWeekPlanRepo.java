@@ -87,7 +87,13 @@ public class FavAndWeekPlanRepo implements FavAndWeekPlanInterface {
         firebase.addToFav(meal, new FireBaseAddingDelegate() {
             @Override
             public void onSuccess() {
-                dataBase.mealDao().insertMealToFavorite(meal);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dataBase.mealDao().insertMealToFavorite(meal);
+
+                    }
+                }).start();
                 onAddingListener.onSuccess();
             }
 
@@ -121,7 +127,13 @@ public class FavAndWeekPlanRepo implements FavAndWeekPlanInterface {
 
     @Override
     public void deleteMealFromFavorites(Meal meal) {
-        firebase.removeMealFromFav(meal.idMeal, () -> dataBase.mealDao().deleteMealFromFavorite(meal));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                firebase.removeMealFromFav(meal.idMeal, () -> dataBase.mealDao().deleteMealFromFavorite(meal));
+            }
+        }).start();
+
     }
 
     @Override

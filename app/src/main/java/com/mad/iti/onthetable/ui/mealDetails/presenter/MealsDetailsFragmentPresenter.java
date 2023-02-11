@@ -1,5 +1,6 @@
 package com.mad.iti.onthetable.ui.mealDetails.presenter;
 
+import com.mad.iti.onthetable.model.Meal;
 import com.mad.iti.onthetable.model.MealPlanner;
 import com.mad.iti.onthetable.model.RootMeal;
 import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanInterface;
@@ -8,22 +9,23 @@ import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepoInterface;
 
 import io.reactivex.rxjava3.core.Single;
 
-public class MealsDetailsFragmentPresenter implements MealsDetailsPresenterInterface{
+public class MealsDetailsFragmentPresenter implements MealsDetailsPresenterInterface  {
 
     private static MealsDetailsFragmentPresenter mealsDetailsFragmentPresenter;
     private MealsRepoInterface mealsRepo;
+    private FavAndWeekPlanInterface dataBaseRepo;
 
-    private FavAndWeekPlanInterface favAndWeekPlanRepo ;
-    public static synchronized MealsDetailsFragmentPresenter getInstance(MealsRepoInterface mealsRepo, FavAndWeekPlanInterface favAndWeekPlanRepo){
+    //OnAddingListener onAddingListener;
+    public static synchronized MealsDetailsFragmentPresenter getInstance(MealsRepoInterface mealsRepo,FavAndWeekPlanInterface dataBaseRepo){
         if(mealsDetailsFragmentPresenter == null){
-            mealsDetailsFragmentPresenter = new MealsDetailsFragmentPresenter(mealsRepo,favAndWeekPlanRepo);
+            mealsDetailsFragmentPresenter = new MealsDetailsFragmentPresenter(mealsRepo , dataBaseRepo);
         }
         return mealsDetailsFragmentPresenter;
     }
 
-    private MealsDetailsFragmentPresenter(MealsRepoInterface mealsRepo, FavAndWeekPlanInterface favAndWeekPlanRepo){
+    private MealsDetailsFragmentPresenter(MealsRepoInterface mealsRepo ,FavAndWeekPlanInterface dataBaseRepo){
         this.mealsRepo = mealsRepo;
-        this.favAndWeekPlanRepo = favAndWeekPlanRepo;
+        this.dataBaseRepo = dataBaseRepo;
     }
 
 
@@ -33,8 +35,13 @@ public class MealsDetailsFragmentPresenter implements MealsDetailsPresenterInter
     }
 
     @Override
+    public void addFavMeal(Meal meal , OnAddingListener onAddingListener) {
+        dataBaseRepo.addToFavorites(meal , onAddingListener);
+    }
+
+    @Override
     public void addToWeekPlanner(MealPlanner mealPlanner, OnAddingListener onAddingListener) {
-        favAndWeekPlanRepo.addToPlanner(mealPlanner,onAddingListener);
+        dataBaseRepo.addToPlanner(mealPlanner,onAddingListener);
     }
 
 

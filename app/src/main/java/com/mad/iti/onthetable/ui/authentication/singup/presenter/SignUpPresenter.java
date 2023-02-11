@@ -4,9 +4,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationFireBaseRepo;
 import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationRepo;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.SignUpDelegate;
+import com.mad.iti.onthetable.remoteSource.remoteFireBase.SignUpWithGoogleDelegate;
 import com.mad.iti.onthetable.ui.authentication.singup.view.SignUpViewInterface;
 
-public class SignUpPresenter implements SignUpPresenterInterface, SignUpDelegate {
+public class SignUpPresenter implements SignUpPresenterInterface, SignUpDelegate , SignUpWithGoogleDelegate {
 
     private AuthenticationRepo authenticationRepo;
     private SignUpViewInterface signUpViewInterface;
@@ -29,6 +30,11 @@ public class SignUpPresenter implements SignUpPresenterInterface, SignUpDelegate
     }
 
     @Override
+    public void signUpWithGoogle() {
+        authenticationRepo.signUpWithGoogle(this);
+    }
+
+    @Override
     public void onSuccess(FirebaseUser user) {
         signUpViewInterface.onSuccess(user);
     }
@@ -36,5 +42,15 @@ public class SignUpPresenter implements SignUpPresenterInterface, SignUpDelegate
     @Override
     public void onFailure(String message) {
         signUpViewInterface.OnFailure(message);
+    }
+
+    @Override
+    public void onSuccessGoogle() {
+
+    }
+
+    @Override
+    public void onFailureGoogle(String message) {
+
     }
 }

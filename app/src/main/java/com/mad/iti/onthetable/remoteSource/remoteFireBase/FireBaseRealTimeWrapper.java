@@ -58,7 +58,13 @@ public class FireBaseRealTimeWrapper {
         referenceFavorite.child(mealId).removeValue(new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                fireBaseRemovingDelegate.onSuccess();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        fireBaseRemovingDelegate.onSuccess();
+                    }
+                }).start();
+                //fireBaseRemovingDelegate.onSuccess();
             }
         });
     }

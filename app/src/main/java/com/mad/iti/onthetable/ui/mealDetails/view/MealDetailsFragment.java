@@ -2,6 +2,8 @@ package com.mad.iti.onthetable.ui.mealDetails.view;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,9 +13,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -26,6 +30,9 @@ import com.mad.iti.onthetable.databinding.FragmentMealDetailsBinding;
 import com.mad.iti.onthetable.model.GetArrayFromMeal;
 import com.mad.iti.onthetable.model.GetMealPlannerFromMealAndDate;
 import com.mad.iti.onthetable.model.Meal;
+import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanInterface;
+import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
+import com.mad.iti.onthetable.model.repositories.dataRepo.OnAddingListener;
 import com.mad.iti.onthetable.model.MealPlanner;
 import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
 import com.mad.iti.onthetable.model.repositories.dataRepo.OnAddingListener;
@@ -93,6 +100,7 @@ public class MealDetailsFragment extends Fragment {
         String id = MealDetailsFragmentArgs.fromBundle(requireArguments()).getMealId();
 
         getMeal(id);
+
     }
 
     private void openDatePicker(Meal meal) {
@@ -130,6 +138,39 @@ public class MealDetailsFragment extends Fragment {
                 youTubePlayer.cueVideo(videoId, 0);
             }
         });
+
+        fragmentMealDetailsBinding.imageViewAddToFavITemDetails.setOnClickListener(new View.OnClickListener() {
+            boolean added = false;
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onClick(View v) {
+                mealsDetailsPresenter.addFavMeal(meal, new OnAddingListener() {
+                    @Override
+                    public void onSuccess() {
+                        added = true;
+                        Log.i("testtt", "Click on Fav "+meal.strMeal);
+                        Toast.makeText(getContext(),"Click on Fav "+meal.strMeal,Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(String message) {
+                        Log.i("testtt", "Click on Fav "+message);
+                        Toast.makeText(getContext(),"Click on Fav "+message,Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+//                if(added){
+//                    Toast.makeText(getContext(),"Click on Fav "+meal.strMeal,Toast.LENGTH_SHORT).show();
+//                    fragmentMealDetailsBinding.imageViewAddToFavITemDetails.setImageTintList(ColorStateList.valueOf(R.color.active));
+//                }
+            }
+
+        });
+//        yt.getYouTubePlayerWhenReady(youTubePlayer -> {
+//
+//            youTubePlayer.cueVideo(,0);
+//            // do stuff with it
+//        });
 
     }
 
@@ -188,4 +229,5 @@ public class MealDetailsFragment extends Fragment {
             // Do something with the date chosen by the user
         }
     }
+
 }

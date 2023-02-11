@@ -1,6 +1,7 @@
 package com.mad.iti.onthetable.ui.mealDetails.presenter;
 
 import com.mad.iti.onthetable.model.MealPlanner;
+import com.mad.iti.onthetable.model.Meal;
 import com.mad.iti.onthetable.model.RootMeal;
 import com.mad.iti.onthetable.model.repositories.dataRepo.OnAddingListener;
 
@@ -11,4 +12,6 @@ public interface MealsDetailsPresenterInterface {
 
 
     void addToWeekPlanner(MealPlanner mealPlanner, OnAddingListener onAddingListener);
+
+    public void addFavMeal(Meal meal , OnAddingListener onAddingListener);
 }

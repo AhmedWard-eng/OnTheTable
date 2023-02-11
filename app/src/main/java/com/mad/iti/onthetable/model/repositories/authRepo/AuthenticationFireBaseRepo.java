@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBaseAuthWrapper;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.SignInDelegate;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.SignUpDelegate;
+import com.mad.iti.onthetable.remoteSource.remoteFireBase.SignUpWithGoogleDelegate;
 
 public class AuthenticationFireBaseRepo implements AuthenticationRepo {
 
@@ -75,6 +76,11 @@ public class AuthenticationFireBaseRepo implements AuthenticationRepo {
     @Override
     public FirebaseAuth getFirebaseAuth() {
         return fireBaseAuthWrapper.getAuth();
+    }
+
+    @Override
+    public void signUpWithGoogle(SignUpWithGoogleDelegate signUpWithGoogleDelegate) {
+
     }
 
     public boolean isAuthenticated() {
