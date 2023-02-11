@@ -21,7 +21,7 @@ public interface MealDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMealToFavorite(Meal meal);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void InsertAllMealsToFavorite(List<Meal> meals);
 
     @Query("SELECT * FROM favorite where idMeal =:idMeal")

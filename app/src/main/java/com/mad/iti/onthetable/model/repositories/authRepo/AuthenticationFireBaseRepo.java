@@ -88,6 +88,17 @@ public class AuthenticationFireBaseRepo implements AuthenticationRepo {
 
     @Override
     public void signUpWithGoogle(AuthCredential authCredential, SignUpWithGoogleDelegate signUpWithGoogleDelegate) {
+        fireBaseAuthWrapper.getAuth().signInWithCredential(authCredential).addOnSuccessListener( new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                signUpWithGoogleDelegate.onSuccessGoogle();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                signUpWithGoogleDelegate.onFailureGoogle(e.getMessage());
+            }
+        });
 
     }
 

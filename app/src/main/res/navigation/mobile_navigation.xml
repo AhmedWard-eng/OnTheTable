@@ -40,12 +40,32 @@
         android:id="@+id/navigation_favorite"
         android:name="com.mad.iti.onthetable.ui.favorite.view.FavoriteFragment"
         android:label="@string/title_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_navigation_favorite_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_menu"
         android:name="com.mad.iti.onthetable.ui.menu.view.MenuFragment"
         android:label="@string/title_menu"
-        tools:layout="@layout/fragment_menu" />
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_navigation_menu_to_navigation_favorite"
+            app:destination="@id/navigation_favorite" />
+        <action
+            android:id="@+id/action_navigation_menu_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_navigation_menu_to_searchMealResultsFragment"
+            app:destination="@id/searchMealResultsFragment" />
+        <action
+            android:id="@+id/action_navigation_menu_to_authenticationActivity"
+            app:destination="@id/authenticationActivity" />
+        <action
+            android:id="@+id/action_navigation_menu_to_navigation_weekPlan"
+            app:destination="@id/navigation_weekPlan" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_weekPlan"
         android:name="com.mad.iti.onthetable.ui.weekplan.view.WeekPlanFragment"
@@ -97,5 +117,10 @@
             android:id="@+id/action_searchMealResultsFragment_to_mealDetailsFragment"
             app:destination="@id/mealDetailsFragment" />
     </fragment>
+    <activity
+        android:id="@+id/authenticationActivity"
+        android:name="com.mad.iti.onthetable.ui.authentication.AuthenticationActivity"
+        android:label="activity_regsiteration"
+        tools:layout="@layout/activity_regsiteration" />
 
 </navigation>

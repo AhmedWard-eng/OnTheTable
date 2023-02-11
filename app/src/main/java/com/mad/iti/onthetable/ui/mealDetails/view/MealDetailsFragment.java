@@ -149,7 +149,8 @@ public class MealDetailsFragment extends Fragment {
                     public void onSuccess() {
                         added = true;
                         Log.i("testtt", "Click on Fav "+meal.strMeal);
-                        Toast.makeText(getContext(),"Click on Fav "+meal.strMeal,Toast.LENGTH_SHORT).show();
+                        fragmentMealDetailsBinding.imageViewAddToFavITemDetails.setImageResource(R.drawable.baseline_favorite_24);
+                        Toast.makeText(getContext(),meal.strMeal+" added to fav. Meals",Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

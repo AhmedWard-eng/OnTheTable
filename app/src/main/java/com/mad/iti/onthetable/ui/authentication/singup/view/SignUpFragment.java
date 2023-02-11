@@ -172,35 +172,13 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() ==  Activity.RESULT_OK) {
                         Intent data = result.getData();
-//                        doSomeOperations();
                         Task<GoogleSignInAccount> signInAccountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
-                        // check condition
                         if (signInAccountTask.isSuccessful()) {
-                            // When google sign in successful initialize string
-                            String s = "Google sign in successful";
-                            // Display Toast
-                            displayToast(s);
-                            // Initialize sign in account
                             try {
-                                // Initialize sign in account
                                 GoogleSignInAccount googleSignInAccount = signInAccountTask.getResult(ApiException.class);
-                                // Check condition
                                 if (googleSignInAccount != null) {
-                                    // When sign in account is not equal to null initialize auth credential
                                     AuthCredential authCredential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
-                                    // Check credential
-
-                                    firebaseAuth.signInWithCredential(authCredential).addOnSuccessListener(requireActivity(), new OnSuccessListener<AuthResult>() {
-                                        @Override
-                                        public void onSuccess(AuthResult authResult) {
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-
-                                        }
-                                    });
-
+                                    signUpPresenter.signUpWithGoogle(authCredential);
                                 }
                             } catch (ApiException e) {
                                 e.printStackTrace();

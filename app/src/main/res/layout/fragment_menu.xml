@@ -12,13 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
         android:fontFamily="@font/barlow"
         android:text="@string/logout"
         android:textColor="@color/outline_color"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/logout_imageView_menu"
         app:layout_constraintStart_toEndOf="@+id/logout_imageView_menu"
-        app:layout_constraintTop_toBottomOf="@+id/view4" />
+        app:layout_constraintTop_toTopOf="@+id/logout_imageView_menu" />
 
     <ImageView
         android:id="@+id/logout_imageView_menu"
@@ -27,6 +27,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:src="@drawable/baseline_logout_24"
+        app:layout_constraintBottom_toTopOf="@+id/view5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view4"
         app:tint="@color/cadmium_orange" />
@@ -37,10 +38,11 @@
         android:layout_height="1dp"
         android:layout_marginTop="24dp"
         android:background="@color/inactive"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logout_textView_menu" />
+        app:layout_constraintTop_toBottomOf="@+id/logout_imageView_menu" />
 
     <ImageView
         android:id="@+id/oboutus_imageView_menu"
@@ -49,6 +51,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:src="@drawable/baseline_info_24"
+        app:layout_constraintBottom_toTopOf="@+id/view4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view3"
         app:tint="@color/cadmium_orange" />
@@ -59,23 +62,24 @@
         android:layout_height="1dp"
         android:layout_marginTop="24dp"
         android:background="@color/inactive"
+        app:layout_constraintBottom_toTopOf="@+id/logout_imageView_menu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aboutus_textView_menu" />
+        app:layout_constraintTop_toBottomOf="@+id/oboutus_imageView_menu" />
 
     <TextView
         android:id="@+id/aboutus_textView_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
         android:fontFamily="@font/barlow"
         android:text="@string/about_us"
         android:textColor="@color/outline_color"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/oboutus_imageView_menu"
         app:layout_constraintStart_toEndOf="@+id/oboutus_imageView_menu"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
+        app:layout_constraintTop_toTopOf="@+id/oboutus_imageView_menu" />
 
     <ImageView
         android:id="@+id/weekplan_imageView_menu"
@@ -84,6 +88,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:src="@drawable/baseline_calendar_today_24"
+        app:layout_constraintBottom_toTopOf="@+id/view3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
         app:tint="@color/cadmium_orange" />
@@ -94,23 +99,24 @@
         android:layout_height="1dp"
         android:layout_marginTop="24dp"
         android:background="@color/inactive"
+        app:layout_constraintBottom_toTopOf="@+id/oboutus_imageView_menu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weekplan_textView_menu" />
+        app:layout_constraintTop_toBottomOf="@+id/weekplan_imageView_menu" />
 
     <TextView
         android:id="@+id/weekplan_textView_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
         android:fontFamily="@font/barlow"
         android:text="@string/week_plan"
         android:textColor="@color/outline_color"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/weekplan_imageView_menu"
         app:layout_constraintStart_toEndOf="@+id/weekplan_imageView_menu"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintTop_toTopOf="@+id/weekplan_imageView_menu" />
 
     <ImageView
         android:id="@+id/favprofile_imageView_menu"
@@ -119,6 +125,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:src="@drawable/baseline_favorite_24"
+        app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2"
         app:tint="@color/cadmium_orange" />
@@ -128,13 +135,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
         android:fontFamily="@font/barlow"
         android:text="@string/favourit_meals_setting"
         android:textColor="@color/outline_color"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/favprofile_imageView_menu"
         app:layout_constraintStart_toEndOf="@+id/favprofile_imageView_menu"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
+        app:layout_constraintTop_toTopOf="@+id/favprofile_imageView_menu" />
 
     <View
         android:id="@+id/view"
@@ -142,20 +149,22 @@
         android:layout_height="1dp"
         android:layout_marginTop="24dp"
         android:background="@color/inactive"
+        app:layout_constraintBottom_toTopOf="@+id/weekplan_imageView_menu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/favorite_textView_menu" />
+        app:layout_constraintTop_toBottomOf="@+id/favprofile_imageView_menu" />
 
     <ImageView
         android:id="@+id/profile_imageView_menu"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
         android:src="@drawable/baseline_account_circle_24"
+        app:layout_constraintBottom_toBottomOf="@+id/editprofile_imageView_menu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26" />
 
     <TextView
         android:id="@+id/username_textView_menu"
@@ -184,35 +193,29 @@
         app:layout_constraintStart_toEndOf="@+id/profile_imageView_menu"
         app:layout_constraintTop_toBottomOf="@+id/username_textView_menu" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="141dp" />
-
     <ImageView
         android:id="@+id/editprofile_imageView_menu"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
         android:src="@drawable/baseline_edit_24"
+        app:layout_constraintBottom_toTopOf="@+id/view2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_imageView_menu"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/editprofile_textView_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
         android:fontFamily="@font/barlow"
         android:text="@string/edit_profile"
         android:textColor="@color/outline_color"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/editprofile_imageView_menu"
         app:layout_constraintStart_toEndOf="@+id/editprofile_imageView_menu"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+        app:layout_constraintTop_toTopOf="@+id/editprofile_imageView_menu" />
 
     <View
         android:id="@+id/view2"
@@ -220,8 +223,40 @@
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
         android:background="@color/inactive"
+        app:layout_constraintBottom_toTopOf="@+id/favprofile_imageView_menu"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editprofile_imageView_menu" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/logout_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="logout_imageView_menu,logout_textView_menu" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/aboutus_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="oboutus_imageView_menu,aboutus_textView_menu" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/weekplan_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="weekplan_textView_menu,weekplan_imageView_menu" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/favmeal_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="favorite_textView_menu,favprofile_imageView_menu" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/editprofile_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="editprofile_textView_menu,editprofile_imageView_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
