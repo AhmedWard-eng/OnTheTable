@@ -159,18 +159,10 @@ public class MealDetailsFragment extends Fragment {
 
                     }
                 });
-//                if(added){
-//                    Toast.makeText(getContext(),"Click on Fav "+meal.strMeal,Toast.LENGTH_SHORT).show();
-//                    fragmentMealDetailsBinding.imageViewAddToFavITemDetails.setImageTintList(ColorStateList.valueOf(R.color.active));
-//                }
+
             }
 
         });
-//        yt.getYouTubePlayerWhenReady(youTubePlayer -> {
-//
-//            youTubePlayer.cueVideo(,0);
-//            // do stuff with it
-//        });
 
     }
 
@@ -208,7 +200,6 @@ public class MealDetailsFragment extends Fragment {
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), this, year, month, day);
             datePickerDialog.getDatePicker().setMinDate(new Date().getTime());
-            // Create a new instance of DatePickerDialog and return it
             return datePickerDialog;
         }
 
@@ -218,7 +209,7 @@ public class MealDetailsFragment extends Fragment {
             mealsDetailsPresenter.addToWeekPlanner(mealPlanner, new OnAddingListener() {
                 @Override
                 public void onSuccess() {
-                    Toast.makeText(view.getContext(), "added Successfully to your plan", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), R.string.added_successfully_to_your_plan, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -226,7 +217,6 @@ public class MealDetailsFragment extends Fragment {
                     Toast.makeText(view.getContext(), message, Toast.LENGTH_SHORT).show();
                 }
             });
-            // Do something with the date chosen by the user
         }
     }
 
