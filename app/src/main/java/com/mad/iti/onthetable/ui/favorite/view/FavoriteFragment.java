@@ -64,11 +64,9 @@ public class FavoriteFragment extends Fragment implements OnClickFavoriteMeal{
     @Override
     public void onClickItem(String id) {
         Log.d("TAG", "onClick: item id= "+id);
-
         com.mad.iti.onthetable.ui.favorite.view.FavoriteFragmentDirections.ActionNavigationFavoriteToMealDetailsFragment action =
                 FavoriteFragmentDirections.actionNavigationFavoriteToMealDetailsFragment(id);
         Navigation.findNavController(requireView()).navigate(action);
-
     }
 
     @Override
@@ -77,13 +75,11 @@ public class FavoriteFragment extends Fragment implements OnClickFavoriteMeal{
                 .setTitle("Delete Meal")
                 .setMessage("Are you sure you want to delete this meal?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Toast.makeText(getContext(), "Removvvve", Toast.LENGTH_SHORT).show();
                         favoritePresenter.deleteMealFromFav(meal);
                     }})
                 .setNegativeButton(android.R.string.no, null).show();
 
-        //favoritePresenter.deleteMealFromFav(meal);
     }
 }
