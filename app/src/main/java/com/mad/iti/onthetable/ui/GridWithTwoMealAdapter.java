@@ -65,7 +65,7 @@ public class GridWithTwoMealAdapter extends RecyclerView.Adapter<GridWithTwoMeal
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView imageView;
         private final TextView textViewName;
-        private final ImageView addToFavoriteButton;
+        //private final ImageView addToFavoriteButton;
         View  view;
 
         public ViewHolder(@NonNull View itemView) {
@@ -73,7 +73,7 @@ public class GridWithTwoMealAdapter extends RecyclerView.Adapter<GridWithTwoMeal
             view = itemView;
             imageView = itemView.findViewById(R.id.imageView_item_main);
             textViewName = itemView.findViewById(R.id.textView_meal_title_item_main);
-            addToFavoriteButton = itemView.findViewById(R.id.icon_fav_item_main);
+            //addToFavoriteButton = itemView.findViewById(R.id.icon_fav_item_main);
         }
 
         public ImageView getImageView() {
@@ -88,8 +88,8 @@ public class GridWithTwoMealAdapter extends RecyclerView.Adapter<GridWithTwoMeal
             return view;
         }
 
-        public ImageView getAddToFavoriteButton() {
+        /*public ImageView getAddToFavoriteButton() {
             return addToFavoriteButton;
-        }
+        }*/
     }
 }

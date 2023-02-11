@@ -18,6 +18,8 @@ import com.mad.iti.onthetable.R;
 import com.mad.iti.onthetable.databinding.FragmentMealDetailsBinding;
 import com.mad.iti.onthetable.model.GetArrayFromMeal;
 import com.mad.iti.onthetable.model.Meal;
+import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanInterface;
+import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
 import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepo;
 import com.mad.iti.onthetable.ui.mealDetails.presenter.MealsDetailsFragmentPresenter;
 import com.mad.iti.onthetable.ui.mealDetails.presenter.MealsDetailsPresenterInterface;
@@ -31,7 +33,7 @@ import java.util.List;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 
-public class MealDetailsFragment extends Fragment {
+public class MealDetailsFragment extends Fragment implements OnClickFavIconMealDetails{
 
 
     FragmentMealDetailsBinding fragmentMealDetailsBinding;
@@ -58,7 +60,7 @@ public class MealDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         fragmentMealDetailsBinding = FragmentMealDetailsBinding.inflate(inflater, container, false);
-        mealsDetailsPresenter = MealsDetailsFragmentPresenter.getInstance(MealsRepo.getInstance());
+        mealsDetailsPresenter = MealsDetailsFragmentPresenter.getInstance(MealsRepo.getInstance(), FavAndWeekPlanRepo.getInstance(getContext()));
         // Inflate the layout for this fragment
         return fragmentMealDetailsBinding.getRoot();
     }
@@ -124,5 +126,15 @@ public class MealDetailsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         yt.release();
+    }
+
+    @Override
+    public void onClickFavIcon(Meal meal) {
+        fragmentMealDetailsBinding.imageViewAddToFavITemDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mealsDetailsPresenter.addFavMeal(meal);
+            }
+        });
     }
 }
