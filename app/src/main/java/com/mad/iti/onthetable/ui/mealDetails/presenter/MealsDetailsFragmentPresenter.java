@@ -14,7 +14,6 @@ public class MealsDetailsFragmentPresenter implements MealsDetailsPresenterInter
     private static MealsDetailsFragmentPresenter mealsDetailsFragmentPresenter;
     private MealsRepoInterface mealsRepo;
     private FavAndWeekPlanInterface dataBaseRepo;
-
     //OnAddingListener onAddingListener;
     public static synchronized MealsDetailsFragmentPresenter getInstance(MealsRepoInterface mealsRepo,FavAndWeekPlanInterface dataBaseRepo){
         if(mealsDetailsFragmentPresenter == null){

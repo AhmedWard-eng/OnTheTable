@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mad.iti.onthetable.R;
 import com.mad.iti.onthetable.model.RootMealPreview;
+import com.mad.iti.onthetable.model.Status;
 import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepo;
 import com.mad.iti.onthetable.ui.search.presenter.SearchPresenter;
 import com.mad.iti.onthetable.ui.search.view.CheckSearchBy;
@@ -143,7 +144,7 @@ public class SearchMealResultsFragment extends Fragment implements OnClickMealRe
 
         com.mad.iti.onthetable.ui.search.view.mealResult.SearchMealResultsFragmentDirections.ActionSearchMealResultsFragmentToMealDetailsFragment action =
                 SearchMealResultsFragmentDirections.
-                        actionSearchMealResultsFragmentToMealDetailsFragment(id);
+                        actionSearchMealResultsFragmentToMealDetailsFragment(id, Status.ONLINE.toString());
         Navigation.findNavController(requireView()).navigate(action);
     }
 }

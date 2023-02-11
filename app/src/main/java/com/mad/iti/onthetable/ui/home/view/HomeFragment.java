@@ -9,10 +9,7 @@ import android.widget.TextView;
 
 import com.mad.iti.onthetable.localSource.roomDatabase.LocalSource;
 import com.mad.iti.onthetable.localSource.roomDatabase.LocalSourceRoom;
-import com.mad.iti.onthetable.model.FragmentName;
-import com.mad.iti.onthetable.model.GetMealPlannerFromMealAndDate;
-import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
-import com.mad.iti.onthetable.model.repositories.dataRepo.OnAddingListener;
+import com.mad.iti.onthetable.model.Status;
 import com.mad.iti.onthetable.ui.home.view.HomeFragmentDirections.ActionNavigationHomeToMealDetailsFragment;
 
 import androidx.annotation.NonNull;
@@ -35,7 +32,7 @@ import java.util.ArrayList;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements  OnClickListener{
 
     //    TextView homeTextView;
     private RecyclerView recyclerView;
@@ -68,7 +65,7 @@ public class HomeFragment extends Fragment {
         imageViewDishOfTheDay = view.findViewById(R.id.imageViewDishOfTheDay);
         cardView = view.findViewById(R.id.cardViewRandomMeal);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-        adapter = new GridWithTwoMealAdapter(new ArrayList<>(), FragmentName.HOME);
+        adapter = new GridWithTwoMealAdapter(new ArrayList<>(),this);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
         localSource = LocalSourceRoom.getInstance(requireContext());
@@ -105,7 +102,7 @@ public class HomeFragment extends Fragment {
         textViewMealCountry.setText(meal.strArea);
         Glide.with(requireContext()).load(meal.strMealThumb).placeholder(R.drawable.breakfast).error(R.drawable.avocado_small).into(imageViewDishOfTheDay);
         cardView.setOnClickListener(v -> {
-            ActionNavigationHomeToMealDetailsFragment action = HomeFragmentDirections.actionNavigationHomeToMealDetailsFragment(meal.idMeal);
+            ActionNavigationHomeToMealDetailsFragment action = HomeFragmentDirections.actionNavigationHomeToMealDetailsFragment(meal.idMeal, Status.ONLINE.toString());
             Navigation.findNavController(v).navigate(action);
         });
 
@@ -120,5 +117,11 @@ public class HomeFragment extends Fragment {
         if (this.disposableYouMightLike != null && disposableYouMightLike.isDisposed()) {
             disposableYouMightLike.dispose();
         }
+    }
+
+    @Override
+    public void onClick(String id) {
+        HomeFragmentDirections.ActionNavigationHomeToMealDetailsFragment action = HomeFragmentDirections.actionNavigationHomeToMealDetailsFragment(id,Status.ONLINE.toString());
+        Navigation.findNavController(requireView()).navigate(action);
     }
 }

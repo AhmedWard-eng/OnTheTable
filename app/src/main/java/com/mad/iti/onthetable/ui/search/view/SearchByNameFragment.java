@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,9 +20,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.mad.iti.onthetable.R;
-import com.mad.iti.onthetable.model.FragmentName;
+import com.mad.iti.onthetable.model.Status;
 import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepo;
 import com.mad.iti.onthetable.ui.GridWithTwoMealAdapter;
+import com.mad.iti.onthetable.ui.home.view.OnClickListener;
 import com.mad.iti.onthetable.ui.search.presenter.SearchByNamePresenter;
 import com.mad.iti.onthetable.ui.search.presenter.SearchByNamePresenterInterface;
 
@@ -33,7 +35,7 @@ import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 
-public class SearchByNameFragment extends Fragment {
+public class SearchByNameFragment extends Fragment implements OnClickListener {
 
     private static final String TAG = "SearchByNameFragment";
     EditText editTextSearch;
@@ -70,7 +72,7 @@ public class SearchByNameFragment extends Fragment {
         InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(editTextSearch, InputMethodManager.SHOW_IMPLICIT);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-        adapter = new GridWithTwoMealAdapter(new ArrayList<>(), FragmentName.SEARCH_BY_NAME);
+        adapter = new GridWithTwoMealAdapter(new ArrayList<>(), this);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
         searchWithTextWitcher();
@@ -119,5 +121,11 @@ public class SearchByNameFragment extends Fragment {
         if (this.disposable != null && disposable.isDisposed()) {
             disposable.dispose();
         }
+    }
+
+    @Override
+    public void onClick(String id) {
+        SearchByNameFragmentDirections.ActionSearchByNameFragmentToMealDetailsFragment action = SearchByNameFragmentDirections.actionSearchByNameFragmentToMealDetailsFragment(id, Status.ONLINE.toString());
+        Navigation.findNavController(requireView()).navigate(action);
     }
 }

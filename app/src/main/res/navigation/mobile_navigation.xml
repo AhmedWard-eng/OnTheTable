@@ -59,6 +59,13 @@
         <argument
             android:name="mealId"
             app:argType="string" />
+        <argument
+            android:name="status"
+            app:argType="string" />
+        <argument
+            android:name="isWeekPlanner"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/searchByNameFragment"

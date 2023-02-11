@@ -152,7 +152,7 @@ public class FavAndWeekPlanRepo implements FavAndWeekPlanInterface {
 
     @Override
     public LiveData<Meal> getMealById(String idMeal) {
-        return dataBase.mealDao().getMealById(idMeal);
+        return dataBase.mealDao().getMealFromFavById(idMeal);
     }
 
 }
