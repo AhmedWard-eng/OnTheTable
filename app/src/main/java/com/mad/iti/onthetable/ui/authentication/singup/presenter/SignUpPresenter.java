@@ -49,9 +49,11 @@ public class SignUpPresenter implements SignUpPresenterInterface, SignUpDelegate
 
     @Override
     public void onSuccessGoogle() {
+        signUpViewInterface.onSuccessGoogle();
     }
 
     @Override
     public void onFailureGoogle(String message) {
+        signUpViewInterface.OnFailure(message);
     }
 }
