@@ -26,6 +26,7 @@ import com.mad.iti.onthetable.model.RootCuisine;
 import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepo;
 import com.mad.iti.onthetable.ui.search.presenter.SearchPresenter;
 import com.mad.iti.onthetable.ui.search.view.CheckSearchBy;
+import com.mad.iti.onthetable.ui.search.view.CountryInSearchAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class AllCountriesFragment extends Fragment implements OnCountryClickListener{
     private static final String TAG = "AllCountriesFragment";
     private RecyclerView countryRecyclerView;
-    private SearchCountryAdapter countryAdapter;
+    private CountryInSearchAdapter countryAdapter;
     private SearchPresenter searchPresenter;
     private EditText searchByCountry;
 
@@ -69,11 +70,14 @@ public class AllCountriesFragment extends Fragment implements OnCountryClickList
         searchByCountry = view.findViewById(R.id.searchFilterByCountry_editText);
 
         countryRecyclerView = view.findViewById(R.id.searchFilterByCountry_recyclerView);
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
-        countryRecyclerView.setLayoutManager(staggeredGridLayoutManager);
+//        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
+//        countryRecyclerView.setLayoutManager(staggeredGridLayoutManager);
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
 //        countryRecyclerView.setLayoutManager(gridLayoutManager);
-        countryAdapter = new SearchCountryAdapter(getContext() , new ArrayList<>(),this );
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        countryRecyclerView.setLayoutManager(layoutManager);
+        countryAdapter = new CountryInSearchAdapter(getContext() , new ArrayList<>(),this );
         getCuisines();
 
         countryRecyclerView.setAdapter(countryAdapter);
