@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,6 +87,25 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
             }
         });
 
+        binding.textInputEditTextPassSignUp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!isPassContainNumber(s.toString())){
+                    binding.textInputEditTextPassSignUp.setError("password Should contain Numbers");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
 
         googleSignInClient = GoogleSignIn.getClient(requireContext(), googleSignInOptions);
@@ -105,23 +126,23 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     }
 
     private void signUp() {
-        if (checkValidation()) {
-            String userName = binding.textInputEditTextEmailSignUp.getText().toString();
-            String pass = binding.textInputEditTextPassSignUp.getText().toString();
-            signUpPresenter.signUp(userName, pass);
-        }
+//        if (checkValidation()) {
+//            String userName = binding.textInputEditTextEmailSignUp.getText().toString();
+//            String pass = binding.textInputEditTextPassSignUp.getText().toString();
+//            signUpPresenter.signUp(userName, pass);
+//        }
     }
 
-    private boolean checkValidation() {
-        if (binding.textInputEditTextEmailSignUp.getText() != null && !binding.textInputEditTextEmailSignUp.getText().toString().isEmpty() && binding.textInputEditTextConfirmPassSignUp.getText() != null && !binding.textInputEditTextConfirmPassSignUp.getText().toString().isEmpty() && binding.textInputEditTextPassSignUp.getText() != null && !binding.textInputEditTextPassSignUp.getText().toString().isEmpty() && checkPassEquality())
-            return true;
-        else {
-            binding.textInputLayoutEmailSignUP.setError("fill all data");
-            binding.textInputLayoutPassWord.setError("fill all data");
-            binding.confirmPasswordInputLayout.setError("fill all data");
-            return false;
-        }
-    }
+//    private boolean checkValidation() {
+////        if (binding.textInputEditTextEmailSignUp.getText() != null && !binding.textInputEditTextEmailSignUp.getText().toString().isEmpty() && binding.textInputEditTextConfirmPassSignUp.getText() != null && !binding.textInputEditTextConfirmPassSignUp.getText().toString().isEmpty() && binding.textInputEditTextPassSignUp.getText() != null && !binding.textInputEditTextPassSignUp.getText().toString().isEmpty() && checkPassEquality())
+////            return true;
+////        else {
+////            binding.textInputLayoutEmailSignUP.setError("fill all data");
+////            binding.textInputLayoutPassWord.setError("fill all data");
+////            binding.confirmPasswordInputLayout.setError("fill all data");
+////            return false;
+////        }
+//    }
 
     private boolean checkPassEquality() {
         return binding.textInputEditTextConfirmPassSignUp.getText().toString().equals(binding.textInputEditTextPassSignUp.getText().toString());
@@ -191,4 +212,33 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
             }
         }
     });
+
+    public boolean isPassContainSpecialChar(String pass) {
+        String specialCharRegex = ".*[@#!$%^&+=].*";
+        String UpperCaseRegex = ".*[A-Z].*";
+        String NumberRegex = ".*[0-9].*";
+        return pass.matches(specialCharRegex);
+    }
+
+    public boolean isPassContainUpperCase(String pass) {
+        String UpperCaseRegex = ".*[A-Z].*";
+        return pass.matches(UpperCaseRegex);
+    }
+
+    public boolean isPassContainNumber(String pass) {
+        String NumberRegex = ".*[0-9].*";
+        return pass.matches(NumberRegex);
+    }
+
+
+    public boolean isPassLengthGT8(String pass) {
+        return pass.length() >= 8;
+    }
+
+
+    private boolean isValidEmail(String s) {
+        String email = s.trim();
+        String emailPattern = "[a-zA-Z\\d._-]+@[a-z]+\\.+[a-z]+";
+        return email.matches(emailPattern);
+    }
 }

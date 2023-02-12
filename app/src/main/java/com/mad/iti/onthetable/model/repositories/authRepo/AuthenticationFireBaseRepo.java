@@ -13,6 +13,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.FireBaseAuthWrapper;
+import com.mad.iti.onthetable.remoteSource.remoteFireBase.ForgetPassDelegate;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.SignInDelegate;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.SignUpDelegate;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.SignUpWithGoogleDelegate;
@@ -101,6 +102,17 @@ public class AuthenticationFireBaseRepo implements AuthenticationRepo {
             }
         });
 
+    }
+
+    public void  resetPassword(String email, ForgetPassDelegate forgetPassDelegate){
+        fireBaseAuthWrapper.getAuth().sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    forgetPassDelegate.onSuccess();
+                }
+            }
+        });
     }
 
     public boolean isAuthenticated() {
