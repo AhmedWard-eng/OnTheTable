@@ -3,10 +3,11 @@ package com.mad.iti.onthetable.ui.authentication.login.presenter;
 import com.google.firebase.auth.FirebaseUser;
 import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationFireBaseRepo;
 import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationRepo;
+import com.mad.iti.onthetable.remoteSource.remoteFireBase.ForgetPassDelegate;
 import com.mad.iti.onthetable.remoteSource.remoteFireBase.SignInDelegate;
 import com.mad.iti.onthetable.ui.authentication.login.view.LoginViewInterface;
 
-public class LoginPresenter implements LoginPresenterInterface , SignInDelegate {
+public class LoginPresenter implements LoginPresenterInterface , SignInDelegate , ForgetPassDelegate {
 
     private AuthenticationRepo authenticationRepo;
     private LoginViewInterface loginViewInterface;
@@ -29,6 +30,11 @@ public class LoginPresenter implements LoginPresenterInterface , SignInDelegate 
     }
 
     @Override
+    public void forgotPassword(String email) {
+        authenticationRepo.resetPassword(email,this);
+    }
+
+    @Override
     public void onSuccess(FirebaseUser user) {
         loginViewInterface.onSuccess(user);
     }
@@ -37,4 +43,10 @@ public class LoginPresenter implements LoginPresenterInterface , SignInDelegate 
     public void onFailure(String message) {
         loginViewInterface.OnFailure(message);
     }
+
+    @Override
+    public void onSuccessPass() {
+        loginViewInterface.onSuccessPass();
+    }
+
 }

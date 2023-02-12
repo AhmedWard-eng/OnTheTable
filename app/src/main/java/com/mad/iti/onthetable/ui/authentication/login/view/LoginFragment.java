@@ -1,5 +1,6 @@
 package com.mad.iti.onthetable.ui.authentication.login.view;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,9 +11,11 @@ import androidx.navigation.Navigation;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,6 +86,23 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
                 }
             }
         });
+
+        binding.textViewForgotPassLoginFr.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Forgot Password");
+
+            final View customLayout = getLayoutInflater().inflate(R.layout.forgot_pass_dialog, null);
+            builder.setView(customLayout);
+
+            builder.setPositiveButton("Send", (dialog, which) -> {
+                EditText editText = customLayout.findViewById(R.id.fogot_password_editText);
+                loginPresenter.forgotPassword(editText.getText().toString());
+            });
+            builder.setNegativeButton( android.R.string.no, null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        });
+
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -113,6 +133,12 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     public void OnFailure(String message) {
 
         binding.textViewMessageLogin.setText(message);
+    }
+
+    @Override
+    public void onSuccessPass() {
+        Log.i("send email", "onSuccessPass:email has been sent");
+        Toast.makeText(getContext(), R.string.send_email_toast, Toast.LENGTH_SHORT).show();
     }
 
     private void goToMainActivity() {

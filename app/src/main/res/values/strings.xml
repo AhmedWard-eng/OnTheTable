@@ -90,5 +90,8 @@
     <string name="confirm_password_doesnt_match_password">Confirm password doesn\'t match password</string>
     <string name="sign_up_with_google_successfully">SignUp with google successfully</string>
     <string name="sign_up_with_google_failed">Sign up with google Failed!</string>
+    <string name="enter_email">Enter email</string>
+    <string name="send_email_toast">Email has been sent</string>
+
 
 </resources>

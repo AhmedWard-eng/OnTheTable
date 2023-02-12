@@ -109,7 +109,7 @@ public class AuthenticationFireBaseRepo implements AuthenticationRepo {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    forgetPassDelegate.onSuccess();
+                    forgetPassDelegate.onSuccessPass();
                 }
             }
         });

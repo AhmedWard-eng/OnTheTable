@@ -50,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
+            android:fontFamily="@font/barlow"
             android:inputType="textEmailAddress"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -72,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
+            android:fontFamily="@font/barlow"
             android:inputType="textPassword"
             android:maxLines="1" />
 
@@ -85,6 +87,7 @@
         android:linksClickable="true"
         android:selectAllOnFocus="true"
         android:text="@string/forgot_password"
+        android:fontFamily="@font/barlow"
         android:textColor="@color/cadmium_orange"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
@@ -112,6 +115,7 @@
         android:layout_marginTop="32dp"
         android:text="@string/don_t_have_an_account"
         android:textColor="@color/outline_color"
+        android:fontFamily="@font/barlow"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textViewGoToSignUP"
@@ -128,7 +132,7 @@
         android:text="@string/singup"
         android:textColor="@color/cadmium_orange"
         android:textSize="16sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/barlowbold"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
