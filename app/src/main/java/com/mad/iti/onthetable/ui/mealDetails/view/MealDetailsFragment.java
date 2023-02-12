@@ -3,13 +3,13 @@ package com.mad.iti.onthetable.ui.mealDetails.view;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.annotation.SuppressLint;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.mad.iti.onthetable.formatters.FormatDateToString;
@@ -28,14 +27,12 @@ import com.mad.iti.onthetable.formatters.GetIdFromYoutubeUrl;
 import com.mad.iti.onthetable.R;
 import com.mad.iti.onthetable.databinding.FragmentMealDetailsBinding;
 import com.mad.iti.onthetable.model.GetArrayFromMeal;
-import com.mad.iti.onthetable.model.GetMealPlannerFromMealAndDate;
+import com.mad.iti.onthetable.model.MealPlannerAndMealConverter;
 import com.mad.iti.onthetable.model.Meal;
-import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanInterface;
+import com.mad.iti.onthetable.model.Status;
 import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
 import com.mad.iti.onthetable.model.repositories.dataRepo.OnAddingListener;
 import com.mad.iti.onthetable.model.MealPlanner;
-import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
-import com.mad.iti.onthetable.model.repositories.dataRepo.OnAddingListener;
 import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepo;
 import com.mad.iti.onthetable.ui.mealDetails.presenter.MealsDetailsFragmentPresenter;
 import com.mad.iti.onthetable.ui.mealDetails.presenter.MealsDetailsPresenterInterface;
@@ -76,8 +73,7 @@ public class MealDetailsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentMealDetailsBinding = FragmentMealDetailsBinding.inflate(inflater, container, false);
         mealsDetailsPresenter = MealsDetailsFragmentPresenter.getInstance(MealsRepo.getInstance(), FavAndWeekPlanRepo.getInstance(requireContext()));
@@ -98,8 +94,26 @@ public class MealDetailsFragment extends Fragment {
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         fragmentMealDetailsBinding.recyclerViewIngredientsItemDetails.setLayoutManager(linearLayoutManager);
         String id = MealDetailsFragmentArgs.fromBundle(requireArguments()).getMealId();
+        String status = MealDetailsFragmentArgs.fromBundle(requireArguments()).getStatus();
+        boolean isWeekPlanner = MealDetailsFragmentArgs.fromBundle(requireArguments()).getIsWeekPlanner();
+        if (status.equals(Status.ONLINE.toString())) {
+            getMealFromNetwork(id);
+        } else {
+            if (!isWeekPlanner) getMealFromLocal(id);
+            else getMealPlanner(id);
+        }
 
-        getMeal(id);
+    }
+
+    private void getMealPlanner(String id) {
+        mealsDetailsPresenter.getMealFromWeekPlanFavById(id).observe(getViewLifecycleOwner(), mealPlanner -> {
+            setMealToTheView(MealPlannerAndMealConverter.getMealFromMealPlanner(mealPlanner));
+        });
+    }
+
+    private void getMealFromLocal(String id) {
+        mealsDetailsPresenter.getMealFromFavById(id).observe(getViewLifecycleOwner(), this::setMealToTheView);
+        fragmentMealDetailsBinding.imageViewAddToFavITemDetails.setImageResource(R.drawable.baseline_favorite_24);
 
     }
 
@@ -108,7 +122,7 @@ public class MealDetailsFragment extends Fragment {
         newFragment.show(requireActivity().getSupportFragmentManager(), "datePicker");
     }
 
-    private void getMeal(String id) {
+    private void getMealFromNetwork(String id) {
         disposable = mealsDetailsPresenter.getMeal(id).subscribe((rootMeal, throwable) -> {
             if (rootMeal != null) {
                 List<Meal> meals = rootMeal.meals;
@@ -140,23 +154,22 @@ public class MealDetailsFragment extends Fragment {
         });
 
         fragmentMealDetailsBinding.imageViewAddToFavITemDetails.setOnClickListener(new View.OnClickListener() {
-            boolean added = false;
+
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
                 mealsDetailsPresenter.addFavMeal(meal, new OnAddingListener() {
                     @Override
                     public void onSuccess() {
-                        added = true;
-                        Log.i("testtt", "Click on Fav "+meal.strMeal);
+                        Log.i("testtt", "Click on Fav " + meal.strMeal);
                         fragmentMealDetailsBinding.imageViewAddToFavITemDetails.setImageResource(R.drawable.baseline_favorite_24);
-                        Toast.makeText(getContext(),meal.strMeal+" added to fav. Meals",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), meal.strMeal +" "+ v.getContext().getString(R.string.added_to_favorites), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onFailure(String message) {
-                        Log.i("testtt", "Click on Fav "+message);
-                        Toast.makeText(getContext(),"Click on Fav "+message,Toast.LENGTH_SHORT).show();
+                        Log.i("testtt", "Click on Fav " + message);
+                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -168,7 +181,6 @@ public class MealDetailsFragment extends Fragment {
     }
 
     private String formatText(String strInstructions) {
-
         strInstructions = strInstructions.replace(". ", ".\n\n");
         return strInstructions;
     }
@@ -179,8 +191,7 @@ public class MealDetailsFragment extends Fragment {
         yt.release();
     }
 
-    public static class DatePickerFragment extends DialogFragment
-            implements DatePickerDialog.OnDateSetListener {
+    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
         Meal meal;
         MealsDetailsPresenterInterface mealsDetailsPresenter;
 
@@ -206,7 +217,7 @@ public class MealDetailsFragment extends Fragment {
 
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            MealPlanner mealPlanner = GetMealPlannerFromMealAndDate.getMealPlanner(meal, FormatDateToString.getString(year, month, day), 0);
+            MealPlanner mealPlanner = MealPlannerAndMealConverter.getMealPlannerFromMealAndDate(meal, FormatDateToString.getString(year, month, day), 0);
             mealsDetailsPresenter.addToWeekPlanner(mealPlanner, new OnAddingListener() {
                 @Override
                 public void onSuccess() {

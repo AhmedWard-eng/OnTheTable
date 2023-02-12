@@ -20,10 +20,10 @@
         android:icon="@drawable/baseline_calendar_today_24"
         android:title="@string/title_week_plan" />
 
-    <item
-        android:id="@+id/navigation_menu"
-        android:icon="@drawable/baseline_menu_24"
-        android:title="@string/title_menu" />
+<!--    <item-->
+<!--        android:id="@+id/navigation_menu"-->
+<!--        android:icon="@drawable/baseline_menu_24"-->
+<!--        android:title="@string/title_menu" />-->
 
 
 </menu>

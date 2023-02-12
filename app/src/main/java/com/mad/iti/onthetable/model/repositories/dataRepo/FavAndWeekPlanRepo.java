@@ -17,7 +17,7 @@ import java.util.List;
 
 public class FavAndWeekPlanRepo implements FavAndWeekPlanInterface {
 
-    private static final String TAG = "FavAndWeekPlanRepo";
+    private static final String TAG = "refresh";
 
     private AppDataBase dataBase;
     private FireBaseRealTimeWrapper firebase;
@@ -41,6 +41,8 @@ public class FavAndWeekPlanRepo implements FavAndWeekPlanInterface {
         firebase.getWeekPlanner(new FireBasePlannerDelegate() {
             @Override
             public void onSuccess(List<MealPlanner> mealPlanners) {
+
+                Log.d(TAG, "onSuccess: planner");
                 new Thread(() -> {
                     dataBase.mealDao().InsertAllMealsIntoPlanner(mealPlanners);
                 }).start();
@@ -60,7 +62,7 @@ public class FavAndWeekPlanRepo implements FavAndWeekPlanInterface {
             public void onSuccess(List<Meal> meals) {
                 new Thread(() -> {
                     new Thread(() -> dataBase.mealDao().InsertAllMealsToFavorite(meals)).start();
-                    Log.d(TAG, "onSuccess: ");
+                    Log.d(TAG, "onSuccess: meals");
                 }).start();
             }
 
@@ -151,8 +153,13 @@ public class FavAndWeekPlanRepo implements FavAndWeekPlanInterface {
     }
 
     @Override
-    public LiveData<Meal> getMealById(String idMeal) {
+    public LiveData<Meal> getMealFromFavById(String idMeal) {
         return dataBase.mealDao().getMealFromFavById(idMeal);
+    }
+
+    @Override
+    public LiveData<MealPlanner> getMealFromWeekPlanById(String id){
+        return dataBase.mealDao().getMealFromWeekPlanById(id);
     }
 
 }

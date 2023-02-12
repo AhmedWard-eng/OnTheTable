@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,9 +17,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mad.iti.onthetable.R;
+import com.mad.iti.onthetable.model.FragmentType;
+import com.mad.iti.onthetable.model.Meal;
+import com.mad.iti.onthetable.model.MealPlannerAndMealConverter;
 import com.mad.iti.onthetable.model.Status;
+import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
+import com.mad.iti.onthetable.model.repositories.dataRepo.OnAddingListener;
 import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepo;
 import com.mad.iti.onthetable.ui.GridWithTwoMealAdapter;
 import com.mad.iti.onthetable.ui.home.view.OnClickListener;
@@ -44,6 +49,7 @@ public class SearchByNameFragment extends Fragment implements OnClickListener {
     SearchByNamePresenterInterface searchByNamePresenter;
 
     private GridWithTwoMealAdapter adapter;
+    String fragmentType;
 
     public SearchByNameFragment() {
         // Required empty public constructor
@@ -53,7 +59,7 @@ public class SearchByNameFragment extends Fragment implements OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        searchByNamePresenter = SearchByNamePresenter.getInstance(MealsRepo.getInstance());
+        searchByNamePresenter = SearchByNamePresenter.getInstance(MealsRepo.getInstance(), FavAndWeekPlanRepo.getInstance(requireContext().getApplicationContext()));
     }
 
     @Override
@@ -75,6 +81,7 @@ public class SearchByNameFragment extends Fragment implements OnClickListener {
         adapter = new GridWithTwoMealAdapter(new ArrayList<>(), this);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
+        fragmentType = SearchByNameFragmentArgs.fromBundle(requireArguments()).getSource();
         searchWithTextWitcher();
 
     }
@@ -124,8 +131,39 @@ public class SearchByNameFragment extends Fragment implements OnClickListener {
     }
 
     @Override
-    public void onClick(String id) {
-        SearchByNameFragmentDirections.ActionSearchByNameFragmentToMealDetailsFragment action = SearchByNameFragmentDirections.actionSearchByNameFragmentToMealDetailsFragment(id, Status.ONLINE.toString(),false);
-        Navigation.findNavController(requireView()).navigate(action);
+    public void onClick(Meal meal) {
+
+        if (fragmentType.equals(FragmentType.SEARCH.toString())) {
+            SearchByNameFragmentDirections.ActionSearchByNameFragmentToMealDetailsFragment action = SearchByNameFragmentDirections.actionSearchByNameFragmentToMealDetailsFragment(meal.idMeal, Status.ONLINE.toString(), false);
+            Navigation.findNavController(requireView()).navigate(action);
+        } else if (fragmentType.equals(FragmentType.PLANNER.toString())) {
+            String date = SearchByNameFragmentArgs.fromBundle(requireArguments()).getDate();
+            addMealToPlan(meal, date);
+            searchMealOnce();
+        }
+    }
+
+    private void searchMealOnce() {
+        disposable = searchByNamePresenter.randomMeals().subscribe((rootMeal, throwable) -> {
+            if (rootMeal != null && rootMeal.meals != null) adapter.setMeals(rootMeal.meals);
+            else {
+                adapter.setMeals(new ArrayList<>());
+                Log.e(TAG, "rootMeal.meals is null");
+            }
+        });
+    }
+
+    private void addMealToPlan(Meal meal, String date) {
+        searchByNamePresenter.addMealToPlan(MealPlannerAndMealConverter.getMealPlannerFromMealAndDate(meal, date, 0), new OnAddingListener() {
+            @Override
+            public void onSuccess() {
+                Navigation.findNavController(requireView()).navigateUp();
+            }
+
+            @Override
+            public void onFailure(String message) {
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

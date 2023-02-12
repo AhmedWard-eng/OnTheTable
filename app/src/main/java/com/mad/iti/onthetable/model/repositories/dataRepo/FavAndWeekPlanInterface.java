@@ -26,6 +26,7 @@ public interface FavAndWeekPlanInterface {
     void deleteAllFav();
     void deleteAllWeekPlan();
 
-    LiveData<Meal> getMealById(String idMeal);
+    LiveData<Meal> getMealFromFavById(String idMeal);
 
+    LiveData<MealPlanner> getMealFromWeekPlanById(String id);
 }
