@@ -65,11 +65,6 @@ public class SearchMealResultsFragment extends Fragment implements OnClickMealRe
         resultTextView = view.findViewById(R.id.searchResult_textView);
         resultTextView.setText(resultTextView.getText()+" "+checkSearchBy.getName());
         previewMealRecyclerView = view.findViewById(R.id.mealResults_recyclerView);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-//        layoutManager.setOrientation(RecyclerView.VERTICAL);
-//        previewMealRecyclerView.setLayoutManager(layoutManager);
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-//        previewMealRecyclerView.setLayoutManager(gridLayoutManager);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         previewMealRecyclerView.setLayoutManager(staggeredGridLayoutManager);
         mealResultAdapter = new MealResultAdapter(getContext() , new ArrayList<>(),this);

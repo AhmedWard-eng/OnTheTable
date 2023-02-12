@@ -3,6 +3,7 @@ package com.mad.iti.onthetable.ui.weekplan.view;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,10 +25,13 @@ public class WeekPlannerAdapter extends RecyclerView.Adapter<WeekPlannerAdapter.
     private OnRemoveClickListener onRemoveClickListener;
     private ONItemClickListener onItemClickListener;
 
-    public WeekPlannerAdapter(List<MealPlanner> mealPlanners, OnRemoveClickListener onRemoveClickListener, ONItemClickListener onItemClickListener) {
+    private OnClickCalendar onClickCalendar;
+
+    public WeekPlannerAdapter(List<MealPlanner> mealPlanners, OnRemoveClickListener onRemoveClickListener, ONItemClickListener onItemClickListener , OnClickCalendar onClickCalendar) {
         this.mealPlanners = mealPlanners;
         this.onRemoveClickListener = onRemoveClickListener;
         this.onItemClickListener = onItemClickListener;
+        this.onClickCalendar = onClickCalendar;
     }
 
     public void setMealPlanners(List<MealPlanner> mealPlanners) {
@@ -50,6 +54,9 @@ public class WeekPlannerAdapter extends RecyclerView.Adapter<WeekPlannerAdapter.
 
         holder.getRow().setOnClickListener(v -> onItemClickListener.onClick(mealPlanners.get(holder.getAbsoluteAdapterPosition())));
         holder.getImageViewRemove().setOnClickListener(v -> onRemoveClickListener.onRemove(mealPlanners.get(holder.getAbsoluteAdapterPosition()),holder.getAbsoluteAdapterPosition()));
+        holder.addToCalendar.setOnClickListener(v ->
+                onClickCalendar.onClickCalendar(mealPlanners.get(holder.getAbsoluteAdapterPosition()))
+        );
     }
 
     @Override
@@ -64,6 +71,7 @@ public class WeekPlannerAdapter extends RecyclerView.Adapter<WeekPlannerAdapter.
         private final TextView textViewCountry;
         private final RoundedImageView imageViewRemove;
         private final CardView row;
+        private final ImageView addToCalendar;
         View view;
 
         public View getView() {
@@ -78,6 +86,7 @@ public class WeekPlannerAdapter extends RecyclerView.Adapter<WeekPlannerAdapter.
             row = itemView.findViewById(R.id.cardViewWeekPlanRow);
             view = itemView;
             imageViewRemove = itemView.findViewById(R.id.icon_remove_item_week);
+            addToCalendar = itemView.findViewById(R.id.addToCalendar_imageView);
         }
 
         public TextView getTextViewTitle() {

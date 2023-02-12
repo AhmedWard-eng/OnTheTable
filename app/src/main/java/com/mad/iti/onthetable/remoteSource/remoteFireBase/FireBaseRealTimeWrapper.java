@@ -42,7 +42,9 @@ public class FireBaseRealTimeWrapper {
 
     public void addToFav(Meal meal, FireBaseAddingDelegate fireBaseAddingDelegate) {
         if (authenticationFireBaseRepo.isAuthenticated()) {
-            referenceFavorite.child(meal.idMeal).setValue(meal).addOnCompleteListener(task -> fireBaseAddingDelegate.onSuccess()).addOnFailureListener(e -> fireBaseAddingDelegate.onFailure(e.toString()));
+            referenceFavorite.child(meal.idMeal).setValue(meal)
+                    .addOnCompleteListener(task -> fireBaseAddingDelegate.onSuccess())
+                    .addOnFailureListener(e -> fireBaseAddingDelegate.onFailure(e.toString()));
         }
     }
 
