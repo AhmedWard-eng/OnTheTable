@@ -114,7 +114,7 @@ public class AllIngredientFragment extends Fragment implements OnIngredientClick
                     public void onNext(@NonNull String s) {
                         Log.d(TAG, "onNext: "+Thread.currentThread().getName());
                         List<Ingredient> ingredientList = ingredients.stream().filter(ingredient ->
-                            ingredient.strIngredient.contains(s)
+                            ingredient.strIngredient.toLowerCase().contains(s.toLowerCase())
                         ).collect(Collectors.toList());
                         Log.d(TAG, "onNext: "+ingredientList.size());
                         ingredientAdapter.setingredientList(ingredientList);

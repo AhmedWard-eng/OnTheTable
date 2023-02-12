@@ -81,7 +81,6 @@ public class SearchByNameFragment extends Fragment implements OnClickListener {
         adapter = new GridWithTwoMealAdapter(new ArrayList<>(), this);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
-        fragmentType = SearchByNameFragmentArgs.fromBundle(requireArguments()).getSource();
         searchWithTextWitcher();
 
     }

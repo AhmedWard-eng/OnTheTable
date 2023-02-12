@@ -30,6 +30,7 @@ import com.mad.iti.onthetable.ui.search.view.CountryInSearchAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -141,7 +142,7 @@ public class AllCountriesFragment extends Fragment implements OnCountryClickList
                     public void onNext(@NonNull String s) {
                         Log.d(TAG, "onNext: "+Thread.currentThread().getName());
                         List<Cuisine> cuisineList = cuisines.stream().filter(cuisine ->
-                                cuisine.strArea.contains(s)
+                                cuisine.strArea.toLowerCase().contains(s.toLowerCase())
                         ).collect(Collectors.toList());
                         Log.d(TAG, "onNext: "+cuisineList.size());
                         countryAdapter.setCountryList(cuisineList);
