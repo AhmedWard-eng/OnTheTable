@@ -81,5 +81,8 @@
     <string name="added_to_favorites">added to favorites</string>
     <string name="Sign_Up_for_more_Feature">Sign Up for more Feature</string>
     <string name="goto_signUp_message">Add your food to Favorite, Plan your meals and more!</string>
+    <string name="enter_email">Enter email</string>
+    <string name="send_email_toast">Email has been sent</string>
+
 
 </resources>

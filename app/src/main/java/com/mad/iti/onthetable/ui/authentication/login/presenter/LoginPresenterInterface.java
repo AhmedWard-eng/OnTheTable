@@ -4,4 +4,6 @@ public interface LoginPresenterInterface {
 
     void login(String email , String pass);
 
+    void forgotPassword(String email);
+
 }
