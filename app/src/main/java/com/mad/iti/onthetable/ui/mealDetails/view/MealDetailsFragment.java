@@ -205,8 +205,6 @@ public class MealDetailsFragment extends Fragment {
 
             }
         });
-
-
     }
 
     private void openGotoSignUpDialogue() {

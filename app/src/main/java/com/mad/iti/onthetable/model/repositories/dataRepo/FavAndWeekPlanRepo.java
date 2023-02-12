@@ -20,10 +20,12 @@ public class FavAndWeekPlanRepo implements FavAndWeekPlanInterface {
     private static final String TAG = "refresh";
 
     private AppDataBase dataBase;
-    private FireBaseRealTimeWrapper firebase;
+    private static FireBaseRealTimeWrapper firebase;
     private static FavAndWeekPlanRepo repo;
 
     public static synchronized FavAndWeekPlanRepo getInstance(Context context) {
+
+        firebase = new FireBaseRealTimeWrapper();
         if (repo == null) {
             repo = new FavAndWeekPlanRepo(context);
         }
@@ -31,7 +33,6 @@ public class FavAndWeekPlanRepo implements FavAndWeekPlanInterface {
     }
 
     private FavAndWeekPlanRepo(Context context) {
-        firebase = new FireBaseRealTimeWrapper();
         dataBase = AppDataBase.getInstance(context);
     }
 
