@@ -19,6 +19,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +47,7 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class WeekPlanFragment extends Fragment implements ONItemClickListener, OnRemoveClickListener {
+public class WeekPlanFragment extends Fragment implements ONItemClickListener, OnRemoveClickListener, OnClickCalendar {
     private static Calendar calendar = Calendar.getInstance();
     CalendarView calendarView;
     RecyclerView recyclerView;
@@ -81,7 +82,7 @@ public class WeekPlanFragment extends Fragment implements ONItemClickListener, O
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        weekPlannerAdapter = new WeekPlannerAdapter(new ArrayList<>(), this, this);
+        weekPlannerAdapter = new WeekPlannerAdapter(new ArrayList<>(), this, this , this);
         calendarView = view.findViewById(R.id.calendarView);
         establishCalendarView(calendarView);
         recyclerView = view.findViewById(R.id.mealWeekPlan_recyclerView_weekplan);
@@ -182,6 +183,18 @@ public class WeekPlanFragment extends Fragment implements ONItemClickListener, O
                     .setNegativeButton(android.R.string.no, null).show();
         }else {
             Toast.makeText(requireContext(), "Please Check Your Internet Connection And Try Again", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onClickCalendar(MealPlanner mealPlanner) {
+        Intent intent = new Intent(Intent.ACTION_INSERT);
+        intent.setData(CalendarContract.Events.CONTENT_URI);
+        intent.putExtra(CalendarContract.Events.TITLE , mealPlanner.strMeal);
+        if(intent.resolveActivity(getContext().getPackageManager()) != null){
+            startActivity(intent);
+        }else{
+            Toast.makeText(getContext(), "Failed to add to calender", Toast.LENGTH_SHORT).show();
         }
     }
 }
