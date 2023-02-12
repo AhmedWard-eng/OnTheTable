@@ -1,15 +1,17 @@
 package com.mad.iti.onthetable.ui.mealDetails.view;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,10 +32,12 @@ import com.mad.iti.onthetable.model.GetArrayFromMeal;
 import com.mad.iti.onthetable.model.MealPlannerAndMealConverter;
 import com.mad.iti.onthetable.model.Meal;
 import com.mad.iti.onthetable.model.Status;
+import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationFireBaseRepo;
 import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
 import com.mad.iti.onthetable.model.repositories.dataRepo.OnAddingListener;
 import com.mad.iti.onthetable.model.MealPlanner;
 import com.mad.iti.onthetable.model.repositories.mealsRepo.MealsRepo;
+import com.mad.iti.onthetable.ui.authentication.AuthenticationActivity;
 import com.mad.iti.onthetable.ui.mealDetails.presenter.MealsDetailsFragmentPresenter;
 import com.mad.iti.onthetable.ui.mealDetails.presenter.MealsDetailsPresenterInterface;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
@@ -142,7 +146,13 @@ public class MealDetailsFragment extends Fragment {
         fragmentMealDetailsBinding.textViewProcedures.setText(formatText(meal.strInstructions));
         Glide.with(requireContext()).load(meal.strMealThumb).placeholder(R.drawable.breakfast).error(R.drawable.avocado_small).into(fragmentMealDetailsBinding.mealImage);
         ingredientsAdapter.setList(GetArrayFromMeal.getArrayList(meal));
-        imageViewADDToWeekPlanner.setOnClickListener((v) -> openDatePicker(meal));
+        imageViewADDToWeekPlanner.setOnClickListener((v) -> {
+            if(AuthenticationFireBaseRepo.getInstance().isAuthenticated()){
+                openDatePicker(meal);
+            }else{
+                openGotoSignUpDialogue();
+            }
+        });
 
         yt.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
@@ -158,26 +168,43 @@ public class MealDetailsFragment extends Fragment {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
-                mealsDetailsPresenter.addFavMeal(meal, new OnAddingListener() {
-                    @Override
-                    public void onSuccess() {
-                        Log.i("testtt", "Click on Fav " + meal.strMeal);
-                        fragmentMealDetailsBinding.imageViewAddToFavITemDetails.setImageResource(R.drawable.baseline_favorite_24);
-                        Toast.makeText(getContext(), meal.strMeal +" "+ v.getContext().getString(R.string.added_to_favorites), Toast.LENGTH_SHORT).show();
-                    }
 
-                    @Override
-                    public void onFailure(String message) {
-                        Log.i("testtt", "Click on Fav " + message);
-                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                if (AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
+                    mealsDetailsPresenter.addFavMeal(meal, new OnAddingListener() {
+                        @Override
+                        public void onSuccess() {
+                            Log.i("testtt", "Click on Fav " + meal.strMeal);
+                            fragmentMealDetailsBinding.imageViewAddToFavITemDetails.setImageResource(R.drawable.baseline_favorite_24);
+                            Toast.makeText(getContext(), meal.strMeal + " " + v.getContext().getString(R.string.added_to_favorites), Toast.LENGTH_SHORT).show();
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onFailure(String message) {
+                            Log.i("testtt", "Click on Fav " + message);
+                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
+                        }
+                    });
+
+                } else {
+                    openGotoSignUpDialogue();
+                }
             }
-
         });
 
+
+    }
+
+    private void openGotoSignUpDialogue() {
+        new AlertDialog.Builder(requireContext())
+                .setTitle(R.string.Sign_Up_for_more_Feature)
+                .setMessage(R.string.goto_signUp_message)
+                .setPositiveButton(R.string.singup, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        startActivity(new Intent(requireActivity(), AuthenticationActivity.class));
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, null).show();
     }
 
     private String formatText(String strInstructions) {

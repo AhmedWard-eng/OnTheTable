@@ -135,7 +135,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
     @Override
     public void onSuccess(FirebaseUser user) {
-        Toast.makeText(requireContext(), R.string.signup_successfully, Toast.LENGTH_SHORT).show();
+        Toast.makeText(binding.getRoot().getContext(), R.string.signup_successfully, Toast.LENGTH_SHORT).show();
         goToMainActivity();
     }
 

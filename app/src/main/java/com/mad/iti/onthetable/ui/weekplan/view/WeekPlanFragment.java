@@ -1,9 +1,13 @@
 package com.mad.iti.onthetable.ui.weekplan.view;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.mad.iti.onthetable.model.FragmentType;
+import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationFireBaseRepo;
+import com.mad.iti.onthetable.ui.authentication.AuthenticationActivity;
 import com.mad.iti.onthetable.ui.weekplan.view.WeekPlanFragmentDirections.ActionNavigationWeekPlanToSearchByNameFragment;
 
 import androidx.annotation.NonNull;
@@ -85,9 +89,13 @@ public class WeekPlanFragment extends Fragment implements ONItemClickListener, O
         btnAddMeal = view.findViewById(R.id.addMeal_button_weekplan);
 
         btnAddMeal.setOnClickListener(v -> {
-            ActionNavigationWeekPlanToSearchByNameFragment action = WeekPlanFragmentDirections.actionNavigationWeekPlanToSearchByNameFragment(FragmentType.PLANNER.toString());
-            action.setDate(date);
-            Navigation.findNavController(requireView()).navigate(action);
+            if(AuthenticationFireBaseRepo.getInstance().isAuthenticated()){
+                ActionNavigationWeekPlanToSearchByNameFragment action = WeekPlanFragmentDirections.actionNavigationWeekPlanToSearchByNameFragment(FragmentType.PLANNER.toString());
+                action.setDate(date);
+                Navigation.findNavController(requireView()).navigate(action);
+            }else {
+                openGotoSignUpDialogue();
+            }
         });
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -98,6 +106,18 @@ public class WeekPlanFragment extends Fragment implements ONItemClickListener, O
                 getMealsPlanner(FormatDateToString.getString(year, month, dayOfMonth));
             }
         });
+    }
+
+    private void openGotoSignUpDialogue() {
+        new AlertDialog.Builder(requireContext())
+                .setTitle(R.string.Sign_Up_for_more_Feature)
+                .setMessage(R.string.goto_signUp_message)
+                .setPositiveButton(R.string.singup, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        startActivity(new Intent(requireActivity(), AuthenticationActivity.class));
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, null).show();
     }
 
     private void removeButtonWhenTimeIsLessThanToday(int year, int month, int dayOfMonth) {

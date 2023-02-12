@@ -37,6 +37,7 @@ public class AuthenticationFireBaseRepo implements AuthenticationRepo {
 
     @Override
     public void signIn(String email, String pass, SignInDelegate signInDelegate) {
+        Log.d(TAG, "signIn: ");
         fireBaseAuthWrapper.getAuth().signInWithEmailAndPassword(email, pass).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
