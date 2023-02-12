@@ -81,5 +81,14 @@
     <string name="added_to_favorites">added to favorites</string>
     <string name="Sign_Up_for_more_Feature">Sign Up for more Feature</string>
     <string name="goto_signUp_message">Add your food to Favorite, Plan your meals and more!</string>
+    <string name="please_fill_all_data">Please fill all data</string>
+    <string name="minmum_one_number">Minimum one number required</string>
+    <string name="minimum_one_special_symbol">Minimum one special symbol required</string>
+    <string name="minimum_one_uppercase">Minimum one uppercase required</string>
+    <string name="At_least__8_character">At least 8 character</string>
+    <string name="please_enter_valid_email">Please enter valid email</string>
+    <string name="confirm_password_doesnt_match_password">Confirm password doesn\'t match password</string>
+    <string name="sign_up_with_google_successfully">SignUp with google successfully</string>
+    <string name="sign_up_with_google_failed">Sign up with google Failed!</string>
 
 </resources>

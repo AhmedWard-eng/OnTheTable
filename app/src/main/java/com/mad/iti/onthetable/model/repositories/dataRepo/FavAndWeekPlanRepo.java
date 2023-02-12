@@ -31,7 +31,7 @@ public class FavAndWeekPlanRepo implements FavAndWeekPlanInterface {
     }
 
     private FavAndWeekPlanRepo(Context context) {
-        firebase = FireBaseRealTimeWrapper.getInstance();
+        firebase = new FireBaseRealTimeWrapper();
         dataBase = AppDataBase.getInstance(context);
     }
 

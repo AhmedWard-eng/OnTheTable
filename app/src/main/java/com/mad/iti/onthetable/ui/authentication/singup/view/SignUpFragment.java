@@ -95,16 +95,64 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!isPassContainNumber(s.toString())){
-                    binding.textInputEditTextPassSignUp.setError("password Should contain Numbers");
-                } else if (!isPassContainSpecialChar(s.toString())) {
 
-                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (!isPassContainNumber(s.toString())) {
+                    binding.textInputEditTextPassSignUp.setError(getString(R.string.minmum_one_number));
+                } else if (!isPassContainSpecialChar(s.toString())) {
+                    binding.textInputEditTextPassSignUp.setError(getString(R.string.minimum_one_special_symbol));
+                } else if (!isPassContainUpperCase(s.toString())) {
+                    binding.textInputEditTextPassSignUp.setError(getString(R.string.minimum_one_uppercase));
+                } else if (!isPassLengthGT8(s.toString())) {
+                    binding.textInputEditTextPassSignUp.setError(getString(R.string.At_least__8_character));
+                } else {
+                    binding.textInputEditTextPassSignUp.setError(null);
+                }
+            }
+        });
 
+
+        binding.textInputEditTextEmailSignUp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!isValidEmail(s.toString())) {
+                    binding.textInputEditTextEmailSignUp.setError(getString(R.string.please_enter_valid_email));
+                } else {
+                    binding.textInputEditTextEmailSignUp.setError(null);
+                }
+            }
+        });
+        binding.textInputEditTextConfirmPassSignUp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!checkPassEquality()) {
+                    binding.textInputEditTextConfirmPassSignUp.setError(getString(R.string.confirm_password_doesnt_match_password));
+                } else {
+                    binding.textInputEditTextConfirmPassSignUp.setError(null);
+                }
             }
         });
 
@@ -128,23 +176,26 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     }
 
     private void signUp() {
-//        if (checkValidation()) {
-//            String userName = binding.textInputEditTextEmailSignUp.getText().toString();
-//            String pass = binding.textInputEditTextPassSignUp.getText().toString();
-//            signUpPresenter.signUp(userName, pass);
-//        }
+        String userName = binding.textInputEditTextEmailSignUp.getText().toString();
+        String pass = binding.textInputEditTextPassSignUp.getText().toString();
+        if (isAllDataFilled() && checkValidation(userName, pass)) {
+            signUpPresenter.signUp(userName, pass);
+        }
     }
 
-//    private boolean checkValidation() {
-////        if (binding.textInputEditTextEmailSignUp.getText() != null && !binding.textInputEditTextEmailSignUp.getText().toString().isEmpty() && binding.textInputEditTextConfirmPassSignUp.getText() != null && !binding.textInputEditTextConfirmPassSignUp.getText().toString().isEmpty() && binding.textInputEditTextPassSignUp.getText() != null && !binding.textInputEditTextPassSignUp.getText().toString().isEmpty() && checkPassEquality())
-////            return true;
-////        else {
-////            binding.textInputLayoutEmailSignUP.setError("fill all data");
-////            binding.textInputLayoutPassWord.setError("fill all data");
-////            binding.confirmPasswordInputLayout.setError("fill all data");
-////            return false;
-////        }
-//    }
+    private boolean checkValidation(String userName, String pass) {
+        return isValidEmail(userName) && isPassLengthGT8(pass) && isPassContainNumber(pass) && isPassContainSpecialChar(pass) && isPassContainUpperCase(pass) && checkPassEquality();
+    }
+
+    private boolean isAllDataFilled() {
+        Log.d(TAG, "isAllDataFilled: ");
+        if (binding.textInputEditTextEmailSignUp.getText() != null && !binding.textInputEditTextEmailSignUp.getText().toString().isEmpty() && binding.textInputEditTextConfirmPassSignUp.getText() != null && !binding.textInputEditTextConfirmPassSignUp.getText().toString().isEmpty() && binding.textInputEditTextPassSignUp.getText() != null && !binding.textInputEditTextPassSignUp.getText().toString().isEmpty() )
+            return true;
+        else {
+            binding.textViewMessage.setText(R.string.please_fill_all_data);
+            return false;
+        }
+    }
 
     private boolean checkPassEquality() {
         return binding.textInputEditTextConfirmPassSignUp.getText().toString().equals(binding.textInputEditTextPassSignUp.getText().toString());
@@ -164,9 +215,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
     @Override
     public void OnFailure(String message) {
-        binding.textInputLayoutEmailSignUP.setError(message);
-        binding.textInputLayoutPassWord.setError(message);
-        binding.confirmPasswordInputLayout.setError(message);
+        binding.textViewMessage.setText(message);
     }
 
     @Override
@@ -178,7 +227,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
     @Override
     public void onSuccessGoogle() {
-        Toast.makeText(context, "SignUp with google successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, context.getString(R.string.sign_up_with_google_successfully), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(binding.getRoot().getContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         binding.getRoot().getContext().startActivity(intent);
@@ -186,7 +235,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
     @Override
     public void OnFailureGoogle(String message) {
-        Toast.makeText(requireContext(), "SignUp with google Failed!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(),context.getString( R.string.sign_up_with_google_failed), Toast.LENGTH_SHORT).show();
     }
 
 

@@ -155,5 +155,18 @@
         app:layout_constraintStart_toStartOf="@+id/buttonSignUp"
         app:layout_constraintTop_toBottomOf="@+id/buttonSignUp" />
 
+    <TextView
+        android:id="@+id/textViewMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9b111e"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/confirm_password_InputLayout"
+        app:layout_constraintStart_toStartOf="@+id/confirm_password_InputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

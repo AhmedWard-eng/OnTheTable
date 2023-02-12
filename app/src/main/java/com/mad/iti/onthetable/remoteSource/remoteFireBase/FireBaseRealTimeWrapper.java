@@ -24,14 +24,14 @@ public class FireBaseRealTimeWrapper {
     private AuthenticationFireBaseRepo authenticationFireBaseRepo;
     private static FireBaseRealTimeWrapper fireBaseRealTimeWrapper;
 
-    public static synchronized FireBaseRealTimeWrapper getInstance() {
-        if (fireBaseRealTimeWrapper == null) {
-            fireBaseRealTimeWrapper = new FireBaseRealTimeWrapper();
-        }
-        return fireBaseRealTimeWrapper;
-    }
+//    public static synchronized FireBaseRealTimeWrapper getInstance() {
+//        if (fireBaseRealTimeWrapper == null) {
+//            fireBaseRealTimeWrapper = new FireBaseRealTimeWrapper();
+//        }
+//        return fireBaseRealTimeWrapper;
+//    }
 
-    private FireBaseRealTimeWrapper() {
+    public FireBaseRealTimeWrapper() {
         this.database = FirebaseDatabase.getInstance();
         authenticationFireBaseRepo = AuthenticationFireBaseRepo.getInstance();
         if (authenticationFireBaseRepo.isAuthenticated()) {
@@ -51,7 +51,7 @@ public class FireBaseRealTimeWrapper {
     public void addToWeekPlanner(MealPlanner mealPlanner, FireBaseAddingDelegate fireBaseAddingDelegate) {
         if (authenticationFireBaseRepo.isAuthenticated()) {
             String key = referenceWeekPlanner.push().getKey();
-            referenceWeekPlanner.child(String.valueOf(mealPlanner.id)).setValue(mealPlanner).addOnCompleteListener(task -> fireBaseAddingDelegate.onSuccess()).addOnFailureListener(e -> fireBaseAddingDelegate.onFailure(e.toString()));
+            referenceWeekPlanner.child(mealPlanner.id).setValue(mealPlanner).addOnCompleteListener(task -> fireBaseAddingDelegate.onSuccess()).addOnFailureListener(e -> fireBaseAddingDelegate.onFailure(e.toString()));
 
         }
     }

@@ -122,7 +122,7 @@ public class MealDetailsFragment extends Fragment {
 
     private void getMealFromLocal(String id) {
         mealsDetailsPresenter.getMealFromFavById(id).observe(getViewLifecycleOwner(), this::setMealToTheView);
-        fragmentMealDetailsBinding.imageViewAddToFavITemDetails.setImageResource(R.drawable.baseline_favorite_24);
+        fragmentMealDetailsBinding.imageViewAddToFavITemDetails.setImageResource(R.drawable.baseline_favorite_48);
 
     }
 
@@ -184,7 +184,7 @@ public class MealDetailsFragment extends Fragment {
                             @Override
                             public void onSuccess() {
                                 Log.i("testtt", "Click on Fav " + meal.strMeal);
-                                fragmentMealDetailsBinding.imageViewAddToFavITemDetails.setImageResource(R.drawable.baseline_favorite_24);
+                                fragmentMealDetailsBinding.imageViewAddToFavITemDetails.setImageResource(R.drawable.baseline_favorite_48);
                                 Toast.makeText(getContext(), meal.strMeal + " " + v.getContext().getString(R.string.added_to_favorites), Toast.LENGTH_SHORT).show();
                             }
 

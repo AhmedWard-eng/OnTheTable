@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,28 +54,42 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        binding.buttonLogin.setOnClickListener(v -> {
-            login();
-        });
+        binding.buttonLogin.setOnClickListener(v -> login());
 
         textViewSkip = binding.skipTextViewLogin;
-        textViewSkip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToMainActivity();
-            }
-        });
+        textViewSkip.setOnClickListener(v -> goToMainActivity());
 
         binding.textViewGoToSignUP.setOnClickListener(v -> {
             Navigation.findNavController(view).navigateUp();
+        });
+
+        binding.TextInputEditTextEmailLogin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!isValidEmail(s.toString())){
+                    binding.TextInputEditTextEmailLogin.setError("Please enter valid email");
+                }else{
+                    binding.TextInputEditTextEmailLogin.setError(null);
+                }
+            }
         });
         super.onViewCreated(view, savedInstanceState);
     }
 
     private void login() {
-        if (checkValidation()) {
-            String userName = binding.TextInputEditTextEmailLogin.getText().toString();
-            String pass = binding.TextInputEditTextPassLogin.getText().toString();
+        String userName = binding.TextInputEditTextEmailLogin.getText().toString();
+        String pass = binding.TextInputEditTextPassLogin.getText().toString();
+        if ( checkValidation() && isValidEmail(userName)) {
             loginPresenter.login(userName, pass);
         }
     }
@@ -82,8 +98,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         if (binding.TextInputEditTextEmailLogin.getText() != null && !binding.TextInputEditTextEmailLogin.getText().toString().isEmpty() && binding.TextInputEditTextPassLogin.getText() != null && !binding.TextInputEditTextPassLogin.getText().toString().isEmpty())
             return true;
         else {
-            binding.textInputLayoutEmailLogin.setError("fill all data");
-            binding.textInputLayoutPassLogin.setError("fill all data");
+            binding.textViewMessageLogin.setText(R.string.please_fill_all_data);
             return false;
         }
     }
@@ -97,13 +112,18 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     @Override
     public void OnFailure(String message) {
 
-        binding.textInputLayoutEmailLogin.setError(message);
-        binding.textInputLayoutPassLogin.setError(message);
+        binding.textViewMessageLogin.setText(message);
     }
 
     private void goToMainActivity() {
         Intent intent = new Intent(binding.getRoot().getContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         binding.getRoot().getContext().startActivity(intent);
+    }
+
+    private boolean isValidEmail(String s) {
+        String email = s.trim();
+        String emailPattern = "[a-zA-Z\\d._-]+@[a-z]+\\.+[a-z]+";
+        return email.matches(emailPattern);
     }
 }
