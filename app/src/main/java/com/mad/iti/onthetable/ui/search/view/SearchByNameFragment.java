@@ -82,6 +82,7 @@ public class SearchByNameFragment extends Fragment implements OnClickListener {
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
         searchWithTextWitcher();
+        fragmentType = SearchByNameFragmentArgs.fromBundle(requireArguments()).getSource();
 
     }
 
@@ -132,13 +133,15 @@ public class SearchByNameFragment extends Fragment implements OnClickListener {
     @Override
     public void onClick(Meal meal) {
 
-        if (fragmentType.equals(FragmentType.SEARCH.toString())) {
-            SearchByNameFragmentDirections.ActionSearchByNameFragmentToMealDetailsFragment action = SearchByNameFragmentDirections.actionSearchByNameFragmentToMealDetailsFragment(meal.idMeal, Status.ONLINE.toString(), false);
-            Navigation.findNavController(requireView()).navigate(action);
-        } else if (fragmentType.equals(FragmentType.PLANNER.toString())) {
+
+        Log.d(TAG, "onClick: "+ fragmentType);
+        if (fragmentType.equals(FragmentType.PLANNER.toString())){
             String date = SearchByNameFragmentArgs.fromBundle(requireArguments()).getDate();
             addMealToPlan(meal, date);
             searchMealOnce();
+        } else {
+            SearchByNameFragmentDirections.ActionSearchByNameFragmentToMealDetailsFragment action = SearchByNameFragmentDirections.actionSearchByNameFragmentToMealDetailsFragment(meal.idMeal, Status.ONLINE.toString(), false);
+            Navigation.findNavController(requireView()).navigate(action);
         }
     }
 
