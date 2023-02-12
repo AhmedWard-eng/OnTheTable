@@ -11,6 +11,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
@@ -27,6 +28,8 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     FragmentLoginBinding binding;
 
     LoginPresenterInterface loginPresenter;
+
+    TextView textViewSkip;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -51,6 +54,14 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         binding.buttonLogin.setOnClickListener(v -> {
             login();
+        });
+
+        textViewSkip = binding.skipTextViewLogin;
+        textViewSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMainActivity();
+            }
         });
 
         binding.textViewGoToSignUP.setOnClickListener(v -> {
@@ -80,10 +91,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     @Override
     public void onSuccess(FirebaseUser user) {
         Toast.makeText(binding.getRoot().getContext(), "LoggedIn Successfully", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(binding.getRoot().getContext(), MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        binding.getRoot().getContext().startActivity(intent);
-
+        goToMainActivity();
     }
 
     @Override
@@ -91,5 +99,11 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
         binding.textInputLayoutEmailLogin.setError(message);
         binding.textInputLayoutPassLogin.setError(message);
+    }
+
+    private void goToMainActivity() {
+        Intent intent = new Intent(binding.getRoot().getContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        binding.getRoot().getContext().startActivity(intent);
     }
 }

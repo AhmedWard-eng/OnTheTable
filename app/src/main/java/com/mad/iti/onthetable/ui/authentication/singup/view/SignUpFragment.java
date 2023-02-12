@@ -13,25 +13,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -41,9 +35,6 @@ import com.mad.iti.onthetable.databinding.FragmentSignUpBinding;
 import com.mad.iti.onthetable.ui.authentication.singup.presenter.SignUpPresenter;
 import com.mad.iti.onthetable.ui.authentication.singup.presenter.SignUpPresenterInterface;
 
-import java.util.Objects;
-import java.util.concurrent.Executor;
-
 
 public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
@@ -52,6 +43,8 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
     GoogleSignInClient googleSignInClient;
     FirebaseAuth firebaseAuth;
+
+    TextView textViewSkip;
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -80,6 +73,14 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
         binding.textViewGoToLogin.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_signUpFragment_to_loginFragment);
         });
+        textViewSkip = binding.skipTextViewSignup;
+
+        textViewSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMainActivity();
+            }
+        });
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -98,6 +99,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
         super.onViewCreated(view, savedInstanceState);
     }
+
 
     private void signUpWithGoogle() {
     }
@@ -134,6 +136,10 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     @Override
     public void onSuccess(FirebaseUser user) {
         Toast.makeText(requireContext(), R.string.signup_successfully, Toast.LENGTH_SHORT).show();
+        goToMainActivity();
+    }
+
+    private void goToMainActivity() {
         Intent intent = new Intent(binding.getRoot().getContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         binding.getRoot().getContext().startActivity(intent);
@@ -160,7 +166,6 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     }
 
 
-
     private void displayToast(String s) {
         Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
     }
@@ -170,7 +175,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() ==  Activity.RESULT_OK) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         Task<GoogleSignInAccount> signInAccountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
                         if (signInAccountTask.isSuccessful()) {

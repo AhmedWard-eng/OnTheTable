@@ -144,9 +144,15 @@ public class HomeFragment extends Fragment implements OnClickListener {
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        MenuItem item = menu.findItem(R.id.logout);
+        MenuItem itemLogout = menu.findItem(R.id.logout);
+
+        MenuItem itemLogIn = menu.findItem(R.id.login);
         if (!AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
-            item.setVisible(false);
+            itemLogout.setVisible(false);
+            itemLogIn.setVisible(true);
+        }else{
+            itemLogout.setVisible(true);
+            itemLogIn.setVisible(false);
         }
     }
 
@@ -167,6 +173,9 @@ public class HomeFragment extends Fragment implements OnClickListener {
                             }
                         })
                         .setNegativeButton(android.R.string.no, null).show();
+                return true;
+            case R.id.login:
+                startActivity(new Intent(requireActivity(),AuthenticationActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
