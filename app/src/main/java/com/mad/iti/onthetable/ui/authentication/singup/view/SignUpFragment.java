@@ -148,7 +148,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
     @Override
     public void onSuccessGoogle() {
-        Toast.makeText(requireContext(), "SignUp with google successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(binding.getRoot().getContext(), "SignUp with google successfully", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(binding.getRoot().getContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         binding.getRoot().getContext().startActivity(intent);

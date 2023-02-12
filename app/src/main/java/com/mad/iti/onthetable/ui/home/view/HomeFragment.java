@@ -1,15 +1,25 @@
 package com.mad.iti.onthetable.ui.home.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mad.iti.onthetable.MainActivity;
 import com.mad.iti.onthetable.localSource.roomDatabase.LocalSource;
 import com.mad.iti.onthetable.localSource.roomDatabase.LocalSourceRoom;
 import com.mad.iti.onthetable.model.Status;
+import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationFireBaseRepo;
+import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
+import com.mad.iti.onthetable.ui.authentication.AuthenticationActivity;
 import com.mad.iti.onthetable.ui.home.view.HomeFragmentDirections.ActionNavigationHomeToMealDetailsFragment;
 
 import androidx.annotation.NonNull;
@@ -32,7 +42,7 @@ import java.util.ArrayList;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 
-public class HomeFragment extends Fragment implements  OnClickListener{
+public class HomeFragment extends Fragment implements OnClickListener {
 
     //    TextView homeTextView;
     private RecyclerView recyclerView;
@@ -50,7 +60,7 @@ public class HomeFragment extends Fragment implements  OnClickListener{
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeFragmentPresenter = HomeFragmentPresenter.getInstance(MealsRepo.getInstance());
-
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -65,7 +75,7 @@ public class HomeFragment extends Fragment implements  OnClickListener{
         imageViewDishOfTheDay = view.findViewById(R.id.imageViewDishOfTheDay);
         cardView = view.findViewById(R.id.cardViewRandomMeal);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-        adapter = new GridWithTwoMealAdapter(new ArrayList<>(),this);
+        adapter = new GridWithTwoMealAdapter(new ArrayList<>(), this);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
         localSource = LocalSourceRoom.getInstance(requireContext());
@@ -102,7 +112,7 @@ public class HomeFragment extends Fragment implements  OnClickListener{
         textViewMealCountry.setText(meal.strArea);
         Glide.with(requireContext()).load(meal.strMealThumb).placeholder(R.drawable.breakfast).error(R.drawable.avocado_small).into(imageViewDishOfTheDay);
         cardView.setOnClickListener(v -> {
-            ActionNavigationHomeToMealDetailsFragment action = HomeFragmentDirections.actionNavigationHomeToMealDetailsFragment(meal.idMeal, Status.ONLINE.toString(),false);
+            ActionNavigationHomeToMealDetailsFragment action = HomeFragmentDirections.actionNavigationHomeToMealDetailsFragment(meal.idMeal, Status.ONLINE.toString(), false);
             Navigation.findNavController(v).navigate(action);
         });
 
@@ -120,8 +130,50 @@ public class HomeFragment extends Fragment implements  OnClickListener{
     }
 
     @Override
-    public void onClick(String id) {
-        HomeFragmentDirections.ActionNavigationHomeToMealDetailsFragment action = HomeFragmentDirections.actionNavigationHomeToMealDetailsFragment(id,Status.ONLINE.toString(),false);
+    public void onClick(Meal meal) {
+        HomeFragmentDirections.ActionNavigationHomeToMealDetailsFragment action = HomeFragmentDirections.actionNavigationHomeToMealDetailsFragment(meal.idMeal, Status.ONLINE.toString(), false);
         Navigation.findNavController(requireView()).navigate(action);
     }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.main_menu, menu);
+    }
+
+
+    @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem item = menu.findItem(R.id.logout);
+        if (!AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
+            item.setVisible(false);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Logout")
+                        .setMessage("Are you sure you want to logout?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                AuthenticationFireBaseRepo.getInstance().logout();
+                                FavAndWeekPlanRepo.getInstance(requireContext().getApplicationContext()).deleteAllWeekPlan();
+                                FavAndWeekPlanRepo.getInstance(requireContext().getApplicationContext()).deleteAllFav();
+//                                Toast.makeText(this, "LoggedOut successfully", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(requireActivity(), AuthenticationActivity.class));
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+
+
+    }
+
 }

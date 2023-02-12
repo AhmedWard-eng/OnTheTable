@@ -1,11 +1,18 @@
 package com.mad.iti.onthetable;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationFireBaseRepo;
 import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
+import com.mad.iti.onthetable.ui.authentication.AuthenticationActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -72,6 +79,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         return navController.navigateUp() || super.onSupportNavigateUp();
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main_menu, menu);
+//        return true;
+//    }
 
 
 }

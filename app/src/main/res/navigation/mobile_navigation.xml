@@ -74,6 +74,9 @@
         <action
             android:id="@+id/action_navigation_weekPlan_to_mealDetailsFragment"
             app:destination="@id/mealDetailsFragment" />
+        <action
+            android:id="@+id/action_navigation_weekPlan_to_searchByNameFragment"
+            app:destination="@id/searchByNameFragment" />
     </fragment>
     <fragment
         android:id="@+id/mealDetailsFragment"
@@ -98,6 +101,13 @@
         <action
             android:id="@+id/action_searchByNameFragment_to_mealDetailsFragment"
             app:destination="@id/mealDetailsFragment" />
+        <argument
+            android:name="Date"
+            app:argType="string"
+            android:defaultValue="NAN" />
+        <argument
+            android:name="source"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/allIngredientFragment"

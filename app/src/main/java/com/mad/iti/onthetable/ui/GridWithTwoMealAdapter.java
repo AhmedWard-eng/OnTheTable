@@ -39,7 +39,7 @@ public class GridWithTwoMealAdapter extends RecyclerView.Adapter<GridWithTwoMeal
         holder.textViewName.setText(meals.get(position).strMeal);
         Glide.with(holder.getView().getContext()).load(meals.get(position).strMealThumb).placeholder(R.drawable.breakfast).error(R.drawable.avocado_small).into(holder.getImageView());
         holder.getView().setOnClickListener(v->{
-            clickListener.onClick(meals.get(position).idMeal);
+            clickListener.onClick(meals.get(position));
         });
     }
 

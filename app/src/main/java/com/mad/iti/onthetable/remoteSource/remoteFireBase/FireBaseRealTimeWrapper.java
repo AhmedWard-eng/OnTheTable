@@ -86,7 +86,7 @@ public class FireBaseRealTimeWrapper {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<Meal> meals = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    new Thread(() -> meals.add(snapshot.getValue(Meal.class))).start();
+                    meals.add(snapshot.getValue(Meal.class));
                 }
                 fireBaseFavDelegate.onSuccess(meals);
             }
@@ -106,7 +106,7 @@ public class FireBaseRealTimeWrapper {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<MealPlanner> mealPlanners = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    new Thread(() -> mealPlanners.add(snapshot.getValue(MealPlanner.class))).start();
+                    mealPlanners.add(snapshot.getValue(MealPlanner.class));
                 }
                 fireBasePlannerDelegate.onSuccess(mealPlanners);
             }

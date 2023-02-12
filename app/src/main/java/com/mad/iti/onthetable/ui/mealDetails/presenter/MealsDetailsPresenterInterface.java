@@ -1,5 +1,7 @@
 package com.mad.iti.onthetable.ui.mealDetails.presenter;
 
+import androidx.lifecycle.LiveData;
+
 import com.mad.iti.onthetable.model.MealPlanner;
 import com.mad.iti.onthetable.model.Meal;
 import com.mad.iti.onthetable.model.RootMeal;
@@ -14,4 +16,7 @@ public interface MealsDetailsPresenterInterface {
     void addToWeekPlanner(MealPlanner mealPlanner, OnAddingListener onAddingListener);
 
     public void addFavMeal(Meal meal , OnAddingListener onAddingListener);
+    public LiveData<Meal> getMealFromFavById(String id);
+
+    LiveData<MealPlanner> getMealFromWeekPlanFavById(String id);
 }

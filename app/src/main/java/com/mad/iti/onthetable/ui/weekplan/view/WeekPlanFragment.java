@@ -1,13 +1,16 @@
 package com.mad.iti.onthetable.ui.weekplan.view;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
+
+import com.mad.iti.onthetable.model.FragmentType;
+import com.mad.iti.onthetable.ui.weekplan.view.WeekPlanFragmentDirections.ActionNavigationWeekPlanToSearchByNameFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,19 +29,26 @@ import com.mad.iti.onthetable.model.repositories.dataRepo.FavAndWeekPlanRepo;
 import com.mad.iti.onthetable.ui.weekplan.presenter.WeekPlanPresenter;
 import com.mad.iti.onthetable.ui.weekplan.presenter.WeekPlanPresenterInterface;
 
+import org.checkerframework.checker.units.qual.C;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 public class WeekPlanFragment extends Fragment implements ONItemClickListener, OnRemoveClickListener {
-
+    private static Calendar calendar = Calendar.getInstance();
     CalendarView calendarView;
-    Button button;
     RecyclerView recyclerView;
 
     WeekPlannerAdapter weekPlannerAdapter;
+    String date;
+
+    Button btnAddMeal;
 
     private WeekPlanPresenterInterface weekPlanPresenter;
     private static final String TAG = "WeekPlanFragment";
@@ -51,7 +61,6 @@ public class WeekPlanFragment extends Fragment implements ONItemClickListener, O
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -70,16 +79,38 @@ public class WeekPlanFragment extends Fragment implements ONItemClickListener, O
         recyclerView = view.findViewById(R.id.mealWeekPlan_recyclerView_weekplan);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(weekPlannerAdapter);
-        getMealsPlanner(FormatDateToString.getString(new Date()));
 
+        date = FormatDateToString.getString(new Date());
 
+        btnAddMeal = view.findViewById(R.id.addMeal_button_weekplan);
+
+        btnAddMeal.setOnClickListener(v -> {
+            ActionNavigationWeekPlanToSearchByNameFragment action = WeekPlanFragmentDirections.actionNavigationWeekPlanToSearchByNameFragment(FragmentType.PLANNER.toString());
+            action.setDate(date);
+            Navigation.findNavController(requireView()).navigate(action);
+        });
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                Log.d(TAG, "debug onSelectedDayChange: " + FormatDateToString.getString(year, month, dayOfMonth));
+                calendar.set(year,month,dayOfMonth);
+                date = FormatDateToString.getString(year, month, dayOfMonth);
+                removeButtonWhenTimeIsLessThanToday(year, month,dayOfMonth);
                 getMealsPlanner(FormatDateToString.getString(year, month, dayOfMonth));
             }
         });
+    }
+
+    private void removeButtonWhenTimeIsLessThanToday(int year, int month, int dayOfMonth) {
+        Calendar calendarDay = Calendar.getInstance();
+        calendarDay.set(Calendar.HOUR,0);
+        calendarDay.set(Calendar.MINUTE,0);
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.set(year,month,dayOfMonth);
+        if(calendarDay.getTimeInMillis() > calendar1.getTimeInMillis()){
+            btnAddMeal.setVisibility(View.GONE);
+        }else {
+            btnAddMeal.setVisibility(View.VISIBLE);
+        }
     }
 
     private void getMealsPlanner(String dateString) {
@@ -93,16 +124,16 @@ public class WeekPlanFragment extends Fragment implements ONItemClickListener, O
     }
 
     private void establishCalendarView(CalendarView calendarView) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendarView.setMinDate(calendar.getTimeInMillis());
+        calendarView.setDate(calendar.getTime().getTime());
+        getMealsPlanner(FormatDateToString.getString(calendar.getTime()));
         calendarView.setFirstDayOfWeek(7);
     }
 
 
     @Override
     public void onClick(MealPlanner mealPlanner) {
-        WeekPlanFragmentDirections.ActionNavigationWeekPlanToMealDetailsFragment action = WeekPlanFragmentDirections.actionNavigationWeekPlanToMealDetailsFragment(mealPlanner.id, Status.OFFLINE.toString(),true);
+        WeekPlanFragmentDirections.ActionNavigationWeekPlanToMealDetailsFragment action = WeekPlanFragmentDirections.actionNavigationWeekPlanToMealDetailsFragment(mealPlanner.id, Status.OFFLINE.toString(), true);
+        Navigation.findNavController(requireView()).navigate(action);
     }
 
     @Override

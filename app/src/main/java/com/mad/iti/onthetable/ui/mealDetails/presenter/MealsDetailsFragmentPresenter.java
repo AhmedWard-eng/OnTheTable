@@ -45,8 +45,14 @@ public class MealsDetailsFragmentPresenter implements MealsDetailsPresenterInter
         dataBaseRepo.addToPlanner(mealPlanner,onAddingListener);
     }
 
-    public LiveData<Meal> getMealFromFav(){
-        return null;
+    @Override
+    public LiveData<Meal> getMealFromFavById(String id){
+        return dataBaseRepo.getMealFromFavById(id);
+    }
+
+    @Override
+    public LiveData<MealPlanner> getMealFromWeekPlanFavById(String id){
+        return dataBaseRepo.getMealFromWeekPlanById(id);
     }
 
 
