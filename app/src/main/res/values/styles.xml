@@ -4,12 +4,12 @@
     <style name="header_one">
         <item name="android:textColor">@color/outline_color</item>
         <item name="android:textSize">24sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/barlowbold</item>
     </style>
 
     <style name="header_three">
         <item name="android:textColor">@color/outline_color</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/barlowbold</item>
     </style>
 
     <style name="appNameInLoginAndSignUp">
@@ -24,7 +24,7 @@
     <style name="header_two">
         <item name="android:textColor">@color/outline_color</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/barlowbold</item>
     </style>
 
     <style name="category_card_custom_corners" parent="">

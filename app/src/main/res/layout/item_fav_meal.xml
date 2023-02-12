@@ -7,8 +7,9 @@
     android:id="@+id/cardViewRandomMeal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="32dp"
-    app:cardCornerRadius="24dp"
+    app:cardElevation="4dp"
+    app:cardMaxElevation="6dp"
+    app:cardCornerRadius="16dp"
     app:cardUseCompatPadding="true">
 
 
@@ -25,8 +26,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:riv_corner_radius_top_left="24dp"
-            app:riv_corner_radius_top_right="24dip" />
+            app:riv_corner_radius_top_left="16dp"
+            app:riv_corner_radius_top_right="16dp" />
 
         <TextView
             android:id="@+id/textView_meal_title_item_fav"
@@ -37,6 +38,7 @@
             android:layout_marginVertical="12dp"
             android:textSize="12sp"
             android:gravity="center"
+            android:fontFamily="@font/barlow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,8 +47,8 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/icon_remove_item_fav"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:background="@drawable/icon_background"
             android:src="@drawable/baseline_remove_24"
             app:layout_constraintEnd_toEndOf="@id/imageView_item_fav"

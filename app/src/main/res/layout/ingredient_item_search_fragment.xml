@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="8dp"
+
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:backgroundTint="@color/neutral"
     android:id="@+id/row_ingredient_layout">
+
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imageViewIngredientImageBGItem"
@@ -15,35 +17,52 @@
         android:layout_height="96dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/ingredients_item_background"
-        android:backgroundTint="@color/calamansi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:riv_oval="true" />
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/imageViewIngredientImageItem"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:src="@drawable/avocado_small"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewIngredientImageBGItem"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewIngredientImageBGItem"
-        app:layout_constraintStart_toStartOf="@+id/imageViewIngredientImageBGItem"
-        app:layout_constraintTop_toTopOf="@+id/imageViewIngredientImageBGItem"
-        app:riv_oval="true" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="16dp"
+        android:foregroundGravity="center"
+        app:cardCornerRadius="160dp"
+        app:cardElevation="4dp"
+        app:cardMaxElevation="6dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imageViewIngredientImageItem"
+            android:layout_gravity="center"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:src="@drawable/avocado_small"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewIngredientImageBGItem"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewIngredientImageBGItem"
+            app:layout_constraintStart_toStartOf="@+id/imageViewIngredientImageBGItem"
+            app:layout_constraintTop_toTopOf="@+id/imageViewIngredientImageBGItem"
+            app:riv_oval="true" />
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/textViewIngredientNameItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="@font/barlow"
+        android:textAlignment="center"
         android:textColor="@color/outline_color"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewIngredientImageBGItem"
-        app:layout_constraintStart_toStartOf="@+id/imageViewIngredientImageBGItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewIngredientImageBGItem"
         tools:text="Avocado" />
 </androidx.constraintlayout.widget.ConstraintLayout>

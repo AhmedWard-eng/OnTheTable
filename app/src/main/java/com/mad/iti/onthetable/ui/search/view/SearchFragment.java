@@ -140,8 +140,11 @@ public class SearchFragment extends Fragment implements OnIngredientClickListene
         countryRecyclerView.setAdapter(countryAdapter);
 
         categoryRecyclerView = view.findViewById(R.id.categories_recyclerView);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-        categoryRecyclerView.setLayoutManager(gridLayoutManager);
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+//        categoryRecyclerView.setLayoutManager(gridLayoutManager);
+        LinearLayoutManager layoutManager3 = new LinearLayoutManager(getContext());
+        layoutManager3.setOrientation(RecyclerView.VERTICAL);
+        categoryRecyclerView.setLayoutManager(layoutManager3);
         categoryAdapter = new SearchCategoryAdapter(getContext() , new ArrayList<>(),this);
         searchPresenter.getCategory().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -20,6 +20,7 @@
         android:focusableInTouchMode="true"
         android:hint="@string/search_by_meal"
         android:imeOptions="actionSearch"
+        android:fontFamily="@font/barlow"
         android:padding="12dp"
         android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"

@@ -7,7 +7,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -66,8 +68,10 @@ public class SearchMealResultsFragment extends Fragment implements OnClickMealRe
 //        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 //        layoutManager.setOrientation(RecyclerView.VERTICAL);
 //        previewMealRecyclerView.setLayoutManager(layoutManager);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-        previewMealRecyclerView.setLayoutManager(gridLayoutManager);
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+//        previewMealRecyclerView.setLayoutManager(gridLayoutManager);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
+        previewMealRecyclerView.setLayoutManager(staggeredGridLayoutManager);
         mealResultAdapter = new MealResultAdapter(getContext() , new ArrayList<>(),this);
 
         if(checkSearchBy.getType() == CheckSearchBy.ingredient){

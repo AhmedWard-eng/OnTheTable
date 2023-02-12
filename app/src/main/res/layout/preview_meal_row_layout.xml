@@ -6,14 +6,15 @@
     android:layout_height="wrap_content"
     android:elevation="32dp"
     app:cardUseCompatPadding="true"
-    app:cardCornerRadius="24dp">
+    app:cardCornerRadius="16dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/previewMeal_cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="32dp"
-        app:cardCornerRadius="24dp"
+        app:cardElevation="4dp"
+        app:cardMaxElevation="6dp"
+        app:cardCornerRadius="16dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,8 +35,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:riv_corner_radius_top_left="24dp"
-                app:riv_corner_radius_top_right="24dip" />
+                app:riv_corner_radius_top_left="16dp"
+                app:riv_corner_radius_top_right="16dip" />
 
             <TextView
                 android:id="@+id/titlePreviewMeal_textView"
@@ -48,7 +49,7 @@
                 android:fontFamily="@font/barlowbold"
                 android:textAlignment="center"
                 android:textColor="@color/dark_grey"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
