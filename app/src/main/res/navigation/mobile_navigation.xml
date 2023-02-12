@@ -107,7 +107,9 @@
             android:defaultValue="NAN" />
         <argument
             android:name="source"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="m" />
     </fragment>
     <fragment
         android:id="@+id/allIngredientFragment"

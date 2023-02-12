@@ -24,6 +24,7 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.mad.iti.onthetable.InternetConnection;
 import com.mad.iti.onthetable.formatters.FormatDateToString;
 import com.mad.iti.onthetable.formatters.GetIdFromYoutubeUrl;
 import com.mad.iti.onthetable.R;
@@ -65,6 +66,8 @@ public class MealDetailsFragment extends Fragment {
 
     Disposable disposable;
 
+    InternetConnection internetConnection;
+
     public MealDetailsFragment() {
         // Required empty public constructor
     }
@@ -81,6 +84,8 @@ public class MealDetailsFragment extends Fragment {
 
         fragmentMealDetailsBinding = FragmentMealDetailsBinding.inflate(inflater, container, false);
         mealsDetailsPresenter = MealsDetailsFragmentPresenter.getInstance(MealsRepo.getInstance(), FavAndWeekPlanRepo.getInstance(requireContext()));
+        internetConnection = new InternetConnection(requireContext());
+
         // Inflate the layout for this fragment
         return fragmentMealDetailsBinding.getRoot();
     }
@@ -147,10 +152,14 @@ public class MealDetailsFragment extends Fragment {
         Glide.with(requireContext()).load(meal.strMealThumb).placeholder(R.drawable.breakfast).error(R.drawable.avocado_small).into(fragmentMealDetailsBinding.mealImage);
         ingredientsAdapter.setList(GetArrayFromMeal.getArrayList(meal));
         imageViewADDToWeekPlanner.setOnClickListener((v) -> {
-            if(AuthenticationFireBaseRepo.getInstance().isAuthenticated()){
-                openDatePicker(meal);
-            }else{
-                openGotoSignUpDialogue();
+            if(internetConnection.isConnectedMobile() || internetConnection.isConnectedWifi()){
+                if(AuthenticationFireBaseRepo.getInstance().isAuthenticated()){
+                    openDatePicker(meal);
+                }else{
+                    openGotoSignUpDialogue();
+                }
+            }else {
+                Toast.makeText(requireContext(), "Please Check Your Internet Connection And Try Again", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -169,26 +178,31 @@ public class MealDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
-                    mealsDetailsPresenter.addFavMeal(meal, new OnAddingListener() {
-                        @Override
-                        public void onSuccess() {
-                            Log.i("testtt", "Click on Fav " + meal.strMeal);
-                            fragmentMealDetailsBinding.imageViewAddToFavITemDetails.setImageResource(R.drawable.baseline_favorite_24);
-                            Toast.makeText(getContext(), meal.strMeal + " " + v.getContext().getString(R.string.added_to_favorites), Toast.LENGTH_SHORT).show();
-                        }
+                if(internetConnection.isConnectedMobile() || internetConnection.isConnectedWifi()){
+                    if (AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
+                        mealsDetailsPresenter.addFavMeal(meal, new OnAddingListener() {
+                            @Override
+                            public void onSuccess() {
+                                Log.i("testtt", "Click on Fav " + meal.strMeal);
+                                fragmentMealDetailsBinding.imageViewAddToFavITemDetails.setImageResource(R.drawable.baseline_favorite_24);
+                                Toast.makeText(getContext(), meal.strMeal + " " + v.getContext().getString(R.string.added_to_favorites), Toast.LENGTH_SHORT).show();
+                            }
 
-                        @Override
-                        public void onFailure(String message) {
-                            Log.i("testtt", "Click on Fav " + message);
-                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onFailure(String message) {
+                                Log.i("testtt", "Click on Fav " + message);
+                                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
-                        }
-                    });
+                            }
+                        });
 
-                } else {
-                    openGotoSignUpDialogue();
+                    } else {
+                        openGotoSignUpDialogue();
+                    }
+                }else {
+                    Toast.makeText(requireContext(), "Please Check Your Internet Connection And Try Again", Toast.LENGTH_LONG).show();
                 }
+
             }
         });
 

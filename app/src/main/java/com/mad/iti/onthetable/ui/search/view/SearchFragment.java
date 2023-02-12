@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.mad.iti.onthetable.model.FragmentType;
 import com.mad.iti.onthetable.model.Ingredient;
 
 import androidx.annotation.NonNull;
@@ -39,6 +40,8 @@ import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
+import com.mad.iti.onthetable.ui.search.view.SearchFragmentDirections.ActionNavigationSearchToSearchByNameFragment;
+
 public class SearchFragment extends Fragment implements OnIngredientClickListener, OnCountryClickListener, OnCategoryClickListener {
 
     private RecyclerView ingredientRecyclerView;
@@ -56,7 +59,7 @@ public class SearchFragment extends Fragment implements OnIngredientClickListene
 
     List<Ingredient> ingredientList;
 
-    TextView viewAllCountries , viewAllIngredients;
+    TextView viewAllCountries, viewAllIngredients;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         searchPresenter = SearchPresenter.getInstance(MealsRepo.getInstance());
@@ -71,17 +74,20 @@ public class SearchFragment extends Fragment implements OnIngredientClickListene
         view.findViewById(R.id.searchView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ActionNavigationSearchToSearchByNameFragment action
+                        = SearchFragmentDirections.actionNavigationSearchToSearchByNameFragment();
+                action.setSource(FragmentType.SEARCH.toString());
                 Navigation.findNavController(v).navigate(R.id.action_navigation_search_to_searchByNameFragment);
             }
         });
         viewAllCountries = view.findViewById(R.id.country_viewAll_textView2);
         viewAllIngredients = view.findViewById(R.id.ingredient_viewAll_textView);
-        viewAllCountries.setOnClickListener(v->{
+        viewAllCountries.setOnClickListener(v -> {
             Navigation.findNavController(view).navigate(R.id.action_navigation_search_to_allCountriesFragment);
         });
 
-        viewAllIngredients.setOnClickListener(v->{
-            if(ingredientList != null){
+        viewAllIngredients.setOnClickListener(v -> {
+            if (ingredientList != null) {
                 Navigation.findNavController(view).navigate(R.id.action_navigation_search_to_allIngredientFragment);
             }
 
@@ -91,7 +97,7 @@ public class SearchFragment extends Fragment implements OnIngredientClickListene
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         ingredientRecyclerView.setLayoutManager(layoutManager);
-        ingredientAdapter = new SearchIngredientAdapter(getContext() , new ArrayList<>(),this );
+        ingredientAdapter = new SearchIngredientAdapter(getContext(), new ArrayList<>(), this);
         searchPresenter.getIngredients()
                 .subscribe(new SingleObserver<RootIngredient>() {
                     @Override
@@ -117,7 +123,7 @@ public class SearchFragment extends Fragment implements OnIngredientClickListene
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
         layoutManager2.setOrientation(RecyclerView.HORIZONTAL);
         countryRecyclerView.setLayoutManager(layoutManager2);
-        countryAdapter = new SearchCountryAdapter(getContext() , new ArrayList<>(),this);
+        countryAdapter = new SearchCountryAdapter(getContext(), new ArrayList<>(), this);
         searchPresenter.getCuisines().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<RootCuisine>() {
@@ -145,7 +151,7 @@ public class SearchFragment extends Fragment implements OnIngredientClickListene
         LinearLayoutManager layoutManager3 = new LinearLayoutManager(getContext());
         layoutManager3.setOrientation(RecyclerView.VERTICAL);
         categoryRecyclerView.setLayoutManager(layoutManager3);
-        categoryAdapter = new SearchCategoryAdapter(getContext() , new ArrayList<>(),this);
+        categoryAdapter = new SearchCategoryAdapter(getContext(), new ArrayList<>(), this);
         searchPresenter.getCategory().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<RootCategory>() {

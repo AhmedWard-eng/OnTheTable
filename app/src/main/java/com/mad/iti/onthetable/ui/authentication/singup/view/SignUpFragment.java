@@ -1,6 +1,7 @@
 package com.mad.iti.onthetable.ui.authentication.singup.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,8 +45,10 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
     GoogleSignInClient googleSignInClient;
     FirebaseAuth firebaseAuth;
+    private static final String TAG = "SignUpFragment";
 
     TextView textViewSkip;
+    Context context;
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -58,8 +62,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         signUpPresenter = SignUpPresenter.getInstance(this);
         binding = FragmentSignUpBinding.inflate(inflater, container, false);
         // Inflate the layout for this fragment
@@ -82,10 +85,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
             }
         });
 
-        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
 
         googleSignInClient = GoogleSignIn.getClient(requireContext(), googleSignInOptions);
 
@@ -113,13 +113,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     }
 
     private boolean checkValidation() {
-        if (binding.textInputEditTextEmailSignUp.getText() != null
-                && !binding.textInputEditTextEmailSignUp.getText().toString().isEmpty()
-                && binding.textInputEditTextConfirmPassSignUp.getText() != null
-                && !binding.textInputEditTextConfirmPassSignUp.getText().toString().isEmpty()
-                && binding.textInputEditTextPassSignUp.getText() != null
-                && !binding.textInputEditTextPassSignUp.getText().toString().isEmpty()
-                && checkPassEquality())
+        if (binding.textInputEditTextEmailSignUp.getText() != null && !binding.textInputEditTextEmailSignUp.getText().toString().isEmpty() && binding.textInputEditTextConfirmPassSignUp.getText() != null && !binding.textInputEditTextConfirmPassSignUp.getText().toString().isEmpty() && binding.textInputEditTextPassSignUp.getText() != null && !binding.textInputEditTextPassSignUp.getText().toString().isEmpty() && checkPassEquality())
             return true;
         else {
             binding.textInputLayoutEmailSignUP.setError("fill all data");
@@ -153,8 +147,15 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        Log.d(TAG, "onAttach: " + context);
+        this.context = context;
+    }
+
+    @Override
     public void onSuccessGoogle() {
-        Toast.makeText(binding.getRoot().getContext(), "SignUp with google successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "SignUp with google successfully", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(binding.getRoot().getContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         binding.getRoot().getContext().startActivity(intent);
@@ -170,26 +171,24 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
         Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
     }
 
-    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        Intent data = result.getData();
-                        Task<GoogleSignInAccount> signInAccountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
-                        if (signInAccountTask.isSuccessful()) {
-                            try {
-                                GoogleSignInAccount googleSignInAccount = signInAccountTask.getResult(ApiException.class);
-                                if (googleSignInAccount != null) {
-                                    AuthCredential authCredential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
-                                    signUpPresenter.signUpWithGoogle(authCredential);
-                                }
-                            } catch (ApiException e) {
-                                e.printStackTrace();
-                            }
+    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result.getResultCode() == Activity.RESULT_OK) {
+                Intent data = result.getData();
+                Task<GoogleSignInAccount> signInAccountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
+                if (signInAccountTask.isSuccessful()) {
+                    try {
+                        GoogleSignInAccount googleSignInAccount = signInAccountTask.getResult(ApiException.class);
+                        if (googleSignInAccount != null) {
+                            AuthCredential authCredential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
+                            signUpPresenter.signUpWithGoogle(authCredential);
                         }
+                    } catch (ApiException e) {
+                        e.printStackTrace();
                     }
                 }
-            });
+            }
+        }
+    });
 }

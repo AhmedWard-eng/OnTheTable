@@ -142,7 +142,7 @@ public class AllCountriesFragment extends Fragment implements OnCountryClickList
                     public void onNext(@NonNull String s) {
                         Log.d(TAG, "onNext: "+Thread.currentThread().getName());
                         List<Cuisine> cuisineList = cuisines.stream().filter(cuisine ->
-                                cuisine.strArea.toLowerCase().contains(s.toLowerCase())
+                                cuisine.strArea.toLowerCase().startsWith(s.toLowerCase())
                         ).collect(Collectors.toList());
                         Log.d(TAG, "onNext: "+cuisineList.size());
                         countryAdapter.setCountryList(cuisineList);

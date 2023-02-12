@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.mad.iti.onthetable.InternetConnection;
 import com.mad.iti.onthetable.model.FragmentType;
 import com.mad.iti.onthetable.model.repositories.authRepo.AuthenticationFireBaseRepo;
 import com.mad.iti.onthetable.ui.authentication.AuthenticationActivity;
@@ -24,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.Toast;
 
 import com.mad.iti.onthetable.R;
 import com.mad.iti.onthetable.formatters.FormatDateToString;
@@ -53,6 +55,7 @@ public class WeekPlanFragment extends Fragment implements ONItemClickListener, O
     String date;
 
     Button btnAddMeal;
+    private InternetConnection internetConnection;
 
     private WeekPlanPresenterInterface weekPlanPresenter;
     private static final String TAG = "WeekPlanFragment";
@@ -70,6 +73,7 @@ public class WeekPlanFragment extends Fragment implements ONItemClickListener, O
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         weekPlanPresenter = WeekPlanPresenter.getInstance(FavAndWeekPlanRepo.getInstance(requireContext()));
+        internetConnection = new InternetConnection(requireContext());
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_week_plan, container, false);
     }
@@ -89,13 +93,7 @@ public class WeekPlanFragment extends Fragment implements ONItemClickListener, O
         btnAddMeal = view.findViewById(R.id.addMeal_button_weekplan);
 
         btnAddMeal.setOnClickListener(v -> {
-            if(AuthenticationFireBaseRepo.getInstance().isAuthenticated()){
-                ActionNavigationWeekPlanToSearchByNameFragment action = WeekPlanFragmentDirections.actionNavigationWeekPlanToSearchByNameFragment(FragmentType.PLANNER.toString());
-                action.setDate(date);
-                Navigation.findNavController(requireView()).navigate(action);
-            }else {
-                openGotoSignUpDialogue();
-            }
+            addMeal();
         });
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -106,6 +104,22 @@ public class WeekPlanFragment extends Fragment implements ONItemClickListener, O
                 getMealsPlanner(FormatDateToString.getString(year, month, dayOfMonth));
             }
         });
+    }
+
+    private void addMeal() {
+        if(internetConnection.isConnectedMobile()|| internetConnection.isConnectedWifi()){
+
+            if(AuthenticationFireBaseRepo.getInstance().isAuthenticated()){
+                ActionNavigationWeekPlanToSearchByNameFragment action = com.mad.iti.onthetable.ui.weekplan.view.WeekPlanFragmentDirections.actionNavigationWeekPlanToSearchByNameFragment();
+                action.setSource(FragmentType.PLANNER.toString());
+                action.setDate(date);
+                Navigation.findNavController(requireView()).navigate(action);
+            }else {
+                openGotoSignUpDialogue();
+            }
+        }else {
+            Toast.makeText(requireContext(), "Please Check Your Internet Connection And Try Again", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void openGotoSignUpDialogue() {
@@ -158,12 +172,16 @@ public class WeekPlanFragment extends Fragment implements ONItemClickListener, O
 
     @Override
     public void onRemove(MealPlanner mealPlanner, int position) {
-        new AlertDialog.Builder(getContext())
-                .setTitle(R.string.Delete_Meal)
-                .setMessage(R.string.Are_you_sure_you_want_to_delete_this_meal)
-                .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> {
-                    weekPlanPresenter.removeItemFromPlanner(mealPlanner);
-                })
-                .setNegativeButton(android.R.string.no, null).show();
+        if(internetConnection.isConnectedMobile() || internetConnection.isConnectedWifi()){
+            new AlertDialog.Builder(getContext())
+                    .setTitle(R.string.Delete_Meal)
+                    .setMessage(R.string.Are_you_sure_you_want_to_delete_this_meal)
+                    .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> {
+                        weekPlanPresenter.removeItemFromPlanner(mealPlanner);
+                    })
+                    .setNegativeButton(android.R.string.no, null).show();
+        }else {
+            Toast.makeText(requireContext(), "Please Check Your Internet Connection And Try Again", Toast.LENGTH_LONG).show();
+        }
     }
 }
