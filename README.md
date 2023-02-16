@@ -29,6 +29,7 @@ You should register to benefit from all the feature provided by the app
 
 ### Forgot password
 ###
+![photo1676558095_google_pixel4_justblack_portrait_removebg_preview](https://user-images.githubusercontent.com/67694831/219396121-a322326d-e511-427d-a4df-4bbbc6f90e7c.png)
 
 
 ### After skipping registeration
@@ -56,7 +57,8 @@ In this case, you can only see the displayed recipes in the home screen and also
 ##
 1. You can search using the name of the meal
     ###
-    
+    ![photo_2023-02-16_16-45-30-removebg-preview](https://user-images.githubusercontent.com/67694831/219397222-aa4c01be-83a0-498f-b59c-ec562196023d.png)
+
 2. You can choose specific category and show its meals.
     ###
     ![photo_2023-02-16_12-41-44-removebg-preview](https://user-images.githubusercontent.com/67694831/219392020-c7a572cb-2b08-446b-a159-7a39d72e1cd7.png)
