@@ -6,8 +6,12 @@
 * The user can also search for a specific meal by name or by category or by a specific ingredient or by a country.
 
 ## Usage
+
 ### First you should registeration to benefit from all the feature provided by the app
+
 1. you can register using E-mail and password
+ ![photo_2023-02-16_12-41-59](https://user-images.githubusercontent.com/67694831/219343284-1908beab-ba0d-4d9a-8df3-c3ff9071d1b4.jpg)
+
 2. You can register by Google
 
 
@@ -40,10 +44,10 @@ In this case, you can only see the displayed recipes in the home screen and sear
 
 
 ### To see all details click on the meal
-#### * Details of the meal is
+#### Details of the meal is
 1. Its ingredients
 2. The steps to do it
-3. A Video How to prepare it. 
+3. A video show how to prepare it. 
 
 
 
