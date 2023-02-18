@@ -88,6 +88,4 @@ In this case, you can only see the displayed recipes in the home screen and also
  ## Contributors
 
 + Ahmed gamal Ahmed Ward
-+ Hossam Ahmed Fadaly 
-+ Marina abdelmalak beshara saad 
-+ Nada Alsayed hamed 
++ Nada Ayman Marzouk 
