@@ -5,7 +5,7 @@
 * It help the user to plan his meal through out the upcoming week by adding a recipe to a specific day
 * The user can add a meal recipe to his favorites
 * The user can also search for a specific meal by name or by category or by a specific ingredient or by a country.
-
+this application is developed by students of ITI intake#43, Native Mobile Application Development track.
 ## Usage
 
 
@@ -83,3 +83,11 @@ In this case, you can only see the displayed recipes in the home screen and also
 3. A video show how to prepare it. 
     ###
     ![photo_2023-02-16_12-42-12](https://user-images.githubusercontent.com/67694831/219384406-ef6b05f2-e77b-482d-874e-30c11798bd7d.jpg)
+    
+    
+ ## Contributors
+
++ Ahmed gamal Ahmed Ward
++ Hossam Ahmed Fadaly 
++ Marina abdelmalak beshara saad 
++ Nada Alsayed hamed 
